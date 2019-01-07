@@ -1,0 +1,87 @@
+/* ------------------------------------------------------Header Styling*/
+html, body {
+    height: 100%;
+}
+
+.header {
+    background-color: #303130;
+    color: #c4c4c4;
+    height: 65px;
+}
+
+.navbar-default .navbar-brand {
+    color: #c4c4c4;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #6c6b70;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #c4c4c4;
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 3px;
+}
+
+.navbar-collapse {
+    float: left;
+    background-color: #303130;
+    margin-top: 25px;
+}
+
+.navbar-collapse.collapse.in {
+    width: 150px;
+    border: none;
+    border-bottom: 1px solid #c4c4c4;
+    border-left: 1px solid #c4c4c4;
+    border-right: 1px solid #c4c4c4;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: 39px;
+    margin-left: -10px;
+}
+
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #b35573;
+}
+
+.nav-text {
+    color: black;
+}
+.logo {
+    float: left;
+    height: 35px;
+    padding: 10px 10px;
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 25px;
+    color: #f702ce;
+    width: 150px;
+}
+
+/* ------------------------------------------------------Footer Styling*/
+.footer {
+    height: 30px;
+    position: fixed;
+    bottom: 0px;
+    background-color: #303130;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.footer-text {
+    color: #c4c4c4;
+    margin-top: 5px;
+}
+
+.linkedIn-link {
+    color: #f702ce;
+    font-weight: bold;
+}
+
+.linkedIn-link:hover {
+    color: #b35573;
+}
