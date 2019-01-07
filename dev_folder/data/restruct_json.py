@@ -22,7 +22,7 @@ def write_json_data(data, json_file):
     with open(json_file, "w") as json_data:
         json.dump(data, json_data)
 
-file = 'devfolder/data/Energy-Balance-2017_2019Jan05_1000'
+file = 'Energy-Balance-2017_for_converting_to_json'
 data = read_json_data('%s.json' % file)
 
 coal = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke"]
@@ -65,5 +65,5 @@ for doc in data:
                        "fuel": obj, "value": doc[obj]}
             new_data.append(new_doc)
 
-write_json_data(new_data, '%sNEW.json' % file)
+write_json_data(new_data, 'EnergyBalance2017.json')
 write_json_data(not_valid, '%sNotValid.json' % file)
