@@ -6,6 +6,7 @@ function makeGraphs(error, energyData) {
     var ndx = crossfilter(energyData);
 
     show_consumptionByConsumer_rowchart(ndx);
+    show_consumptionByConsumer_piechart(ndx);
     show_fuelType_pie(ndx);
     show_consumptionByFuelType_barchart(ndx);
     dc.renderAll();
@@ -34,6 +35,22 @@ function show_consumptionByConsumer_rowchart(ndx) {
         .xAxis().ticks(5).tickFormat(d3.format("s"));
 }
 
+function show_consumptionByConsumer_piechart(ndx) {
+    var consumerSub_dim = ndx.dimension(function (d) { if (d.group === 'FinalEnergyConsumption') return d.record; });
+    var all = consumerSub_dim.groupAll().reduceSum(function (d) { if (d.group === 'FinalEnergyConsumption') return d.value; });
+    var total_perConsumerSub = consumerSub_dim.group().reduceSum(dc.pluck('value'));
+    dc.pieChart("#consumptionByConsumerSub_piechart")
+        .height(200)
+        .transitionDuration(750)
+        .radius(50)
+        .innerRadius(30)
+        .dimension(consumerSub_dim)
+        .group(total_perConsumerSub)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .renderLabel(false);
+}
 // Energy Consumption (ktoe) per fuel, stack consumer bar chart
 function show_consumptionByFuelType_barchart(ndx) {
 
@@ -77,7 +94,6 @@ function show_fuelType_pie(ndx) {
     var total_perFuelType = fuelType_dim.group().reduceSum(dc.pluck('value'));
 
     // var total_perFuelType = fuelType_dim.group().reduceSum(function (d) { if (d.group === 'FinalEnergyConsumption') return d.value; });
-    console.log(total_perFuelType)
     dc.pieChart('#fuelType_pie')
         .dimension(fuelType_dim)
         .group(total_perFuelType)

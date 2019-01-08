@@ -46,12 +46,18 @@
     <!---------------------------------------------------------------------------------------------------------Main Content-->
     <div class="container-fluid">
         <div class="">
-            <h5 class="chart_title">Final Consumption by Consumer</h5>
-            <div id="consumptionByConsumer_rowchart"></div>
+            <div class="finalEnergyConsumptionContainerByConsumer container">
+                <h5 class="chart_title">Final Consumption by Consumer</h5>
+                <div id="consumptionByConsumer_rowchart" class="dc-chart col-xs-6"></div>
+                <div id="consumptionByConsumerSub_piechart" class="dc-chart col-xs-2"></div>
+            </div>
+            <div class="finalEnergyConsumptionContainerByFuel container">
+                <h5 class="chart_title">Final Consumption by Fuel</h5>
+                <div id="consumptionByFuelType_barchart" class="dc-chart col-xs-6">></div>
+            </div>
             <div id="fuelType_pie"></div>
-            <div id="consumptionByFuelType_barchart"></div>
+            <h5 class="chart_title">Final Consumption by Consumer</h5>
         </div>
-        <h5 class="chart_title">Final Consumption by Consumer</h5>
     </div>
     <!---------------------------------------------------------------------------------------------------------Footer Content-->
 
