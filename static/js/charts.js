@@ -9,8 +9,13 @@ function makeGraphs(error, energyData) {
 
     show_consumptionByConsumer_rowchart(ndx);
     show_consumptionByConsumer_piechart(ndx);
-    show_fuelType_pie(ndx);
+
+
     show_consumptionByFuelType_barchart(ndx);
+    show_consumptionFuel_piechart(ndx)
+
+    show_supplyBySource_barchart(ndx);
+    show_supplyFuel_piechart(ndx);
     dc.renderAll();
 }
 
@@ -57,7 +62,6 @@ function show_consumptionByConsumer_piechart(ndx) {
 // Energy Consumption (ktoe) per fuel, stack consumer bar chart
 function show_consumptionByFuelType_barchart(ndx) {
 
-    var g;
     var fuelType_dim = ndx.dimension(function (d) { if (d.group === 'FinalEnergyConsumption') return d.fuelType; });
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perFuelType = fuelType_dim.group().reduceSum(function (d) { if (d.group === 'FinalEnergyConsumption') return d.value; });
@@ -82,25 +86,77 @@ function show_consumptionByFuelType_barchart(ndx) {
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
         .yAxis().tickFormat(d3.format("s"));
-
-
 }
 
 
-
-function show_fuelType_pie(ndx) {
-    // var fuelType_dim = ndx.dimension(dc.pluck('fuelType'))
-    var fuelType_dim = ndx.dimension(function (d) { if (d.group === 'FinalEnergyConsumption') return d.fuelType; });
-    var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
-    var total_perFuelType = fuelType_dim.group().reduceSum(dc.pluck('value'));
-
-    // var total_perFuelType = fuelType_dim.group().reduceSum(function (d) { if (d.group === 'FinalEnergyConsumption') return d.value; });
-    dc.pieChart('#fuelType_pie')
-        .dimension(fuelType_dim)
-        .group(total_perFuelType)
+function show_consumptionFuel_piechart(ndx) {
+    var fuel_dim = ndx.dimension(function (d) { if (d.group === 'FinalEnergyConsumption') return d.fuel; });
+    var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
+    var total_perFuel = fuel_dim.group().reduceSum(dc.pluck('value'));
+    dc.pieChart("#consumptionByFuel_piechart")
+        .height(200)
+        .transitionDuration(750)
+        .radius(50)
+        .innerRadius(30)
+        .dimension(fuel_dim)
+        .group(total_perFuel)
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
-        });
+        })
+        .renderLabel(false);
 }
+
+
+// Energy Supply (ktoe) per source, bar chart
+function show_supplyBySource_barchart(ndx) {
+
+    var source_dim = ndx.dimension(function (d) { if (d.group === 'PrimaryEnergyRequirement') return d.record; });
+    var all = source_dim.groupAll().reduceSum(dc.pluck('value'));
+    var total_perSource = source_dim.group().reduceSum(function (d) { if (d.group === 'PrimaryEnergyRequirement') return d.value; });
+    consumptionByFuelType_barchart = dc.barChart("#supplyBySource_barchart")
+    consumptionByFuelType_barchart
+        .width(400)
+        .height(300)
+        .margins({ top: 10, right: 50, bottom: 100, left: 50 })
+        .dimension(source_dim)
+        .group(total_perSource)
+        .centerBar(true)
+        .brushOn(false)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .gap(1)
+        .elasticY(true)
+        .colors(['steelblue'])
+        .transitionDuration(750)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .renderHorizontalGridLines(true)
+        .y(d3.scale.linear().domain([0, 5500000]))
+        .yAxis().tickFormat(d3.format("s"));
+}
+
+
+function show_supplyFuel_piechart(ndx) {
+    var fuel_dim = ndx.dimension(function (d) { if (d.group === 'PrimaryEnergyRequirement') return d.fuel; });
+    var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
+    var total_perFuel = fuel_dim.group().reduceSum(dc.pluck('value'));
+    dc.pieChart("#supplyByFuel_piechart")
+        .height(200)
+        .transitionDuration(750)
+        .radius(50)
+        .innerRadius(30)
+        .dimension(fuel_dim)
+        .group(total_perFuel)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .renderLabel(false);
+}
+
+
+
+
+
 
 

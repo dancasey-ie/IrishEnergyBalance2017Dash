@@ -67,6 +67,10 @@ html, body {
     transform: translate(-35px, 10px) rotate(-45deg);
 }
 
+#supplyBySource_barchart .x.axis text {
+    text-anchor: end !important;
+    transform: translate(-35px, 10px) rotate(-45deg);
+}
 /* ------------------------------------------------------Footer Styling*/
 .footer {
     height: 30px;
