@@ -44,7 +44,7 @@ for doc in data:
             if obj in coal:
                 fuel_type = "Coal"
             elif obj in peat:
-                fuel_type = "Coal"
+                fuel_type = "Peat"
             elif obj in oil:
                 fuel_type = "Oil"
             elif obj in natgas:
@@ -52,7 +52,7 @@ for doc in data:
             elif obj in RE:
                 fuel_type = "Renewables"
             elif obj in nonRwWaste:
-                fuel_type = "Non-RenewableWaste"
+                fuel_type = "Non-Re.Waste"
             elif obj in elect:
                 fuel_type = "Electricity"
             else:
