@@ -61,6 +61,12 @@ html, body {
     width: 150px;
 }
 
+
+#consumptionByFuelType_barchart .x.axis text {
+    text-anchor: end !important;
+    transform: translate(-35px, 10px) rotate(-45deg);
+}
+
 /* ------------------------------------------------------Footer Styling*/
 .footer {
     height: 30px;
