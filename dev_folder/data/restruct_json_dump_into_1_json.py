@@ -35,10 +35,8 @@ RE = ["Hydro", "Wind", "Biomass&RenewableWaste", "LandfillGas", "Biogas",
 nonRwWaste = ["Non-RenewableWaste"]
 elect = ["Electricity"]
 
-primary_energy_req_data = []
-transformation_data = []
-final_energy_consumption_data = []
-
+new_data = []
+not_valid = []
 
 for doc in data:
     for obj in doc:
@@ -59,22 +57,13 @@ for doc in data:
                 fuel_type = "Electricity"
             else:
                 fuel_type = "NA"
+                print(obj)
+                not_valid.append(doc)
 
             new_doc = {"group": doc["group"], "subgroup": doc["subgroup"],
                        "record": doc["record"], "fuelType": fuel_type,
                        "fuel": obj, "value": doc[obj]}
+            new_data.append(new_doc)
 
-            if doc["group"] == "PrimaryEnergyRequirement":
-                primary_energy_req_data.append(new_doc)
-            elif doc["group"] == "TransformationInput" or \
-                doc["group"] == "TransformationOutput" or \
-                doc["group"] == "ExchangesAndTransfers":
-                transformation_data.append(new_doc)
-            elif doc["group"] == "FinalEnergyConsumption":
-                final_energy_consumption_data.append(new_doc)
-            else:
-                print(new_doc)
-
-write_json_data(primary_energy_req_data, 'EnergyBalance2017PrimaryEnergyReq.json')
-write_json_data(transformation_data, 'EnergyBalance2017Transformation.json')
-write_json_data(final_energy_consumption_data, 'EnergyBalance2017FinalEnergyConsumption.json')
+write_json_data(new_data, 'EnergyBalance2017.json')
+write_json_data(not_valid, '%sNotValid.json' % file)
