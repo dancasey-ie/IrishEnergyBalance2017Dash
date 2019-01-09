@@ -15,6 +15,7 @@ html, body {
 /* ------------------------------------------------------Main Styling*/
 .main_container {
     margin-top: 100px;
+    margin-bottom:30px;
 }
 
 .chart_title {
@@ -46,6 +47,41 @@ html, body {
 #supplyBySource_barchart .x.axis text {
     text-anchor: end !important;
     transform: translate(-35px, 10px) rotate(-45deg);
+}
+
+#transformationInput_rowchart {
+    width: 200px;
+    display: inline;
+}
+
+#transformationOutput_rowchart {
+    width: 200px;
+    display: inline;
+    margin-left: -4px;
+}
+
+.tranChart_label_container{
+    position: absolute;
+    text-align: center;
+    left:100px;
+    margin:0px;
+}
+
+    .tranChart_label_container .subchart_title{
+        margin:0px;
+    }
+    .labelOut {
+        margin-left: 50px;
+    }
+
+.transChart_text_container {
+    margin: 0px;
+    padding: 0px;
+    margin-top:5px;
+}
+
+.tranChart_label {
+    margin-bottom:28px;
 }
 /* ------------------------------------------------------Footer Styling*/
 .footer {
