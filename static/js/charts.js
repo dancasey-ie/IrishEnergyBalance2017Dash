@@ -28,7 +28,7 @@ function show_consumptionByConsumer_rowchart(ndx) {
     dc.rowChart("#consumptionByConsumer_rowchart")
         .height(300)
         .width(300)
-        .margins({ top: 20, left: 10, right: 10, bottom: 20 })
+        .margins({ top: 10, left: 10, right: 10, bottom: 20 })
         .transitionDuration(750)
         .dimension(consumer_dim)
         .group(total_perConsumer)
@@ -47,7 +47,8 @@ function show_consumptionByConsumer_piechart(ndx) {
     var all = consumerSub_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perConsumerSub = consumerSub_dim.group().reduceSum(dc.pluck('value'));
     dc.pieChart("#consumptionByConsumerSub_piechart")
-        .height(200)
+        .height(100)
+        .width(100)
         .transitionDuration(750)
         .radius(50)
         .innerRadius(30)
@@ -68,7 +69,7 @@ function show_consumptionByFuelType_barchart(ndx) {
     consumptionByFuelType_barchart = dc.barChart("#consumptionByFuelType_barchart")
     consumptionByFuelType_barchart
         .width(400)
-        .height(300)
+        .height(400)
         .margins({ top: 10, right: 50, bottom: 100, left: 50 })
         .dimension(fuelType_dim)
         .group(total_perFuelType)
@@ -94,7 +95,8 @@ function show_consumptionFuel_piechart(ndx) {
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perFuel = fuel_dim.group().reduceSum(dc.pluck('value'));
     dc.pieChart("#consumptionByFuel_piechart")
-        .height(200)
+        .height(100)
+        .width(100)
         .transitionDuration(750)
         .radius(50)
         .innerRadius(30)
@@ -142,7 +144,8 @@ function show_supplyFuel_piechart(ndx) {
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perFuel = fuel_dim.group().reduceSum(dc.pluck('value'));
     dc.pieChart("#supplyByFuel_piechart")
-        .height(200)
+        .height(100)
+        .width(100)
         .transitionDuration(750)
         .radius(50)
         .innerRadius(30)

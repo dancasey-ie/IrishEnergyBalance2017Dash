@@ -3,64 +3,40 @@ html, body {
     height: 100%;
 }
 
-.header {
-    background-color: #303130;
-    color: #c4c4c4;
-    height: 65px;
+.header_container {
+    height: 100px;
 }
 
-.navbar-default .navbar-brand {
-    color: #c4c4c4;
+.navbar-nav {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+}
+/* ------------------------------------------------------Main Styling*/
+.main_container {
+    margin-top: 100px;
 }
 
-.navbar-default .navbar-brand:hover {
-    color: #6c6b70;
+.chart_title {
+    font-family: 'Lato', futura, georgia;
+    letter-spacing: 1px;
+    line-height: 15px;
+    text-transform: Uppercase;
+    text-align: center;
+    color: #525252;
 }
 
-.navbar-default .navbar-nav > li > a {
-    color: #c4c4c4;
-    font-weight: bold;
-    font-size: 18px;
-    padding-bottom: 3px;
+.pie_container {
+    text-align: center;
 }
-
-.navbar-collapse {
-    float: left;
-    background-color: #303130;
-    margin-top: 25px;
+.subchart_title {
+    font-family: 'Lato', futura, georgia;
+    letter-spacing: 1px;
+    text-transform: Uppercase;
+    color: #525252;
+    text-align: center;
+    margin-top: 20px;
 }
-
-.navbar-collapse.collapse.in {
-    width: 150px;
-    border: none;
-    border-bottom: 1px solid #c4c4c4;
-    border-left: 1px solid #c4c4c4;
-    border-right: 1px solid #c4c4c4;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-top: 39px;
-    margin-left: -10px;
-}
-
-
-.navbar-default .navbar-nav > li > a:hover {
-    color: #b35573;
-}
-
-.nav-text {
-    color: black;
-}
-.logo {
-    float: left;
-    height: 35px;
-    padding: 10px 10px;
-    font-size: 27px;
-    font-weight: bold;
-    line-height: 25px;
-    color: #f702ce;
-    width: 150px;
-}
-
 
 #consumptionByFuelType_barchart .x.axis text {
     text-anchor: end !important;

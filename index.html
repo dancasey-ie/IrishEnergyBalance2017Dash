@@ -17,52 +17,88 @@
 
 <body>
     <!-----------------------------------------------------------------------------------------------------------------Header Content-->
-    <!--
-     <nav class="navbar navbar-default navbar-fixed-top header">
-         <div class="container-fluid">
-             <div class="navbar-header">
-                 <div>
-                     <a class="logo" href="index.html">Energy Balance </a>
-                 </div>
-                 <div>
-                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsible-navbar" aria-expanded="false">
-                         <span class="sr-only">Toggle navigation</span>
-                         <span class="icon-bar"></span>
-                         <span class="icon-bar"></span>
-                         <span class="icon-bar"></span>
-                     </button>
-                 </div>
-             </div>
-             <div class="collapse navbar-collapse" id="collapsible-navbar">
-                 <ul class="nav navbar-nav nav-text">
-                     <li class="menu-item">
-                         <a href="index.html"><i class="fas fa-home"></i> Home </a>
-                     </li>
-                 </ul>
-             </div>
-         </div>
-     </nav>
-     -->
-    <!---------------------------------------------------------------------------------------------------------Main Content-->
-    <div class="container-fluid">
-        <div class="">
-            <div class="finalEnergyConsumptionContainerByConsumer col-xs-6">
-                <h5 class="chart_title">Final Consumption by Consumer</h5>
-                <div id="consumptionByConsumer_rowchart" class="dc-chart col-xs-6"></div>
-                <div id="consumptionByConsumerSub_piechart" class="dc-chart col-xs-2"></div>
-            </div>
-            <div class="finalEnergyConsumptionContainerByFuel col-xs-6">
-                <h5 class="chart_title">Final Consumption by Fuel</h5>
-                <div id="consumptionByFuelType_barchart" class="dc-chart col-xs-6"></div>
-                <div id="consumptionByFuel_piechart" class="dc-chart col-xs-2"></div>
-            </div>
-            <div class="primaryEnergyRequirment col-xs-6">
-                <h5 class="chart_title">Primary Energy Requirements</h5>
-                <div id="supplyBySource_barchart" class="dc-chart col-xs-6"></div>
-                <div id="supplyByFuel_piechart" class="dc-chart col-xs-2"></div>
+        <div class="navbar navbar-default navbar-fixed-top header_container">
+            <div class="container">
+                <div class="navbar-header">
+                    <h3>Ireland's Energy Balance 2017</h3>
+                </div>
+                <div class="nav navbar-nav">
+                    <span class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            About <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/" title="LinkedIn">by Daniel Casey</a></li>
+                            <li class="divider"></li>
+                            <li><a data-toggle="modal" href="#myModal">Source Data</a></li>
+                        </ul>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">About these graphs</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">The data source</h4>
+                    <p>
+                        The data source for these graphs is a report called <a target="_blank" href="http://finreports.universityofcalifornia.edu/index.php?file=retrends/retrends_2012.pdf">University of California Revenue and Expense Trends (Fiscal Years 2008 through 2012)</a> which was prepared by the UC Office of the President (UCOP). Amounts displayed in the graphs are in thousands of dollars.
+                        <hr>
+                        <h4 class="modal-title">The technology</h4>
+                    <p>These interactive graphs were made using an excellent javascript charting library called <a target="_blank" href="http://nickqizhu.github.io/dc.js/">dc.js</a>, which was built to work natively with <a target="_blank" href="http://square.github.com/crossfilter/">crossfilter</a> and leverages the super awesome <a target="_blank" href="http://d3js.org">d3.js</a>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!---------------------------------------------------------------------------------------------------------Main Content-->
+    <div class="main_container">
+        <div class="container">
+            <div class="finalEnergyConsumption_container">
+                <h4 class="chart_title">Final Energy Consumption</h4>
+                <div class="chart_container finalEnergyConsumptionContainerByConsumer col-xs-12 col-md-5">
+                    <h5 class="chart_title">Final Consumption by Consumer</h5>
+                    <div id="consumptionByConsumer_rowchart" class="dc-chart"></div>
+                </div>
+                <div class="chart_container finalEnergyConsumptionContainerByFuel col-xs-12 col-md-5">
+                    <h5 class="chart_title">Final Consumption by Fuel</h5>
+                    <div id="consumptionByFuelType_barchart" class="dc-chart"></div>
+                </div>
+                <div class="chart_container finalEnergyConsumptionBreakDown col-xs-12 col-md-2">
+                    <h5 class="chart_title">Consumption Breakdown</h5>
+                    <div class="row pie_container">
+                        <p class="subchart_title">Consumers</p>
+                        <div id="consumptionByConsumerSub_piechart" class="dc-chart"></div>
+                    </div>
+                    <div class="row pie_container">
+                        <p class="subchart_title">Fuel</p>
+                        <div id="consumptionByFuel_piechart" class="dc-chart"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="primaryEnergyReq_container">
+                    <h4 class="chart_title row">Primary Energy Requirements</h4>
+                    <div class="chart_container primaryEnergyRequirment col-xs-12 col-md-6">
+                        <h5 class="chart_title">Requirement by Source</h5>
+                        <div id="supplyBySource_barchart" class="dc-chart col-xs-8"></div>
+                        <div class="row pie_container">
+                            <p class="subchart_title">Fuel</p>
+                            <div id="supplyByFuel_piechart" class="dc-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!---------------------------------------------------------------------------------------------------------Footer Content-->
 
     <footer class="container footer">
