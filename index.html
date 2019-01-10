@@ -64,21 +64,21 @@
 
             <div class="finalEnergyConsumption_container col-xs-12">
                 <h4 class="chart_title">Final Energy Consumption</h4>
-                <div class="chart_container finalEnergyConsumptionContainerByConsumer col-xs-12 col-md-5">
+                <div class="chart_container finalEnergyConsumptionContainerByConsumer col-xs-12 col-sm-6  col-md-5">
                     <h5 class="chart_title">Final Consumption by Consumer</h5>
                     <div id="consumptionByConsumer_rowchart" class="dc-chart"></div>
                 </div>
-                <div class="chart_container finalEnergyConsumptionContainerByFuel col-xs-12 col-md-5">
+                <div class="chart_container finalEnergyConsumptionContainerByFuel col-xs-12 col-sm-6 col-md-5">
                     <h5 class="chart_title">Final Consumption by Fuel</h5>
                     <div id="consumptionByFuelType_barchart" class="dc-chart"></div>
                 </div>
-                <div class="chart_container finalEnergyConsumptionBreakDown col-xs-12 col-md-2">
+                <div class="chart_container finalEnergyConsumptionBreakDown col-xs-12 col-sm-8 col-md-2">
                     <h5 class="chart_title">Consumption Breakdown</h5>
-                    <div class="pie_container">
+                    <div class="pie_container col-xs-12 col-sm-6 col-md-12">
                         <p class="subchart_title">Consumers</p>
                         <div id="consumptionByConsumerSub_piechart" class="dc-chart"></div>
                     </div>
-                    <div class="pie_container">
+                    <div class="pie_container col-xs-12 col-sm-6 col-md-12">
                         <p class="subchart_title">Fuel</p>
                         <div id="consumptionByFuel_piechart" class="dc-chart"></div>
                     </div>
@@ -88,15 +88,15 @@
             <div class="primaryEnergyReq_container col-xs-12 col-md-6">
                 <h4 class="chart_title row">Primary Energy Requirements</h4>
 
-                <div class="chart_container primaryEnergyRequirment col-xs-12 col-md-6">
+                <div class="chart_container primaryEnergyRequirment col-xs-12 col-sm-8">
                     <h5 class="chart_title">Requirements by Source</h5>
                         <div id="supplyBySource_barchart" class="dc-chart col-xs-8"></div>
-                    </div>
-                        <div class="row pie_container col-xs-12 col-md-4">
-                            <p class="subchart_title">Fuel</p>
-                            <div id="supplyByFuel_piechart" class="dc-chart"></div>
-                        </div>
                 </div>
+                    <div class="pie_container col-xs-12 col-sm-4">
+                        <p class="subchart_title">Fuel</p>
+                        <div id="supplyByFuel_piechart" class="dc-chart"></div>
+                    </div>
+            </div>
 
             <div class="transformation_container col-xs-12 col-md-6">
                 <h4 class="chart_title row">Transformation</h4>

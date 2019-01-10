@@ -61,7 +61,7 @@ function show_consumptionByConsumer_rowchart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .elasticX(false)
-        .xAxis().tickFormat(d3.format("s"));;
+        .xAxis().ticks(4).tickFormat(d3.format("s"));;
 }
 
 function show_consumptionByConsumer_piechart(ndx) {
@@ -163,7 +163,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         .xUnits(dc.units.ordinal)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-        .yAxis().tickFormat(d3.format("s"));
+        .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
 
@@ -249,9 +249,9 @@ function show_supplyBySource_barchart(ndx) {
 
     consumptionByFuelType_barchart = dc.barChart("#supplyBySource_barchart")
     consumptionByFuelType_barchart
-        .width(400)
+        .width(300)
         .height(300)
-        .margins({ top: 10, right: 50, bottom: 100, left: 30 })
+        .margins({ top: 10, right: 50, bottom: 100, left: 40 })
         .dimension(source_dim)
         .group(oil_perSource, 'Oil')
         .stack(natgas_perSource, 'Nat.Gas')
@@ -268,14 +268,14 @@ function show_supplyBySource_barchart(ndx) {
         })
         .gap(1)
         .elasticY(true)
-        .legend(dc.legend().x(250).y(0).itemHeight(15).gap(5))
+        .legend(dc.legend().x(150).y(0).itemHeight(15).gap(5))
         .transitionDuration(750)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-        .ordering(function (d) { return +d.value })
-        .yAxis().tickFormat(d3.format("s"));
+
+        .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
 
@@ -325,7 +325,7 @@ function show_transformationInput_rowchart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';})
         .elasticX(false)
         .ordering(function (d) { return +d.value })
-        .xAxis().tickFormat(d3.format("s"));
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
 // Energy transformation inputs
@@ -340,7 +340,6 @@ function show_transformationOutput_rowchart(ndx) {
         if (d.group === 'TransformationOutput')
             return d.value;
     });
-
     dc.rowChart("#transformationOutput_rowchart")
         .height(300)
         .width(200)
@@ -354,8 +353,7 @@ function show_transformationOutput_rowchart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .elasticX(true)
-        .ordering(function (d) { return -d.value })
-        .xAxis().tickFormat(d3.format("s"));
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
 
