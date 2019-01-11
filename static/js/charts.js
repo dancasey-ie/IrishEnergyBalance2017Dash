@@ -61,6 +61,7 @@ function show_consumptionByConsumer_rowchart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .elasticX(false)
+        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33'])
         .xAxis().ticks(4).tickFormat(d3.format("s"));;
 }
 
@@ -137,10 +138,12 @@ function show_consumptionByFuelType_barchart(ndx) {
         }
     });
 
+    var names = ["Oil", "Electricity", "Nat.Gas", "Renewables", "Coal", "Peat", "Non-Re.Waste"]
     consumptionByFuelType_barchart = dc.barChart("#consumptionByFuelType_barchart")
     consumptionByFuelType_barchart
         .width(400)
         .height(400)
+
         .margins({ top: 10, right: 50, bottom: 100, left: 50 })
         .dimension(fuelType_dim)
         .group(transport_perFuelType, 'Transport')
@@ -159,9 +162,11 @@ function show_consumptionByFuelType_barchart(ndx) {
         .elasticY(true)
         .transitionDuration(750)
         .legend(dc.legend().x(250).y(0).itemHeight(15).gap(5))
-        .x(d3.scale.ordinal())
+        .x(d3.scale.ordinal().domain(names))
         .xUnits(dc.units.ordinal)
-        .renderHorizontalGridLines(true)
+        .barPadding(0.1)
+        .outerPadding(0.5)
+        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33'])
         .y(d3.scale.linear().domain([0, 5500000]))
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
@@ -304,12 +309,18 @@ function show_transformationInput_rowchart(ndx) {
 
     var tranIn_dim = ndx.dimension(function (d) {
         if (d.group === 'TransformationInput')
-            return d.record;});
+            return d.record;
+    });
+
     var all = tranIn_dim.groupAll().reduceSum(dc.pluck('value'));
     var tranIn_total = tranIn_dim.group().reduceSum(function (d) {
-        if (d.group === 'TransformationInput')
-            return d.value*-1;});
-
+        if (d.group === 'TransformationInput') {
+            return +d.value * -1;
+        } else {
+            return 0;
+        }
+    });
+    console.log(tranIn_total.top(Infinity))
     dc.rowChart("#transformationInput_rowchart")
         .height(300)
         .width(200)
@@ -318,13 +329,10 @@ function show_transformationInput_rowchart(ndx) {
         .dimension(tranIn_dim)
         .group(tranIn_total)
         .renderLabel(true)
-        .labelOffsetY(20)
-        .labelOffsetX(-20)
         .gap(20)
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';})
         .elasticX(false)
-        .ordering(function (d) { return +d.value })
         .xAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
@@ -337,9 +345,19 @@ function show_transformationOutput_rowchart(ndx) {
     });
     var all = tranOut_dim.groupAll().reduceSum(dc.pluck('value'));
     var tranOut_total = tranOut_dim.group().reduceSum(function (d) {
-        if (d.group === 'TransformationOutput')
-            return d.value;
+        if (d.group === 'TransformationOutput') {
+            return +d.value;
+    } else {
+            return 0;
+        }
     });
+    var tranOut_total_sorted = [{ key: "Public Thermal Power Plants", value: 90 }, { key: "Oil Refineries & other energy sector", value: 80 }, { key: "Combined Heat and Power Plants", value: 70 }, { key: "Briquetting Plants", value: 60 }, { key: "Pumped Storage", value: 50 }]
+
+    var names = ["Public Thermal Power Plants", "Oil Refineries & other energy sector", "Combined Heat and Power Plants", "Briquetting Plants", "Pumped Storage"]
+
+    console.log(tranOut_total)
+    console.log(tranOut_total.top(Infinity))
+    console.log(tranOut_total_sorted)
     dc.rowChart("#transformationOutput_rowchart")
         .height(300)
         .width(200)
@@ -354,6 +372,7 @@ function show_transformationOutput_rowchart(ndx) {
         })
         .elasticX(true)
         .xAxis().ticks(4).tickFormat(d3.format("s"));
+    console.log(dc.rowChart("#transformationOutput_rowchart").group(tranOut_total).dimension(tranOut_dim))
 }
 
 
