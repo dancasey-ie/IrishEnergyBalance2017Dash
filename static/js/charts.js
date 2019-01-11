@@ -36,6 +36,7 @@ function makeGraphsTransformation(error, energyData) {
     var ndx = crossfilter(energyData);
     show_transformationInput_rowchart(ndx);
     show_transformationOutput_rowchart(ndx);
+    show_transforationInput_barchart(ndx);
     dc.renderAll();
 }
 
@@ -160,7 +161,6 @@ function show_consumptionByFuelType_barchart(ndx) {
         .gap(1)
         .elasticY(true)
         .transitionDuration(750)
-        // .legend(dc.legend().x(250).y(0).itemHeight(15).gap(5))
         .x(d3.scale.ordinal().domain(names))
         .xUnits(dc.units.ordinal)
         .barPadding(0.1)
@@ -278,7 +278,7 @@ function show_supplyBySource_barchart(ndx) {
         .xUnits(dc.units.ordinal)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-
+        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
@@ -335,7 +335,7 @@ function show_transformationInput_rowchart(ndx) {
         .xAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
-// Energy transformation inputs
+// Energy transformation Outputs
 function show_transformationOutput_rowchart(ndx) {
 
     var tranOut_dim = ndx.dimension(function (d) {
@@ -374,5 +374,102 @@ function show_transformationOutput_rowchart(ndx) {
     console.log(dc.rowChart("#transformationOutput_rowchart").group(tranOut_total).dimension(tranOut_dim))
 }
 
+// transformationInput_barchart, stacked fuel type
+function show_transforationInput_barchart(ndx) {
 
+    var tranIn_dim = ndx.dimension(function (d) {
+        if (d.group === 'TransformationInput')
+            return d.record;
+    });
+    var all = tranIn_dim.groupAll().reduceSum(dc.pluck('value'));
+
+    var coal_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Coal') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+    var elec_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Electricity') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var natgas_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Nat.Gas') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var nRWaste_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Non-Re.Waste') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var oil_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Oil') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var peat_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Peat') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var renew_group = tranIn_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Renewables') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+    var dimensions = ["Briquetting Plants", "Pumped Storage", "Combined Heat and Power Plants", "Oil Refineries & other energy sector", "Public Thermal Power Plants"]
+
+    console.log(oil_group.top(Infinity))
+
+    transformationInput_barchart = dc.barChart("#transformationInput_barchart")
+    transformationInput_barchart
+        .width(300)
+        .height(300)
+        .margins({ top: 10, right: 10, bottom: 0, left: 20 })
+        .dimension(tranIn_dim)
+        .group(oil_group, 'Oil')
+        .stack(natgas_group, 'Nat.Gas')
+        .stack(coal_group, 'Coal')
+        .stack(renew_group, 'Renewables')
+        .stack(peat_group, 'Peat')
+        .stack(nRWaste_group, 'non-Ren.Waste')
+        .stack(elec_group, 'Electricity')
+
+        .centerBar(true)
+        .brushOn(false)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .elasticY(true)
+        .transitionDuration(750)
+        .x(d3.scale.ordinal().domain(dimensions))
+        .xUnits(dc.units.ordinal)
+        .gap(10)
+        .barPadding(0.4)
+        .outerPadding(0.5)
+        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .y(d3.scale.linear().domain([0, 5500000]))
+
+        .yAxis().ticks(4).tickFormat(d3.format("s"));
+}
 

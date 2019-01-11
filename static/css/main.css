@@ -107,6 +107,21 @@ html, body {
 .tranChart_label {
     margin-bottom:28px;
 }
+
+#transformationInput_barchart {
+    transform: rotate(-90deg);
+    width:300px;
+}
+
+#transformationInput_barchart .x.axis text {
+    text-anchor: end !important;
+    transform: translate(25px, 0px) rotate(90deg);
+}
+
+#transformationInput_barchart .y.axis text {
+    text-anchor: end !important;
+    transform: translate(-15px, 0px) rotate(90deg);
+}
 /* ------------------------------------------------------Footer Styling*/
 .footer {
     height: 30px;
