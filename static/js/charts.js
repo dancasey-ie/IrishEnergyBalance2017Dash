@@ -15,6 +15,9 @@ queue()
 function makeGraphsFinalEnergyConsumption(error, energyData) {
     var ndx = crossfilter(energyData);
 
+    show_consumptionByFuelType_rowchart(ndx);
+    show_consumptionByConsumer_barchart(ndx);
+
     show_consumptionByConsumer_rowchart(ndx);
     show_consumptionByConsumer_piechart(ndx);
 
@@ -41,9 +44,123 @@ function makeGraphsTransformation(error, energyData) {
     dc.renderAll();
 }
 
+// Energy Consumption (ktoe) per fuel
+function show_consumptionByFuelType_rowchart(ndx) {
+    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
+    var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
+    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
+    dc.rowChart("#consumptionByFuelType_rowchart")
+        .height(400)
+        .margins({ top: 0, left: 10, right: 0, bottom: 100 })
+        .transitionDuration(750)
+        .dimension(fuelType_dim)
+        .group(fuelType_group)
+        .renderLabel(true)
+        .labelOffsetY(-10)
+        .labelOffsetX(0)
+        .gap(20)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .elasticX(true)
+        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33'])
+        .xAxis().ticks(4).tickFormat(d3.format("s"));;
+}
 
+// Energy Consumption by consumer, stacked fuel type
+function show_consumptionByConsumer_barchart(ndx) {
 
+    var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
+    var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
 
+    var consumers = ["Transport", "Residential", "Industry", "Services", "Agricultural", "Fisheries"]
+
+    var coal_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Coal') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+    var elec_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Electricity') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var natgas_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Nat.Gas') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var nRWaste_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Non-Re.Waste') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var oil_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Oil') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var peat_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Peat') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    var renew_group = consumer_dim.group().reduceSum(function (d) {
+        if (d.fuelType === 'Renewables') {
+            return +d.value;
+        } else {
+            return 0;
+        }
+    });
+
+    consumptionByConsumer_barchart = dc.barChart("#consumptionByConsumer_barchart")
+    consumptionByConsumer_barchart
+        .height(380)
+        .margins({ top: 10, right: 50, bottom: 80, left: 50 })
+        .dimension(consumer_dim)
+        .group(oil_group, 'Oil')
+        .stack(elec_group, 'Electricity')
+        .stack(natgas_group, 'Nat.Gas')
+        .stack(renew_group, 'Renewables')
+        .stack(coal_group, 'Coal')
+        .stack(peat_group, 'Peat')
+        .stack(nRWaste_group, 'non-Ren.Waste')
+
+        .centerBar(true)
+        .brushOn(false)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .gap(1)
+        .elasticY(true)
+        .transitionDuration(750)
+        .x(d3.scale.ordinal().domain(consumers))
+        .xUnits(dc.units.ordinal)
+        .gap(10)
+        .barPadding(0.4)
+        .outerPadding(0.5)
+        .renderHorizontalGridLines(true)
+        .y(d3.scale.linear().domain([0, 5500000]))
+        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .yAxis().ticks(4).tickFormat(d3.format("s"));
+}
 // Energy Consumption (ktoe) per consumer
 function show_consumptionByConsumer_rowchart(ndx) {
     var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
@@ -92,7 +209,7 @@ function show_consumptionByFuelType_barchart(ndx) {
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perFuelType = fuelType_dim.group().reduceSum(dc.pluck('value'));
 
-    var transport_perFuelType = fuelType_dim.group().reduceSum(function (d) {
+    var transport_group = fuelType_dim.group().reduceSum(function (d) {
         if (d.subgroup === 'Transport') {
             return +d.value;
         } else {
@@ -100,7 +217,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         }
     });
 
-    var residential_perFuelType = fuelType_dim.group().reduceSum(function (d) {
+    var residential_group = fuelType_dim.group().reduceSum(function (d) {
         if (d.subgroup === 'Residential') {
             return +d.value;
         } else {
@@ -108,7 +225,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         }
     });
 
-    var industry_perFuelType = fuelType_dim.group().reduceSum(function (d) {
+    var industry_group = fuelType_dim.group().reduceSum(function (d) {
         if (d.subgroup === 'Industry') {
             return +d.value;
         } else {
@@ -116,7 +233,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         }
     });
 
-    var services_perFuelType = fuelType_dim.group().reduceSum(function (d) {
+    var services_group = fuelType_dim.group().reduceSum(function (d) {
         if (d.subgroup === 'Services') {
             return +d.value;
         } else {
@@ -124,7 +241,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         }
     });
 
-    var agriculture_perFuelType = fuelType_dim.group().reduceSum(function (d) {
+    var agriculture_group = fuelType_dim.group().reduceSum(function (d) {
         if (d.subgroup === 'Agriculture') {
             return +d.value;
         } else {
@@ -132,7 +249,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         }
     });
 
-    var fisheries_perFuelType = fuelType_dim.group().reduceSum(function (d) {
+    var fisheries_group = fuelType_dim.group().reduceSum(function (d) {
         if (d.subgroup === 'Fisheries') {
             return +d.value;
         } else {
@@ -147,12 +264,12 @@ function show_consumptionByFuelType_barchart(ndx) {
 
         .margins({ top: 10, right: 0, bottom: 100, left: 50 })
         .dimension(fuelType_dim)
-        .group(transport_perFuelType, 'Transport')
-        .stack(residential_perFuelType, 'Residential')
-        .stack(industry_perFuelType, 'Industry')
-        .stack(services_perFuelType, 'Services')
-        .stack(agriculture_perFuelType, 'Agriculture')
-        .stack(fisheries_perFuelType, 'Fisheries')
+        .group(transport_group, 'Transport')
+        .stack(residential_group, 'Residential')
+        .stack(industry_group, 'Industry')
+        .stack(services_group, 'Services')
+        .stack(agriculture_group, 'Agriculture')
+        .stack(fisheries_group, 'fisheries')
 
         .centerBar(true)
         .brushOn(false)
@@ -197,14 +314,14 @@ function show_supplyBySource_barchart(ndx) {
     var source_dim = ndx.dimension(dc.pluck('record'));
     var all = source_dim.groupAll().reduceSum(dc.pluck('value'));
 
-    var coal_perSource = source_dim.group().reduceSum(function (d) {
+    var coal_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Coal') {
             return +d.value;
         } else {
             return 0;
         }
     });
-    var elec_perSource = source_dim.group().reduceSum(function (d) {
+    var elec_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Electricity') {
             return +d.value;
         } else {
@@ -212,7 +329,7 @@ function show_supplyBySource_barchart(ndx) {
         }
     });
 
-    var natgas_perSource = source_dim.group().reduceSum(function (d) {
+    var natgas_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Nat.Gas') {
             return +d.value;
         } else {
@@ -220,7 +337,7 @@ function show_supplyBySource_barchart(ndx) {
         }
     });
 
-    var nRWaste_perSource = source_dim.group().reduceSum(function (d) {
+    var nRWaste_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Non-Re.Waste') {
             return +d.value;
         } else {
@@ -228,7 +345,7 @@ function show_supplyBySource_barchart(ndx) {
         }
     });
 
-    var oil_perSource = source_dim.group().reduceSum(function (d) {
+    var oil_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Oil') {
             return +d.value;
         } else {
@@ -236,7 +353,7 @@ function show_supplyBySource_barchart(ndx) {
         }
     });
 
-    var peat_perSource = source_dim.group().reduceSum(function (d) {
+    var peat_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Peat') {
             return +d.value;
         } else {
@@ -244,7 +361,7 @@ function show_supplyBySource_barchart(ndx) {
         }
     });
 
-    var renew_perSource = source_dim.group().reduceSum(function (d) {
+    var renew_group = source_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Renewables') {
             return +d.value;
         } else {
@@ -258,13 +375,13 @@ function show_supplyBySource_barchart(ndx) {
         .height(300)
         .margins({ top: 10, right: 50, bottom: 100, left: 40 })
         .dimension(source_dim)
-        .group(oil_perSource, 'Oil')
-        .stack(natgas_perSource, 'Nat.Gas')
-        .stack(coal_perSource, 'Coal')
-        .stack(renew_perSource, 'Renewables')
-        .stack(peat_perSource, 'Peat')
-        .stack(nRWaste_perSource, 'non-Ren.Waste')
-        .stack(elec_perSource, 'Electricity')
+        .group(oil_group, 'Oil')
+        .stack(elec_group, 'Electricity')
+        .stack(natgas_group, 'Nat.Gas')
+        .stack(renew_group, 'Renewables')
+        .stack(coal_group, 'Coal')
+        .stack(peat_group, 'Peat')
+        .stack(nRWaste_group, 'non-Ren.Waste')
 
         .centerBar(true)
         .brushOn(false)

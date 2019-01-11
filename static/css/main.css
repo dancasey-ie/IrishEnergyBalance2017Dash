@@ -68,6 +68,20 @@ html, body {
     transform: translate(-35px, 10px) rotate(-45deg);
 }
 
+#consumptionByConsumer_barchart {
+    width: 100%;
+    display: inline;
+}
+
+    #consumptionByConsumer_barchart svg {
+        width: 100%;
+    }
+
+#consumptionByConsumer_barchart .x.axis text {
+    text-anchor: end !important;
+    transform: translate(-35px, 10px) rotate(-45deg);
+}
+
 #supplyBySource_barchart .x.axis text {
     text-anchor: end !important;
     transform: translate(-35px, 10px) rotate(-45deg);
