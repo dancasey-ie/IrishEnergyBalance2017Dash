@@ -48,19 +48,19 @@ function show_consumptionByConsumer_rowchart(ndx) {
     var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perConsumer = consumer_dim.group().reduceSum(dc.pluck('value'));
     dc.rowChart("#consumptionByConsumer_rowchart")
-        .height(300)
-        .width(300)
-        .margins({ top: 10, left: 10, right: 10, bottom: 20 })
+        .height(400)
+        .margins({ top: 0, left: 10, right: 0, bottom: 100 })
         .transitionDuration(750)
         .dimension(consumer_dim)
         .group(total_perConsumer)
         .renderLabel(true)
-        .labelOffsetY(20)
-        .gap(9)
+        .labelOffsetY(-10)
+        .labelOffsetX(0)
+        .gap(20)
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .elasticX(false)
+        .elasticX(true)
         .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33'])
         .xAxis().ticks(4).tickFormat(d3.format("s"));;
 }
@@ -141,10 +141,9 @@ function show_consumptionByFuelType_barchart(ndx) {
     var names = ["Oil", "Electricity", "Nat.Gas", "Renewables", "Coal", "Peat", "Non-Re.Waste"]
     consumptionByFuelType_barchart = dc.barChart("#consumptionByFuelType_barchart")
     consumptionByFuelType_barchart
-        .width(400)
         .height(400)
 
-        .margins({ top: 10, right: 50, bottom: 100, left: 50 })
+        .margins({ top: 10, right: 0, bottom: 100, left: 50 })
         .dimension(fuelType_dim)
         .group(transport_perFuelType, 'Transport')
         .stack(residential_perFuelType, 'Residential')
@@ -161,7 +160,7 @@ function show_consumptionByFuelType_barchart(ndx) {
         .gap(1)
         .elasticY(true)
         .transitionDuration(750)
-        .legend(dc.legend().x(250).y(0).itemHeight(15).gap(5))
+        // .legend(dc.legend().x(250).y(0).itemHeight(15).gap(5))
         .x(d3.scale.ordinal().domain(names))
         .xUnits(dc.units.ordinal)
         .barPadding(0.1)

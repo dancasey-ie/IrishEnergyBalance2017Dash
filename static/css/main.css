@@ -39,6 +39,30 @@ html, body {
     margin-top: 20px;
 }
 
+.consumptionByFuelType_barchart_container{
+    padding:0px;
+}
+
+.consumptionByConsumer_rowchart_container {
+    padding: 0px;
+}
+#consumptionByFuelType_barchart {
+    width: 100%;
+    display: inline;
+}
+
+#consumptionByFuelType_barchart svg {
+    width: 100%;
+}
+
+#consumptionByConsumer_rowchart {
+    width: 100%;
+    display: inline;
+}
+
+    #consumptionByConsumer_rowchart svg {
+        width: 100%;
+    }
 #consumptionByFuelType_barchart .x.axis text {
     text-anchor: end !important;
     transform: translate(-35px, 10px) rotate(-45deg);
