@@ -27,9 +27,10 @@ html, body {
     color: #525252;
 }
 
-.pie_container {
+/*.pie_container {
     text-align: center;
 }
+    */
 .subchart_title {
     font-family: 'Lato', futura, georgia;
     letter-spacing: 1px;
@@ -144,6 +145,46 @@ html, body {
     margin-bottom:100px;
     height: 300px;
 }
+
+.fuel_consumption_sunburst_chart {
+    width: 220px;
+    height: 220px;
+    text-align:center;
+}
+
+
+#consumptionByFuel_sunburstchart_outer svg g {
+    transform: translate(35px,35px);
+}
+
+#consumptionByFuel_sunburstchart_inner svg g {
+    transform: translate(17px,17px);
+}
+
+#consumptionByFuel_sunburstchart_inner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 104px;
+    left: 69px
+}
+
+#consumptionByFuel_sunburstchart_outer{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+#consumptionByFuel_sunburstchart_inner svg{
+    width: 105px;
+    height: 105px;
+}
+
+#consumptionByFuel_sunburstchart_outer svg {
+    width: 210px;
+    height: 210px;
+}
+
 /* ------------------------------------------------------Footer Styling*/
 .footer {
     height: 30px;

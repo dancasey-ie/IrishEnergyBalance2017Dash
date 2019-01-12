@@ -22,7 +22,8 @@ function makeGraphsFinalEnergyConsumption(error, energyData) {
     show_consumptionByConsumer_piechart(ndx);
     show_consumptionFuel_piechart(ndx);
 
-    show_consumptionFuel_sunburstchart(ndx);
+    show_consumptionFuel_sunburstchart_inner(ndx);
+    show_consumptionFuel_sunburstchart_outer(ndx);
 
     //show_consumptionByConsumer_rowchart(ndx);
     //show_consumptionByFuelType_barchart(ndx);
@@ -210,21 +211,34 @@ function show_consumptionFuel_piechart(ndx) {
         .renderLabel(false);
 }
 
-function show_consumptionFuel_sunburstchart(ndx) {
-    var fuel_dim = ndx.dimension(function (d) {
-        return [d.fuelType, d.fuel];
-    });
-    var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
-    var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
+function show_consumptionFuel_sunburstchart_inner(ndx) {
+    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
+    var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
+    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
 
-    dc.sunburstChart("#consumptionByFuel_sunburstchart")
-        .height(100)
-        .width(100)
+    dc.pieChart("#consumptionByFuel_sunburstchart_inner")
         .transitionDuration(750)
+        .dimension(fuelType_dim)
+        .group(fuelType_group)
         .radius(50)
-        .innerRadius(30)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .renderLabel(false);
+
+}
+
+function show_consumptionFuel_sunburstchart_outer(ndx) {
+    var fuel_dim = ndx.dimension(dc.pluck('fuel'));
+    var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
+    var total_perFuel = fuel_dim.group().reduceSum(dc.pluck('value'));
+
+    dc.pieChart("#consumptionByFuel_sunburstchart_outer")
+        .transitionDuration(750)
         .dimension(fuel_dim)
-        .group(fuel_group)
+        .group(total_perFuel)
+        .radius(100)
+        .innerRadius(50)
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
