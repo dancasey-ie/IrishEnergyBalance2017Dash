@@ -76,6 +76,9 @@ The project was developed using Visual Studios 2017. Even though this project is
 There are a number of folders included in the wrapper associated with the virtual envirenment not required by the project that should not be included in the git repository. 
 A .gitignore file was included so these files would not be commited.
 
+During the project I wanted to develop a sunburst style pie chart. Dc.js v.5 has the function built in. Dc.js version 5 requires D3 version 3, time was spent trying to get these working with my
+project but I decided that it wasn't worth spending more time on and tried to develop them myself.
+
 Deployment
 ------------------------
 

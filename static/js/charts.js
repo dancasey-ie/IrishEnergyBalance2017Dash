@@ -1,16 +1,17 @@
 
 
 queue()
-    .defer(d3.json, "static/data/EnergyBalance2017FinalEnergyConsumption.json")
-    .await(makeGraphsFinalEnergyConsumption);
+  .defer(d3.json, "static/data/EnergyBalance2017FinalEnergyConsumption.json")
+  .await(makeGraphsFinalEnergyConsumption);
 
 queue()
-    .defer(d3.json, "static/data/EnergyBalance2017PrimaryEnergyReq.json")
-    .await(makeGraphsPrimaryEnergyReq);
+  .defer(d3.json, "static/data/EnergyBalance2017PrimaryEnergyReq.json")
+   .await(makeGraphsPrimaryEnergyReq);
 
 queue()
-    .defer(d3.json, "static/data/EnergyBalance2017Transformation.json")
-    .await(makeGraphsTransformation);
+  .defer(d3.json, "static/data/EnergyBalance2017Transformation.json")
+  .await(makeGraphsTransformation);
+
 
 function makeGraphsFinalEnergyConsumption(error, energyData) {
     var ndx = crossfilter(energyData);
@@ -19,7 +20,9 @@ function makeGraphsFinalEnergyConsumption(error, energyData) {
     show_consumptionByConsumer_barchart(ndx);
 
     show_consumptionByConsumer_piechart(ndx);
-    show_consumptionFuel_piechart(ndx)
+    show_consumptionFuel_piechart(ndx);
+
+    show_consumptionFuel_sunburstchart(ndx);
 
     //show_consumptionByConsumer_rowchart(ndx);
     //show_consumptionByFuelType_barchart(ndx);
@@ -204,6 +207,27 @@ function show_consumptionFuel_piechart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .renderLabel(false);
+}
+
+function show_consumptionFuel_sunburstchart(ndx) {
+    var fuel_dim = ndx.dimension(function (d) {
+        return [d.fuelType, d.fuel];
+    });
+    var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
+    var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
+
+    dc.sunburstChart("#consumptionByFuel_sunburstchart")
+        .height(100)
+        .width(100)
+        .transitionDuration(750)
+        .radius(50)
+        .innerRadius(30)
+        .dimension(fuel_dim)
+        .group(fuel_group)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
         .renderLabel(false);
 }
 

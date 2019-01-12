@@ -61,6 +61,7 @@
     </div><!-- /.modal -->
     <!---------------------------------------------------------------------------------------------------------Main Content-->
     <div class="main_container">
+        <div id="consumptionByFuel_sunburstchart" class="dc-chart"></div>
         <div class="finalEnergyConsumption_container col-xs-12">
             <h4 class="chart_title">Final Energy Consumption</h4>
 
@@ -76,17 +77,17 @@
                     </div>
                 </div>
             </div>
-                <div class="chart_container finalEnergyConsumptionBreakDown col-xs-2">
-                    <h5 class="chart_title">Consumption Breakdown</h5>
-                    <div class="pie_container col-xs-12">
-                        <p class="subchart_title">Consumers</p>
-                        <div id="consumptionByConsumerSub_piechart" class="dc-chart"></div>
-                    </div>
-                    <div class="pie_container col-xs-12">
-                        <p class="subchart_title">Fuel</p>
-                        <div id="consumptionByFuel_piechart" class="dc-chart"></div>
-                    </div>
+            <div class="chart_container finalEnergyConsumptionBreakDown col-xs-2">
+                <h5 class="chart_title">Consumption Breakdown</h5>
+                <div class="pie_container col-xs-12">
+                    <p class="subchart_title">Consumers</p>
+                    <div id="consumptionByConsumerSub_piechart" class="dc-chart"></div>
                 </div>
+                <div class="pie_container col-xs-12">
+                    <p class="subchart_title">Fuel</p>
+                    <div id="consumptionByFuel_piechart" class="dc-chart"></div>
+                </div>
+            </div>
 
         </div>
         <!--
