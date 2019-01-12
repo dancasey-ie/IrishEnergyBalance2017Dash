@@ -38,6 +38,7 @@ elect = ["Electricity"]
 primary_energy_req_data = []
 transformation_data = []
 final_energy_consumption_data = []
+all_data_new = []
 
 
 for doc in data:
@@ -63,7 +64,9 @@ for doc in data:
             new_doc = {"group": doc["group"], "subgroup": doc["subgroup"],
                        "record": doc["record"], "fuelType": fuel_type,
                        "fuel": obj, "value": doc[obj]}
-
+            # append to file containing all data
+            all_data_new.append(new_doc)
+            # append to files seperating out groups
             if doc["group"] == "PrimaryEnergyRequirement":
                 primary_energy_req_data.append(new_doc)
             elif doc["group"] == "TransformationInput" or \
@@ -75,6 +78,7 @@ for doc in data:
             else:
                 print(new_doc)
 
+write_json_data(all_data_new, 'EnergyBalance2017.json')
 write_json_data(primary_energy_req_data, 'EnergyBalance2017PrimaryEnergyReq.json')
 write_json_data(transformation_data, 'EnergyBalance2017Transformation.json')
 write_json_data(final_energy_consumption_data, 'EnergyBalance2017FinalEnergyConsumption.json')

@@ -43,5 +43,5 @@ FinalEnergyConsumption,Transport,Unspecified,,,,,,,,,,146.18,,,0,,274.89,,,20.21
 FinalEnergyConsumption,Residential,Residential,73.9,65.92,,8.89,,127.7,60.63,,,0,772.84,,0,40.25,150.44,3.78,,555.5,,,26.85,,,,14.15,23.97,,684.48
 FinalEnergyConsumption,Services,Commercial Services,0,0,,0,,,,,,,0,,,6.47,163.48,0,,212.21,,,21.05,,,,0.17,17.34,,433.24
 FinalEnergyConsumption,Services,Public Services,,,,,,0,0,,,,,,1.25,2.22,83.98,,,272.04,,,,,7.58,,,,,171.08
-FinalEnergyConsumption,Agricultural,Agricultural,0,,,,,,,,,0,0,,,0,165.02,,,0,,,,,,,,,,47.99
-FinalEnergyConsumption,Fisheries,Fisheries,,,,,,,,,,,,,,,22.83,,,,,,,,,,,,,
+FinalEnergyConsumption,Agricultural & Fisheries,Agricultural,0,,,,,,,,,0,0,,,0,165.02,,,0,,,,,,,,,,47.99
+FinalEnergyConsumption,Agricultural & Fisheries,Fisheries,,,,,,,,,,,,,,,22.83,,,,,,,,,,,,,
