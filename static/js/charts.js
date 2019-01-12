@@ -12,6 +12,15 @@ queue()
   .defer(d3.json, "static/data/EnergyBalance2017Transformation.json")
   .await(makeGraphsTransformation);
 
+var oilColor = '#46a09a'
+var elecColor = '#0560a7'
+var natgasColor = '#007a45'
+var renewColor = '#bebd01'
+var coalColor = '#ffb736'
+var peatColor = '#ec571b'
+var nonRWColor = '#c70063'
+var colorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor]
+
 
 function makeGraphsFinalEnergyConsumption(error, energyData) {
     var ndx = crossfilter(energyData);
@@ -67,7 +76,7 @@ function show_consumptionByFuelType_rowchart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .elasticX(true)
-        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33'])
+        .ordinalColors(colorsList)
         .xAxis().ticks(4).tickFormat(d3.format("s"));;
 }
 
@@ -162,7 +171,7 @@ function show_consumptionByConsumer_barchart(ndx) {
         .outerPadding(0.5)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .ordinalColors(colorsList)
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 
     consumptionByConsumer_barchart.selectAll(".x.axis text")
@@ -207,7 +216,7 @@ function show_consumptionFuel_piechart(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .ordinalColors(colorsList)
         .renderLabel(false);
 }
 
@@ -224,6 +233,7 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
+        .ordinalColors(colorsList)
         .renderLabel(false);
 
 }
@@ -238,10 +248,11 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
         .dimension(fuel_dim)
         .group(total_perFuel)
         .radius(100)
-        .innerRadius(50)
+        .innerRadius(60)
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
+        .ordinalColors(colorsList)
         .renderLabel(false);
 }
 
@@ -336,7 +347,7 @@ function show_supplyBySource_barchart(ndx) {
         .outerPadding(0.5)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .ordinalColors(colorsList)
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
@@ -346,8 +357,6 @@ function show_supplyFuel_piechart(ndx) {
     var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
     var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
-    //var colorScale = d3.scale.ordinal().domain(fuelTypes)
-        //.range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628']);
     dc.pieChart("#supplyByFuel_piechart")
         .height(100)
         .width(100)
@@ -359,7 +368,6 @@ function show_supplyFuel_piechart(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        //.colors(function (d) { return colorScale(d.fuelTypes); })
         .renderLabel(false);
 }
 
@@ -508,12 +516,12 @@ function show_transforationInput_barchart(ndx) {
         .margins({ top: 0, right: 0, bottom: 0, left: 20 })
         .dimension(tranIn_dim)
         .group(oil_group, 'Oil')
+        .stack(elec_group, 'Electricity')
         .stack(natgas_group, 'Nat.Gas')
-        .stack(coal_group, 'Coal')
         .stack(renew_group, 'Renewables')
+        .stack(coal_group, 'Coal')
         .stack(peat_group, 'Peat')
         .stack(nRWaste_group, 'non-Ren.Waste')
-        .stack(elec_group, 'Electricity')
 
         .centerBar(true)
         .brushOn(false)
@@ -527,7 +535,7 @@ function show_transforationInput_barchart(ndx) {
         .gap(10)
         .barPadding(0.4)
         .outerPadding(0.5)
-        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .ordinalColors(colorsList)
         .y(d3.scale.linear().domain([0, 5500000]))
 
         .yAxis().ticks(4).tickFormat(d3.format("s"));
@@ -606,12 +614,13 @@ function show_transforationOutput_barchart(ndx) {
         .margins({ top: 0, right: -10, bottom: 0, left: 35 })
         .dimension(tranOut_dim)
         .group(oil_group, 'Oil')
+        .stack(elec_group, 'Electricity')
         .stack(natgas_group, 'Nat.Gas')
-        .stack(coal_group, 'Coal')
         .stack(renew_group, 'Renewables')
+        .stack(coal_group, 'Coal')
         .stack(peat_group, 'Peat')
         .stack(nRWaste_group, 'non-Ren.Waste')
-        .stack(elec_group, 'Electricity')
+
 
         .centerBar(true)
         .brushOn(false)
@@ -625,7 +634,7 @@ function show_transforationOutput_barchart(ndx) {
         .gap(10)
         .barPadding(0.4)
         .outerPadding(0.5)
-        .ordinalColors(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628'])
+        .ordinalColors(colorsList)
         .y(d3.scale.linear().domain([0, 5500000]))
 
         .yAxis().ticks(4).tickFormat(d3.format("s"));
