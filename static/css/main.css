@@ -184,6 +184,10 @@ html, body {
     height: 210px;
 }
 
+#consumptionByFuelType_rowchart svg text {
+    fill: black;
+}
+
 /* ------------------------------------------------------Footer Styling*/
 .footer {
     height: 30px;
