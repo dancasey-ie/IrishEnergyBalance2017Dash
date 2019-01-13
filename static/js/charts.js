@@ -13,14 +13,30 @@ queue()
   .await(makeGraphsTransformation);
 
 var oilColor = '#46a09a'
+var oilColorScale = ['#4eb1ab', '#5fb9b3', '#71c1bb', '#95d0cc', '#83c9c4', '#a6d8d5', '#b8e0dd', '#cae8e6', '#dcefee', '#edf7f7', '#ffffff']
 var elecColor = '#0560a7'
 var natgasColor = '#007a45'
 var renewColor = '#bebd01'
+var renewColorScale = ['#cbcb01', '#e4e401', '#fefe01', '#fefe1b', '#fefe34', '#fefe4d', '#fefe67', '#fefe80', '#fefe9a']
 var coalColor = '#ffb736'
+var coalColorScale = ['#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc']
 var peatColor = '#ec571b'
+var peatColorScale = ['#ee622b', '#f07342', '#f2855a', '#f49671', '#f5a889', '#f7b9a1', '#f9cbb8', '#fbdcd0']
+
 var nonRWColor = '#c70063'
 var colorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor]
 
+
+var coalTypes = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke",
+    "Lignite\\BrownCoalBriquettes"];
+var peatTypes = ["MilledPeat", "SodPeat", "Briquettes"];
+var oilTypes = ["Crude", "RefineryGas", "Gasoline", "Kerosene", "JetKerosene",
+    "Fueloil", "LPG", "Gasoil/Diesel/DERV", "PetroleumCoke", "Naphta"];
+var natgasTypes = ['NaturalGas'];
+var ReTypes = ["Hydro", "Wind", "Biomass&RenewableWaste", "LandfillGas", "Biogas",
+    "LiquidBiofuel", "Solar", "Geothermal"];
+var nonRwWasteTypes = ["Non-RenewableWaste"];
+var elecTypes = ["Electricity"];
 
 function makeGraphsFinalEnergyConsumption(error, energyData) {
     var ndx = crossfilter(energyData);
@@ -234,6 +250,7 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .ordinalColors(colorsList)
+        //.ordering(dc.pluck('fuel'))
         .renderLabel(true);
 
 }
@@ -241,18 +258,78 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
 function show_consumptionFuel_sunburstchart_outer(ndx) {
     var fuel_dim = ndx.dimension(dc.pluck('fuel'));
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
-    var total_perFuel = fuel_dim.group().reduceSum(dc.pluck('value'));
+    var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
+    var filteredFuel_array = fuel_group.top(Infinity);
+    var list = [];
+    var coalDomain = [];
+    var peatDomain = [];
+    var oilDomain = [];
+    var natgasDomain = [];
+    var ReDomain = [];
+    var nonRwWasteDomain = [];
+    var elecDomain = [];
+    var domainColors = []
+    var oilFuelIndex = 0;
+    var renewFuelIndex = 0;
+    var coalFuelIndex = 0;
+    var peatFuelIndex = 0;
+
+    filteredFuel_array.forEach(seperate_fuelTypes);
+    function seperate_fuelTypes(d) {
+        if (oilTypes.indexOf(d.key) > -1) {
+            oilDomain.push(d.key);
+            domainColors.push(oilColorScale[oilFuelIndex]);
+
+            oilFuelIndex = oilFuelIndex + 1;
+        }
+        else if (elecTypes.indexOf(d.key) > -1) {
+            elecDomain.push(d.key);
+            domainColors.push(elecColor);
+        }
+        else if (natgasTypes.indexOf(d.key) > -1) {
+            natgasDomain.push(d.key);
+            domainColors.push(natgasColor);
+        }
+        else if (ReTypes.indexOf(d.key) > -1) {
+            ReDomain.push(d.key);
+            domainColors.push(renewColorScale[renewFuelIndex]);
+            renewFuelIndex = renewFuelIndex + 1;
+        }
+        else if (coalTypes.indexOf(d.key) > -1) {
+            coalDomain.push(d.key);
+            domainColors.push(coalColorScale[coalFuelIndex]);
+            coalFuelIndex = coalFuelIndex + 1;
+        }
+        else if (peatTypes.indexOf(d.key) > -1) {
+            peatDomain.push(d.key);
+            domainColors.push(peatColorScale[peatFuelIndex]);
+            peatFuelIndex = peatFuelIndex + 1;
+        }
+        else if (nonRwWasteTypes.indexOf(d.key) > -1) {
+            nonRwWasteDomain.push(d.key);
+            domainColors.push(nonRWColor);
+        }
+    };
+
+    var domain = oilDomain.concat(elecDomain).concat(natgasDomain).concat(ReDomain).concat(coalDomain).concat(peatDomain).concat(nonRwWasteDomain);
+    console.log(domain)
+
+
+
+
+
 
     dc.pieChart("#consumptionByFuel_sunburstchart_outer")
         .transitionDuration(750)
         .dimension(fuel_dim)
-        .group(total_perFuel)
+        .group(fuel_group)
         .radius(100)
         .innerRadius(60)
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(colorsList)
+        .ordinalColors(domainColors)
+        //.ordering(function (d) { return domain; })
         .renderLabel(true);
 }
 

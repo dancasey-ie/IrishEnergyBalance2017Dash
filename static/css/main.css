@@ -148,6 +148,9 @@ html, body {
     text-align:center;
 }
 
+#consumptionByFuel_sunburstchart_outer svg {
+    transform: rotate(0deg);
+}
 
 #consumptionByFuel_sunburstchart_outer svg g {
     transform: translate(35px,35px);
