@@ -25,8 +25,9 @@ def write_json_data(data, json_file):
 file = 'Energy-Balance-2017_for_converting_to_json'
 data = read_json_data('%s.json' % file)
 
-coal = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke"]
-peat = ["Lignite\\BrownCoalBriquettes", "MilledPeat","SodPeat", "Briquettes"]
+coal = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke",
+        "Lignite\\BrownCoalBriquettes"]
+peat = ["MilledPeat", "SodPeat", "Briquettes"]
 oil = ["Crude", "RefineryGas", "Gasoline", "Kerosene", "JetKerosene",
        "Fueloil", "LPG", "Gasoil/Diesel/DERV", "PetroleumCoke", "Naphta"]
 natgas = ['NaturalGas']

@@ -86,7 +86,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
     var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
 
-    var consumers = ["Transport", "Residential", "Industry", "Services", "Agricultural\n& Fisheries"]
+    var consumers = ["Transport", "Residential", "Industry", "Services", "Agricultural & Fisheries"]
 
     var coal_group = consumer_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Coal') {
@@ -234,7 +234,7 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .ordinalColors(colorsList)
-        .renderLabel(false);
+        .renderLabel(true);
 
 }
 
@@ -253,7 +253,7 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .ordinalColors(colorsList)
-        .renderLabel(false);
+        .renderLabel(true);
 }
 
 //                                                                    Primary Requirement Charts
