@@ -5,6 +5,8 @@ html, body {
 
 .header_container {
     height: 100px;
+    color: #ffffff;
+    background-color: #1a1350;
 }
 
 .navbar-nav {
@@ -12,40 +14,51 @@ html, body {
     top: 50px;
     left: 50px;
 }
+
+svg text {
+    fill: #333333!important;
+}
 /* ------------------------------------------------------Main Styling*/
 .main_container {
     margin-top: 100px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
+    background-color: #eeeeee;
+    color: #333333;
 }
 
+.finalEnergyConsumption_container, .primaryEnergyReq_container, .transformation_container {
+    background-color: #eeeeee;
+}
 .chart_title {
     font-family: 'Lato', futura, georgia;
     letter-spacing: 1px;
     line-height: 15px;
     text-transform: Uppercase;
     text-align: center;
-    color: #525252;
+    color: #39827d;
 }
 
 .subchart_title {
     font-family: 'Lato', futura, georgia;
     letter-spacing: 1px;
     text-transform: Uppercase;
-    color: #525252;
+    color: #39827d;
     text-align: center;
     margin-top: 20px;
 }
 
+.pie_container {
+}
 /*---------------------------------------------------------Final Consumption Fuel Row Chart*/
-
 #consumptionByFuelType_rowchart svg text {
     fill: black;
 }
 /*---------------------------------------------------------Final Consumption Consumer Bar Chart*/
-#consumptionByConsumer_barchart svg g g .tick text {
+#consumptionByConsumer_barchart svg g .x .tick text {
     text-anchor: end !important;
     transform: translate(-30px, 5px) rotate(-45deg);
 }
+
 /*---------------------------------------------------------Final Consumption Consumer Pie Chart*/
 .consumptionByConsumer_sunburst_chart {
     width: 400px;
@@ -75,7 +88,7 @@ html, body {
     width: 400px;
     height: 220px;
     position: absolute;
-    overflow: auto;
+    overflow:auto;
 }
 
     #consumptionByConsumer_sunburstchart_outer svg {
@@ -93,7 +106,7 @@ html, body {
 
 /*---------------------------------------------------------Final Consumption Fuel Pie Chart*/
 
-.fuel_consumption_sunburst_chart {
+.consumptionByFuel_sunburst_chart {
     width: 400px;
     height: 220px;
     text-align: center;
@@ -140,8 +153,13 @@ html, body {
 
 
 /*---------------------------------------------------------Primary Req Source Bar Chart*/
-/*---------------------------------------------------------Primary Req Fuel Pie Chart*/
-.fuel_PrimReq_sunburst_chart {
+
+#supplyBySource_barchart svg g .x .tick text {
+    text-anchor: end !important;
+    transform: translate(-30px, 5px) rotate(-45deg);
+}
+    /*---------------------------------------------------------Primary Req Fuel Pie Chart*/
+.fuel_primReq_sunburst_chart {
     width: 400px;
     height: 220px;
     text-align: center;
@@ -256,22 +274,22 @@ html, body {
 
 /* ------------------------------------------------------Footer Styling*/
 .footer {
+    display: block;
+    position: inherit;
     height: 30px;
-    position: fixed;
-    bottom: 0px;
-    background-color: #303130;
+    color: #ffffff;
+    background-color: #1a1350;
     text-align: center;
     vertical-align: middle;
     width: 100%;
 }
 
 .footer-text {
-    color: #c4c4c4;
     margin-top: 5px;
 }
 
 .linkedIn-link {
-    color: #f702ce;
+    color: #ffffff;
     font-weight: bold;
 }
 

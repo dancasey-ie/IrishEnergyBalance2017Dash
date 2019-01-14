@@ -224,28 +224,6 @@ function show_consumptionByConsumer_barchart(ndx) {
         .call(wrap, 200);
 }
 
-
-//--------------------------------------------------------------Consumer Breakdown Pie Chart
-function show_consumptionByConsumer_piechart(ndx) {
-    var consumerSub_dim = ndx.dimension(dc.pluck('record'));
-    var all = consumerSub_dim.groupAll().reduceSum(dc.pluck('value'));
-    var total_perConsumerSub = consumerSub_dim.group().reduceSum(dc.pluck('value'));
-    dc.pieChart("#consumptionByConsumerSub_piechart")
-        .height(500)
-        .width(200)
-        .transitionDuration(750)
-        .radius(50)
-        .innerRadius(30)
-        .dimension(consumerSub_dim)
-        .group(total_perConsumerSub)
-        .title(function (d) {
-            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
-        })
-        .legend(dc.legend())
-        .renderLabel(false);
-}
-
-
 //--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart
 
 //--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart (inner)
@@ -560,7 +538,7 @@ function show_primReqFuel_sunburstchart_inner(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(fuelColorsList)
+        .ordinalColors([oilColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor])
         .renderLabel(false);
 
 }
@@ -644,26 +622,6 @@ function show_primReqFuel_sunburstchart_outer(ndx) {
             return l.data > 0;
         });
     });
-}
-
-//--------------------------------------------------------------Primary Req. by Fuel Pie Chart
-function show_supplyFuel_piechart(ndx) {
-    var fuelTypes = ["Oil", "Electricity", "Nat.Gas", "Renewables", "Coal", "Peat", "Non-Re.Waste"]
-    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
-    var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
-    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
-    dc.pieChart("#supplyByFuel_piechart")
-        .height(100)
-        .width(100)
-        .transitionDuration(750)
-        .radius(50)
-        .innerRadius(30)
-        .dimension(fuelType_dim)
-        .group(fuelType_group)
-        .title(function (d) {
-            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
-        })
-        .renderLabel(false);
 }
 
 //----------------------------------------------------------------------------Transformation Charts
@@ -1102,3 +1060,41 @@ function wrap(text, width) {
     });
 }
 
+//--------------------------------------------------------------Consumer Breakdown Pie Chart
+function show_consumptionByConsumer_piechart(ndx) {
+    var consumerSub_dim = ndx.dimension(dc.pluck('record'));
+    var all = consumerSub_dim.groupAll().reduceSum(dc.pluck('value'));
+    var total_perConsumerSub = consumerSub_dim.group().reduceSum(dc.pluck('value'));
+    dc.pieChart("#consumptionByConsumerSub_piechart")
+        .height(500)
+        .width(200)
+        .transitionDuration(750)
+        .radius(50)
+        .innerRadius(30)
+        .dimension(consumerSub_dim)
+        .group(total_perConsumerSub)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .legend(dc.legend())
+        .renderLabel(false);
+}
+//--------------------------------------------------------------Primary Req. by Fuel Pie Chart
+function show_supplyFuel_piechart(ndx) {
+    var fuelTypes = ["Oil", "Electricity", "Nat.Gas", "Renewables", "Coal", "Peat", "Non-Re.Waste"]
+    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
+    var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
+    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
+    dc.pieChart("#supplyByFuel_piechart")
+        .height(100)
+        .width(100)
+        .transitionDuration(750)
+        .radius(50)
+        .innerRadius(30)
+        .dimension(fuelType_dim)
+        .group(fuelType_group)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .renderLabel(false);
+}

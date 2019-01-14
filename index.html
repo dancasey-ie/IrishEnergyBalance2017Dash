@@ -87,7 +87,7 @@
                 </ul>
             </div>
             <div class="finalEnergyConsumptionChartContainer">
-                <div class="chart_container finalEnergyConsumptionContainer col-xs-10 col-md-7">
+                <div class="chart_container finalEnergyConsumptionContainer col-xs-10 col-md-5">
                     <div class="consumptionByFuelType_barchart_container col-xs-12">
                         <div class="col-xs-12 col-md-6">
                             <h5 class="chart_title">Consumption by Fuel Type</h5>
@@ -99,59 +99,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="chart_container finalEnergyConsumptionBreakDown col-xs-12 col-md-5">
-                    <h5 class="chart_title">Consumption Breakdown</h5>
-                    <div class="pie_container col-xs-12">
+                <div class="chart_container finalEnergyConsumptionBreakDown col-xs-12 col-md-7">
+                    <div class="pie_container col-sm-6">
                         <p class="subchart_title">Consumers</p>
                         <div class="consumptionByConsumer_sunburst_chart">
                             <div id="consumptionByConsumer_sunburstchart_outer" class="dc-chart"></div>
                             <div id="consumptionByConsumer_sunburstchart_inner" class="dc-chart"></div>
                         </div>
                     </div>
-                    <div class="pie_container col-xs-12">
+                    <div class="pie_container col-sm-6">
                         <p class="subchart_title">Fuel</p>
-                        <div class="fuel_consumption_sunburst_chart">
+                        <div class="consumptionByFuel_sunburst_chart">
                             <div id="consumptionByFuel_sunburstchart_outer" class="dc-chart"></div>
                             <div id="consumptionByFuel_sunburstchart_inner" class="dc-chart"></div>
                         </div>
-                        <!--<div id="consumptionByFuel_piechart" class="dc-chart"></div>-->
                     </div>
+
                 </div>
 
             </div>
         </div>
-        <!--
-        <div class="finalEnergyConsumption_container col-xs-12">
-            <h4 class="chart_title">Final Energy Consumption</h4>
 
-        <div class="chart_container finalEnergyConsumptionContainerByConsumer col-xs-12 col-sm-6  col-md-5">
-            <h5 class="chart_title">Final Consumption by Consumer</h5>
-            <div id="consumptionByConsumer_rowchart" class="dc-chart"></div>
-        </div>
-
-            <div class="chart_container finalEnergyConsumptionContainerByFuel col-xs-12 col-sm-8">
-                <h5 class="chart_title">Final Consumption by Fuel</h5>
-                <div class="consumptionByFuelType_barchart_container col-xs-10">
-                    <div id="consumptionByFuelType_barchart" class="dc-chart"></div>
-                </div>
-                <div class="consumptionByConsumer_rowchart_container col-xs-2">
-                    <div id="consumptionByConsumer_rowchart" class="dc-chart"></div>
-                </div>
-            </div>
-            <div class="chart_container finalEnergyConsumptionBreakDown col-xs-12 col-sm-4">
-                <h5 class="chart_title">Consumption Breakdown</h5>
-                <div class="pie_container col-xs-12 col-sm-6 col-md-12">
-                    <p class="subchart_title">Consumers</p>
-                    <div id="consumptionByConsumerSub_piechart" class="dc-chart"></div>
-                </div>
-                <div class="pie_container col-xs-12 col-sm-6 col-md-12">
-                    <p class="subchart_title">Fuel</p>
-                    <div id="consumptionByFuel_piechart" class="dc-chart"></div>
-                </div>
-            </div>
-        </div>
-    -->
-                    <div class="primaryEnergyReq_container col-xs-12">
+                    <div class="primaryEnergyReq_container col-xs-12 col-sm-8">
                         <h4 class="chart_title row">Primary Energy Requirements</h4>
                         <div class="primaryEnergyRequirmentAnalysisContainer">
                             <ul>
@@ -167,11 +136,11 @@
                             </ul>
                         </div>
                         <div class="primaryEnergyRequirmentChartContainer">
-                            <div class="chart_container primaryEnergyRequirment col-xs-12 col-sm-8">
+                            <div class="chart_container primaryEnergyRequirment col-xs-12 col-sm-6">
                                 <h5 class="chart_title">Requirements by Source</h5>
                                 <div id="supplyBySource_barchart" class="dc-chart col-xs-8"></div>
                             </div>
-                            <div class="pie_container col-xs-12 col-sm-4">
+                            <div class="pie_container col-xs-12 col-sm-6">
                                 <p class="subchart_title">Fuel</p>
                                 <div class="fuel_primReq_sunburst_chart">
                                     <div id="primReqByFuel_sunburstchart_outer" class="dc-chart"></div>
@@ -181,7 +150,7 @@
                         </div>
                     </div>
 
-                    <div class="transformation_container col-xs-12">
+                    <div class="transformation_container col-xs-12 col-sm-4">
                         <h4 class="chart_title row">Transformation</h4>
                         <div class="tranformationAnalysisContainer">
                             <ul>
@@ -189,7 +158,7 @@
                                     Most of the island electricity is generated from gas powered plants
                                 </li>
                                 <li>
-                                    Peat still features hich is suprising
+                                    Peat still features which is suprising
                                 </li>
                                 <li>
                                     Moneypoint coal needs to be removed
@@ -217,12 +186,10 @@
 
     <!---------------------------------------------------------------------------------------------------------Footer Content-->
 
-                <footer class="container footer">
-                    <div class="row">
+                <footer class="container footer col-xs-12">
                         <div class="footer-text">
                             <p>Developed by <a class="linkedIn-link" target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/">Daniel Casey</a></p>
                         </div>
-                    </div>
                 </footer>
 
                 <!---------------------------------------------------------------------------------------------------------Scripts-->
