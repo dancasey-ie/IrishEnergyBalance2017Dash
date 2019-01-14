@@ -201,8 +201,8 @@ function show_consumptionByConsumer_piechart(ndx) {
     var all = consumerSub_dim.groupAll().reduceSum(dc.pluck('value'));
     var total_perConsumerSub = consumerSub_dim.group().reduceSum(dc.pluck('value'));
     dc.pieChart("#consumptionByConsumerSub_piechart")
-        .height(100)
-        .width(100)
+        .height(500)
+        .width(200)
         .transitionDuration(750)
         .radius(50)
         .innerRadius(30)
@@ -211,6 +211,7 @@ function show_consumptionByConsumer_piechart(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
+        .legend(dc.legend())
         .renderLabel(false);
 }
 
@@ -251,7 +252,7 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
         })
         .ordinalColors(colorsList)
         //.ordering(dc.pluck('fuel'))
-        .renderLabel(true);
+        .renderLabel(false);
 
 }
 
@@ -312,14 +313,8 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
     };
 
     var domain = oilDomain.concat(elecDomain).concat(natgasDomain).concat(ReDomain).concat(coalDomain).concat(peatDomain).concat(nonRwWasteDomain);
-    console.log(domain)
-
-
-
-
-
-
-    dc.pieChart("#consumptionByFuel_sunburstchart_outer")
+    var consumptionByFuel_sunburstchart_outer = dc.pieChart("#consumptionByFuel_sunburstchart_outer");
+    consumptionByFuel_sunburstchart_outer
         .transitionDuration(750)
         .dimension(fuel_dim)
         .group(fuel_group)
@@ -329,8 +324,16 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .ordinalColors(domainColors)
-        //.ordering(function (d) { return domain; })
-        .renderLabel(true);
+        .legend(dc.legend())
+        .renderLabel(false);
+
+    // https://stackoverflow.com/questions/29371256/dc-js-piechart-legend-hide-if-result-is-0/29415900#29415900
+    dc.override(consumptionByFuel_sunburstchart_outer, 'legendables', function () {
+        var legendables = this._legendables();
+        return legendables.filter(function (l) {
+            return l.data > 0;
+        });
+    });
 }
 
 //                                                                    Primary Requirement Charts

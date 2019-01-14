@@ -36,66 +36,75 @@ html, body {
     margin-top: 20px;
 }
 
-.consumptionByFuelType_barchart_container{
-    padding:0px;
+/*---------------------------------------------------------Final Consumption Fuel Row Chart*/
+
+#consumptionByFuelType_rowchart svg text {
+    fill: black;
 }
+/*---------------------------------------------------------Final Consumption Consumer Bar Chart*/
 
+/*---------------------------------------------------------Final Consumption Consumer Pie Chart*/
+/*---------------------------------------------------------Final Consumption Fuel Pie Chart*/
 
-#consumptionByConsumer_barchart {
-    width: 100%;
-    display: inline;
-}
-
-    #consumptionByConsumer_barchart svg {
-        width: 100%;
-    }
-
-    #consumptionByConsumer_barchart .x.axis text {
-        text-anchor: end !important;
-        transform: translate(-35px, 10px) rotate(-45deg);
-        width: 10px;
-        word-wrap: break-word;
-    }
-
-#supplyBySource_barchart .x.axis text {
-    text-anchor: end !important;
-    transform: translate(-35px, 10px) rotate(-45deg);
-}
-
-#transformationInput_rowchart {
-    width: 200px;
-    display: inline;
-}
-
-#transformationOutput_rowchart {
-    width: 200px;
-    display: inline;
-    margin-left: -4px;
-}
-
-.tranChart_label_container{
-    position: absolute;
+.fuel_consumption_sunburst_chart {
+    width: 400px;
+    height: 220px;
     text-align: center;
-    left:160px;
-    top: 55px;
-    margin:0px;
+    overflow: scroll !important;
 }
 
-    .tranChart_label_container .subchart_title{
-        margin:0px;
-    }
-    .labelOut {
-        margin-left: 50px;
-    }
+#consumptionByFuel_sunburstchart_inner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 104px;
+    left: 69px;
+
+}
+
+#consumptionByFuel_sunburstchart_inner svg {
+    width: 105px;
+    height: 105px;
+}
+
+#consumptionByFuel_sunburstchart_inner svg g {
+    transform: translate(17px,17px);
+}
+
+#consumptionByFuel_sunburstchart_outer {
+    width: 400px;
+    height: 220px;
+    position: absolute;
+    overflow:auto;
+}
+
+#consumptionByFuel_sunburstchart_outer svg {
+    width: 400px;
+    height: 380px;
+}
+
+#consumptionByFuel_sunburstchart_outer svg .pie-slice-group {
+    transform: translate(-95px,-5px);
+}
+
+#consumptionByFuel_sunburstchart_outer svg .dc-legend {
+    transform: translate(220px,0px);
+}
+
+
+/*---------------------------------------------------------Primary Req Source Bar Chart*/
+/*---------------------------------------------------------Primary Req Fuel Pie Chart*/
+
+/*---------------------------------------------------------Transformation Bar Chart*/
 
 .transChart_text_container {
     margin: 0px;
     padding: 0px;
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 .tranChart_label {
-    margin-bottom:28px;
+    margin-bottom: 28px;
 }
 
 #transformationInput_barchart {
@@ -129,63 +138,31 @@ html, body {
 #transformationOutput_barchart svg g g.axis.x {
     display: none;
 }
-    #transformationOutput_barchart .y.axis {
-        transform: translate(290px, 0px);
-    }
+
+#transformationOutput_barchart .y.axis {
+    transform: translate(290px, 0px);
+}
+
     #transformationOutput_barchart .y.axis text {
         text-anchor: end !important;
         transform: translate(15px, 0px) rotate(-90deg);
     }
 
 .transformation_barchart_container {
-    margin-bottom:100px;
+    margin-bottom: 100px;
     height: 300px;
 }
 
-.fuel_consumption_sunburst_chart {
-    width: 220px;
-    height: 220px;
-    text-align:center;
-}
-
-#consumptionByFuel_sunburstchart_outer svg {
-    transform: rotate(0deg);
-}
-
-#consumptionByFuel_sunburstchart_outer svg g {
-    transform: translate(35px,35px);
-}
-
-#consumptionByFuel_sunburstchart_inner svg g {
-    transform: translate(17px,17px);
-}
-
-#consumptionByFuel_sunburstchart_inner {
-    width: 50px;
-    height: 50px;
+.tranChart_label_container {
     position: absolute;
-    top: 104px;
-    left: 69px
+    text-align: center;
+    left: 160px;
+    top: 55px;
+    margin: 0px;
 }
 
-#consumptionByFuel_sunburstchart_outer{
-    width: 100px;
-    height: 100px;
-    position: absolute;
-}
-
-#consumptionByFuel_sunburstchart_inner svg{
-    width: 105px;
-    height: 105px;
-}
-
-#consumptionByFuel_sunburstchart_outer svg {
-    width: 210px;
-    height: 210px;
-}
-
-#consumptionByFuelType_rowchart svg text {
-    fill: black;
+.tranChart_label_container .subchart_title{
+    margin:0px;
 }
 
 /* ------------------------------------------------------Footer Styling*/
