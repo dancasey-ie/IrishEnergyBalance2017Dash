@@ -149,7 +149,7 @@
             </div>
         </div>
     -->
-                    <div class="primaryEnergyReq_container col-xs-12 col-md-6">
+                    <div class="primaryEnergyReq_container col-xs-12">
                         <h4 class="chart_title row">Primary Energy Requirements</h4>
                         <div class="primaryEnergyRequirmentAnalysisContainer">
                             <ul>
@@ -171,12 +171,15 @@
                             </div>
                             <div class="pie_container col-xs-12 col-sm-4">
                                 <p class="subchart_title">Fuel</p>
-                                <div id="supplyByFuel_piechart" class="dc-chart"></div>
+                                <div class="fuel_primReq_sunburst_chart">
+                                    <div id="primReqByFuel_sunburstchart_outer" class="dc-chart"></div>
+                                    <div id="primReqByFuel_sunburstchart_inner" class="dc-chart"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="transformation_container col-xs-12 col-sm-6">
+                    <div class="transformation_container col-xs-12">
                         <h4 class="chart_title row">Transformation</h4>
                         <div class="tranformationAnalysisContainer">
                             <ul>

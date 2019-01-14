@@ -42,7 +42,10 @@ html, body {
     fill: black;
 }
 /*---------------------------------------------------------Final Consumption Consumer Bar Chart*/
-
+#consumptionByConsumer_barchart svg g g .tick text {
+    text-anchor: end !important;
+    transform: translate(-30px, 5px) rotate(-45deg);
+}
 /*---------------------------------------------------------Final Consumption Consumer Pie Chart*/
 /*---------------------------------------------------------Final Consumption Fuel Pie Chart*/
 
@@ -94,7 +97,49 @@ html, body {
 
 /*---------------------------------------------------------Primary Req Source Bar Chart*/
 /*---------------------------------------------------------Primary Req Fuel Pie Chart*/
+.fuel_PrimReq_sunburst_chart {
+    width: 400px;
+    height: 220px;
+    text-align: center;
+    overflow: scroll !important;
+}
 
+#primReqByFuel_sunburstchart_inner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 104px;
+    left: 69px;
+}
+
+    #primReqByFuel_sunburstchart_inner svg {
+        width: 105px;
+        height: 105px;
+    }
+
+        #primReqByFuel_sunburstchart_inner svg g {
+            transform: translate(17px,17px);
+        }
+
+#primReqByFuel_sunburstchart_outer {
+    width: 400px;
+    height: 220px;
+    position: absolute;
+    overflow: auto;
+}
+
+    #primReqByFuel_sunburstchart_outer svg {
+        width: 400px;
+        height: 380px;
+    }
+
+        #primReqByFuel_sunburstchart_outer svg .pie-slice-group {
+            transform: translate(-95px,-5px);
+        }
+
+        #primReqByFuel_sunburstchart_outer svg .dc-legend {
+            transform: translate(220px,0px);
+        }
 /*---------------------------------------------------------Transformation Bar Chart*/
 
 .transChart_text_container {
