@@ -23,12 +23,33 @@ var coalColorScale = ['#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#f
 var peatColor = '#ec571b'
 var peatColorScale = ['#ee622b', '#f07342', '#f2855a', '#f49671', '#f5a889', '#f7b9a1', '#f9cbb8', '#fbdcd0']
 var nonRWColor = '#c70063'
-var colorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor]
+var fuelColorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor]
+
+var transportColor = '#5b156a'
+var transportColorScale = ['#6d1980', '#7f1d95', '#9122aa', '#a326c0', '#b62ad5', '#bd3fd9', '#c455dd', '#cc6ae2', '#d37fe6', '#da95ea', '#e2aaee']
+var residentialColor = '#ec571b'
+var industryColor = '#ffb736'
+var industryColorScale = ['#e69500', '#ffa600', '#ffaf1a', '#ffb833', '#ffb736', '#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc', '#fff6e6']
+var servicesColor = '#006b3d'
+var servicesColorScale = ['#009957', '#00cc74']
+var agriFishColor = '#c70063'
+var agriFishColorScale = ['#e60073', '#ff3399', '#ff66b3']
+
+var consumerColorsList = [transportColor, residentialColor, industryColor, servicesColor, agriFishColor]
 
 
 
-
-
+console.log(transportColorScale[5])
+var transportTypes = ['Road Freight', 'Road Light Goods Vehicle', 'Road Private Car',
+    'Public Passenger Services', 'Rail', 'Domestic Aviation', 'International Aviation',
+    'Fuel Tourism', 'Navigation', 'Unspecified']
+var industryTypes = ['Non - Energy Mining', 'Food & beverages', 'Textiles and textile products',
+    'Wood and wood products', 'Pulp, paper, publishing and printing', 'Chemicals & man - made fibres',
+    'Rubber and plastic products', 'Other non - metallic mineral products',
+    'Basic metals and fabricated metal products', 'Machinery and equipment n.e.c.',
+    'Electrical and optical equipment', 'Transport equipment manufacture', 'Other manufacturing']
+var servicesTypes = ['Commercial Services', 'Public Services']
+var agriFishTypes = ['Agricultural', 'Fisheries']
 
 
 var coalTypes = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke",
@@ -48,8 +69,11 @@ function makeGraphsFinalEnergyConsumption(error, energyData) {
     show_consumptionByFuelType_rowchart(ndx);
     show_consumptionByConsumer_barchart(ndx);
 
-    show_consumptionByConsumer_piechart(ndx);
+    // show_consumptionByConsumer_piechart(ndx);
     //show_consumptionFuel_piechart(ndx);
+
+    show_consumptionConsumer_sunburstchart_inner(ndx);
+    show_consumptionConsumer_sunburstchart_outer(ndx);
 
     show_consumptionFuel_sunburstchart_inner(ndx);
     show_consumptionFuel_sunburstchart_outer(ndx);
@@ -98,7 +122,7 @@ function show_consumptionByFuelType_rowchart(ndx) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
         .elasticX(true)
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .xAxis().ticks(4).tickFormat(d3.format("s"));;
 }
 
@@ -193,7 +217,7 @@ function show_consumptionByConsumer_barchart(ndx) {
         .outerPadding(0.5)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 
     consumptionByConsumer_barchart.selectAll(".x.axis text")
@@ -222,12 +246,109 @@ function show_consumptionByConsumer_piechart(ndx) {
 }
 
 
+//--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart
+
+//--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart (inner)
+function show_consumptionConsumer_sunburstchart_inner(ndx) {
+    var consumerType_dim = ndx.dimension(dc.pluck('subgroup'));
+    var all = consumerType_dim.groupAll().reduceSum(dc.pluck('value'));
+    var consumerType_group = consumerType_dim.group().reduceSum(dc.pluck('value'));
+
+    dc.pieChart("#consumptionByConsumer_sunburstchart_inner")
+        .transitionDuration(750)
+        .dimension(consumerType_dim)
+        .group(consumerType_group)
+        .radius(50)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .ordinalColors(consumerColorsList)
+        .renderLabel(false);
+
+}
+
+//--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (outer)
+function show_consumptionConsumer_sunburstchart_outer(ndx) {
+    var consumer_dim = ndx.dimension(dc.pluck('record'));
+    var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
+    var consumer_group = consumer_dim.group().reduceSum(dc.pluck('value'));
+    var filteredConsumer_array = consumer_group.top(Infinity);
+    var list = [];
+    var transportDomain = [];
+    var residentialDomain = [];
+    var industryDomain = [];
+    var servicesDomain = [];
+    var agriFishDomain = [];
+    var transportIndex = 0;
+    var industryIndex = 0;
+    var servicesIndex = 0;
+    var agriFishIndex = 0;
+    var domainColors = [];
+    console.log(filteredConsumer_array)
+    filteredConsumer_array.forEach(seperate_consumerTypes);
+    function seperate_consumerTypes(d) {
+        if (transportTypes.indexOf(d.key) > -1) {
+            transportDomain.push(d.key);
+            domainColors.push(transportColorScale[transportIndex]);
+
+            transportIndex = transportIndex + 1;
+        }
+        else if (d.key === 'Residential') {
+            residentialDomain.push(d.key);
+            domainColors.push(residentialColor);
+        }
+        else if (industryTypes.indexOf(d.key) > -1) {
+            industryDomain.push(d.key);
+            domainColors.push(industryColorScale[industryIndex]);
+
+            industryIndex = industryIndex + 1;
+            console.log(industryIndex)
+        }
+        else if (servicesTypes.indexOf(d.key) > -1) {
+            servicesDomain.push(d.key);
+            domainColors.push(servicesColorScale[servicesIndex]);
+            servicesIndex = servicesIndex + 1;
+        }
+        else if (agriFishTypes.indexOf(d.key) > -1) {
+            agriFishDomain.push(d.key);
+            domainColors.push(agriFishColorScale[agriFishIndex]);
+            agriFishIndex = agriFishIndex + 1;
+        }
+    };
+
+    console.log(domainColors)
+    // var domain = oilDomain.concat(elecDomain).concat(natgasDomain).concat(ReDomain).concat(coalDomain).concat(peatDomain).concat(nonRwWasteDomain);
+    var consumptionByConsumer_sunburstchart_outer = dc.pieChart("#consumptionByConsumer_sunburstchart_outer");
+    consumptionByConsumer_sunburstchart_outer
+        .transitionDuration(750)
+        .dimension(consumer_dim)
+        .group(consumer_group)
+        .radius(100)
+        .innerRadius(60)
+        .title(function (d) {
+            return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
+        })
+        .ordinalColors(domainColors)
+        .legend(dc.legend())
+        .renderLabel(false);
+
+    // https://stackoverflow.com/questions/29371256/dc-js-piechart-legend-hide-if-result-is-0/29415900#29415900
+    dc.override(consumptionByConsumer_sunburstchart_outer, 'legendables', function () {
+        var legendables = this._legendables();
+        return legendables.filter(function (l) {
+            return l.data > 0;
+        });
+    });
+}
 
 
 
-//--------------------------------------------------------------Consumer Fuel Breakdown Pie Chart
 
-//--------------------------------------------------------------Consumer Fuel Breakdown Pie Chart (inner)
+
+
+//--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart
+
+//--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (inner)
 function show_consumptionFuel_sunburstchart_inner(ndx) {
     var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
@@ -241,12 +362,12 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .renderLabel(false);
 
 }
 
-//--------------------------------------------------------------Consumer Fuel Breakdown Pie Chart (outer)
+//--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (outer)
 function show_consumptionFuel_sunburstchart_outer(ndx) {
     var fuel_dim = ndx.dimension(dc.pluck('fuel'));
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
@@ -418,7 +539,7 @@ function show_supplyBySource_barchart(ndx) {
         .outerPadding(0.5)
         .renderHorizontalGridLines(true)
         .y(d3.scale.linear().domain([0, 5500000]))
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
@@ -439,7 +560,7 @@ function show_primReqFuel_sunburstchart_inner(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .renderLabel(false);
 
 }
@@ -641,7 +762,7 @@ function show_transforationInput_barchart(ndx) {
         .gap(10)
         .barPadding(0.4)
         .outerPadding(0.5)
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .y(d3.scale.linear().domain([0, 5500000]))
 
         .yAxis().ticks(4).tickFormat(d3.format("s"));
@@ -740,7 +861,7 @@ function show_transforationOutput_barchart(ndx) {
         .gap(10)
         .barPadding(0.4)
         .outerPadding(0.5)
-        .ordinalColors(colorsList)
+        .ordinalColors(fuelColorsList)
         .y(d3.scale.linear().domain([0, 5500000]))
 
         .yAxis().ticks(4).tickFormat(d3.format("s"));
