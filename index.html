@@ -54,34 +54,35 @@
             </div>
             <div class="collapse navbar-collapse" id="collapsible-navbar">
                 <ul class="nav navbar-nav navbar-right nav-text">
-                    <li class="menu-item"><a data-toggle="modal" href="#SourceModal">Source Data</a></li>
+                    <li class="menu-item"><a data-toggle="modal" href="#HowToModal">How to Use</a></li>
                     <li class="divider"></li>
-                    <li class="menu-item"><a href="">How to Use</a></li>
+                    <li class="menu-item"><a data-toggle="modal" href="#SourceModal">About the Charts</a></li>
                     <li class="divider"></li>
-                    <li class="menu-item"><a data-toggle="modal" href="#DeveloperModal">About Developer</a></li>
+                    <li class="menu-item"><a data-toggle="modal" href="#DeveloperModal">About the Developer</a></li>
                     <li class="divider"></li>
                     <li class="menu-item"><a href="javascript:dc.filterAll(); dc.renderAll();">Reset Charts</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <!-- About Data Modal -->
-    <div class="modal fade" id="SourceModal" tabindex="-1" role="dialog" aria-labelledby="SourceModalLabel" aria-hidden="true">
+    <!-- How to Use Modal -->
+    <div class="modal fade" id="HowToModal" tabindex="-1" role="dialog" aria-labelledby="HowToModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Source Data</h4>
+                    <h4 class="modal-title">How to use the Dashboard</h4>
                 </div>
                 <div class="modal-body">
-                    <h4 class="modal-title">Source of Data</h4>
-                    <p>
-                        The data source for these graphs is a report called <a target="_blank" href="https://www.seai.ie/resources/publications/Energy-in-Ireland-2018.pdf">Energy in Ireland 2018</a> which was prepared by <a target="_blank" href="https://www.seai.ie">SEAI</a>, and published in December 2018.
-                        <hr>
-                        <h4 class="modal-title">Technology Used</h4>
-                    <p>The data was downloaded as .xlsx, converted to .json and furtherly reorganised using a Python script.</p>
-                    <p>The interactive graphs were made using a javascript charting library called <a target="_blank" href="http://nickqizhu.github.io/dc.js/">dc.js</a>, which was built to work natively with <a target="_blank" href="http://square.github.com/crossfilter/">crossfilter</a> and leverages <a target="_blank" href="http://d3js.org">d3.js</a> library.
+                    <ul>
+                        <li>The dashboard can be used on mobile, but is best explored on desktop.</li>
+                        <li>Hover the mouse over a data group to reveal additional information on a data group. (Only available on desktop)</li>
+                        <li>Click on a data group to filter the data displayed on the charts. <br />
+                        i.e. Click the 'Oil' data group on the 'Consumption by Fuel' will filter for 'Oil' data across all charts, while clicking 'Transport' data group on the 'Consumption by Consumer' chart will only filter across 'Final Energy Consumption' charts.</li>
+                        <li>Clicking a filtered data group again to remove the group from the filter.</li>
+                        <li>Narrow or widen your filter range by selecting or removing a number of data groups.</li>
+                        <li>Reset the charts data by clicking the 'Reset Charts' option from the menu. </li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -90,6 +91,33 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <!-- About the Charts Modal -->
+    <div class="modal fade" id="SourceModal" tabindex="-1" role="dialog" aria-labelledby="SourceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">About the Charts</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Source of Data</h4>
+                    <p>
+                        The data source for these graphs is a report called <a target="_blank" href="https://www.seai.ie/resources/publications/Energy-in-Ireland-2018.pdf">Energy in Ireland 2018</a> which was prepared by <a target="_blank" href="https://www.seai.ie">SEAI</a>, and published in December 2018.
+                        <hr>
+                        <h4 class="modal-title">Chart Development</h4>
+                    <p>The data was downloaded as .xlsx, converted to .json and furtherly reorganised using a Python script.</p>
+                    <p>
+                        The interactive graphs were made using a javascript charting library called <a target="_blank" href="http://nickqizhu.github.io/dc.js/">dc.js</a>, which was built to work natively with <a target="_blank" href="http://square.github.com/crossfilter/">crossfilter</a> and leverages <a target="_blank" href="http://d3js.org">d3.js</a> library.
+                    </p>
+                    <p>Bootstrap framework was utilised for responsive page developement.</p>
+                    <p>The code and development write up can be found on <a target="_blank" href="https://github.com/dcasey720/IrishEnergyBalance2017Dash">GitHub</a>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <!-- About Developer Modal -->
     <div class="modal fade" id="DeveloperModal" tabindex="-1" role="dialog" aria-labelledby="DeveloperModalLabel" aria-hidden="true">
         <div class="modal-dialog">

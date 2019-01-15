@@ -33,8 +33,11 @@ html, body {
     right: 5px;
 }
 
+.navbar-default .navbar-nav > li > a{
+    width:200px;
+}
 .navbar-collapse {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
 svg text {
