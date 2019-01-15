@@ -109,7 +109,8 @@ function show_consumptionByFuelType_rowchart(ndx) {
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
     var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
     dc.rowChart("#consumptionByFuelType_rowchart")
-        .height(400)
+        .height(350)
+        .width(300)
         .margins({ top: 0, left: 10, right: 0, bottom: 100 })
         .transitionDuration(750)
         .dimension(fuelType_dim)
@@ -191,7 +192,8 @@ function show_consumptionByConsumer_barchart(ndx) {
 
     consumptionByConsumer_barchart = dc.barChart("#consumptionByConsumer_barchart")
     consumptionByConsumer_barchart
-        .height(380)
+        .height(330)
+        .width(400)
         .margins({ top: 10, right: 50, bottom: 80, left: 50 })
         .dimension(consumer_dim)
         .group(oil_group, 'Oil')
@@ -245,7 +247,7 @@ function show_consumptionConsumer_sunburstchart_inner(ndx) {
 
 }
 
-//--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (outer)
+//--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart (outer)
 function show_consumptionConsumer_sunburstchart_outer(ndx) {
     var consumer_dim = ndx.dimension(dc.pluck('record'));
     var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
@@ -347,6 +349,9 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
 
 //--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (outer)
 function show_consumptionFuel_sunburstchart_outer(ndx) {
+
+
+
     var fuel_dim = ndx.dimension(dc.pluck('fuel'));
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
     var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
@@ -424,6 +429,7 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
             return l.data > 0;
         });
     });
+
 }
 
 //----------------------------------------------------------------------------Primary Requirement Charts

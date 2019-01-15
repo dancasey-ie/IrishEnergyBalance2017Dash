@@ -33,8 +33,10 @@ html, body {
     right: 5px;
 }
 
-.navbar-default .navbar-nav > li > a{
-    width:200px;
+.navbar-default .navbar-nav > li > a {
+    max-width: 200px;
+    padding-left: 0px;
+    padding-right: 15px;
 }
 .navbar-collapse {
     margin-top: 15px;
@@ -75,6 +77,10 @@ svg text {
 .pie_container {
 }
 /*---------------------------------------------------------Final Consumption Fuel Row Chart*/
+
+#consumptionByFuelType_rowchart svg {
+}
+
 #consumptionByFuelType_rowchart svg text {
     fill: black;
 }
@@ -86,8 +92,9 @@ svg text {
 
 /*---------------------------------------------------------Final Consumption Consumer Pie Chart*/
 .consumptionByConsumer_sunburst_chart {
-    width: 400px;
-    height: 220px;
+    width: 350px;
+    height: 300px;
+    position: relative;
     text-align: center;
     overflow: scroll !important;
 }
@@ -97,7 +104,7 @@ svg text {
     height: 50px;
     position: absolute;
     top: 104px;
-    left: 69px;
+    left: 70px;
 }
 
     #consumptionByConsumer_sunburstchart_inner svg {
@@ -113,7 +120,6 @@ svg text {
     width: 400px;
     height: 220px;
     position: absolute;
-    overflow:auto;
 }
 
     #consumptionByConsumer_sunburstchart_outer svg {
@@ -132,9 +138,10 @@ svg text {
 /*---------------------------------------------------------Final Consumption Fuel Pie Chart*/
 
 .consumptionByFuel_sunburst_chart {
-    width: 400px;
-    height: 220px;
+    width: 350px;
+    height: 300px;
     text-align: center;
+    position: relative;
     overflow: scroll !important;
 }
 
@@ -143,7 +150,7 @@ svg text {
     height: 50px;
     position: absolute;
     top: 104px;
-    left: 69px;
+    left: 70px;
 
 }
 
@@ -160,7 +167,6 @@ svg text {
     width: 400px;
     height: 220px;
     position: absolute;
-    overflow:auto;
 }
 
 #consumptionByFuel_sunburstchart_outer svg {
@@ -185,9 +191,10 @@ svg text {
 }
     /*---------------------------------------------------------Primary Req Fuel Pie Chart*/
 .fuel_primReq_sunburst_chart {
-    width: 400px;
-    height: 220px;
+    width: 350px;
+    height: 300px;
     text-align: center;
+    position: relative;
     overflow: scroll !important;
 }
 
@@ -196,7 +203,7 @@ svg text {
     height: 50px;
     position: absolute;
     top: 104px;
-    left: 69px;
+    left: 70px;
 }
 
     #primReqByFuel_sunburstchart_inner svg {
@@ -212,7 +219,6 @@ svg text {
     width: 400px;
     height: 220px;
     position: absolute;
-    overflow: auto;
 }
 
     #primReqByFuel_sunburstchart_outer svg {
