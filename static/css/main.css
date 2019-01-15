@@ -4,23 +4,45 @@ html, body {
 }
 
 .header_container {
-    height: 100px;
     color: #ffffff;
     background-color: #1a1350;
 }
 
-.navbar-nav {
+.navbar-nav > li > a {
+    padding-bottom: 10px;
+    color: #ffffff !important;
+}
+    .navbar-header{
+    height: 60px;
+}
+
+.navbar-header h3{
+    width: 280px;
+    margin-left: 10px;
+}
+
+.navbar-toggle{
     position: fixed;
-    top: 50px;
-    left: 50px;
+    top: 5px;
+    right:5px;
+}
+
+.collapse .navbar-toggle {
+    position: fixed;
+    top: 20px;
+    right: 5px;
+}
+
+.navbar-collapse {
+    margin-top:15px;
 }
 
 svg text {
-    fill: #333333!important;
+    fill: #333333 !important;
 }
 /* ------------------------------------------------------Main Styling*/
 .main_container {
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 30px;
     background-color: #eeeeee;
     color: #333333;

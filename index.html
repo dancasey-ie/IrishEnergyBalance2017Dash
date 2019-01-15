@@ -13,41 +13,66 @@
     <script type="text/javascript" src="static/js/dc.js"></script>
     <script type="text/javascript" src="static/js/charts.js"></script>
     <meta name="viewport" content="width=device-width">
-    <title>Irelands Energy Balance 2017</title>
+    <title>Irelands Energy Balance</title>
 </head>
 
 <body>
     <!-----------------------------------------------------------------------------------------------------------------Header Content-->
-        <div class="navbar navbar-default navbar-fixed-top header_container">
-            <div class="container">
-                <div class="navbar-header">
-                    <h3>Ireland's Energy Balance 2017</h3>
-                </div>
-                <div class="nav navbar-nav">
-                    <span class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            About <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/" title="LinkedIn">by Daniel Casey</a></li>
-                            <li class="divider"></li>
-                            <li><a data-toggle="modal" href="#myModal">Source Data</a></li>
-                        </ul>
-                    </span>
-                </div>
-                <div class="dc-data-count">
-                        <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
-                </div>
+    <!--<div class="navbar navbar-default navbar-fixed-top header_container">
+        <div class="container">
+            <div class="navbar-header">
+                <h3>Ireland's Energy Balance 2017</h3>
+            </div>
+            <div class="nav navbar-nav">
+                <span class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        About <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/" title="LinkedIn">by Daniel Casey</a></li>
+                        <li class="divider"></li>
+                        <li><a data-toggle="modal" href="#myModal">Source Data</a></li>
+                    </ul>
+                </span>
+            </div>
+            <div class="dc-data-count">
+                <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a>
             </div>
         </div>
+    </div>
+        -->
+    <nav class="navbar navbar-default navbar-fixed-top header_container">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h3>Ireland's Energy Balance</h3>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsible-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="collapsible-navbar">
+                <ul class="nav navbar-nav navbar-right nav-text">
+                    <li class="menu-item"><a data-toggle="modal" href="#SourceModal">Source Data</a></li>
+                    <li class="divider"></li>
+                    <li class="menu-item"><a href="">How to Use</a></li>
+                    <li class="divider"></li>
+                    <li class="menu-item"><a data-toggle="modal" href="#DeveloperModal">About Developer</a></li>
+                    <li class="divider"></li>
+                    <li class="menu-item"><a href="javascript:dc.filterAll(); dc.renderAll();">Reset Charts</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- About Data Modal -->
+    <div class="modal fade" id="SourceModal" tabindex="-1" role="dialog" aria-labelledby="SourceModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">About these graphs</h4>
+                    <h4 class="modal-title">Source Data</h4>
                 </div>
                 <div class="modal-body">
                     <h4 class="modal-title">Source of Data</h4>
@@ -57,6 +82,45 @@
                         <h4 class="modal-title">Technology Used</h4>
                     <p>The data was downloaded as .xlsx, converted to .json and furtherly reorganised using a Python script.</p>
                     <p>The interactive graphs were made using a javascript charting library called <a target="_blank" href="http://nickqizhu.github.io/dc.js/">dc.js</a>, which was built to work natively with <a target="_blank" href="http://square.github.com/crossfilter/">crossfilter</a> and leverages <a target="_blank" href="http://d3js.org">d3.js</a> library.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- About Developer Modal -->
+    <div class="modal fade" id="DeveloperModal" tabindex="-1" role="dialog" aria-labelledby="DeveloperModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">About Developer - Dan Casey</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">Bio</h4>
+                    <p>
+                        I am foremost an Energy Engineer, an experienced Automation Engineer and soon to be Full Stack Software Developer.
+                    </p>
+                    <p>
+                        Having spent a number of years working as an Automation Engineer in the Energy Industry,
+                        I saw how technology and data will be drivers to a more sustainable energy future.
+                        Whether it is advanced procision control of a more distributed grid, use tracking for customers or data models influencing policiy,
+                        software is ever more instrumental in the industry.
+                    </p>
+
+                    <p>
+                        After taking a break from engineering and Ireland for a few (fun) years, I am currently completing a diploma in software development.
+                        With an initial focus on learning Python for data analysis and engineering tasks,
+                        I have become more and more interested in the web-application aspects of the course and how these skills can be brought back into the energy industry.
+                    </p>
+                    <h4 class="modal-title">Connect</h4>
+                    <p>
+                        If you would like to connect you can find me on <a target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/">LinkedIn</a>, where I plan to share similar projects in the future.
+                        If we don't have common connections you can use my email <a target="_blank" href="mailto:dcasey720@gmail.com">dcasey720@gmail.com</a>.
+                    </p>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -120,80 +184,80 @@
             </div>
         </div>
 
-                    <div class="primaryEnergyReq_container col-xs-12 col-sm-8">
-                        <h4 class="chart_title row">Primary Energy Requirements</h4>
-                        <div class="primaryEnergyRequirmentAnalysisContainer">
-                            <ul>
-                                <li>
-                                    Ireland is heavily relient on imports.
-                                </li>
-                                <li>
-                                    Irelands indgienous supply of natural gas is
-                                </li>
-                                <li>
-                                    Refining is an important industry in Ireland
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="primaryEnergyRequirmentChartContainer">
-                            <div class="chart_container primaryEnergyRequirment col-xs-12 col-sm-6">
-                                <h5 class="chart_title">Requirements by Source</h5>
-                                <div id="supplyBySource_barchart" class="dc-chart col-xs-8"></div>
-                            </div>
-                            <div class="pie_container col-xs-12 col-sm-6">
-                                <p class="subchart_title">Fuel</p>
-                                <div class="fuel_primReq_sunburst_chart">
-                                    <div id="primReqByFuel_sunburstchart_outer" class="dc-chart"></div>
-                                    <div id="primReqByFuel_sunburstchart_inner" class="dc-chart"></div>
-                                </div>
-                            </div>
+        <div class="primaryEnergyReq_container col-xs-12 col-sm-8">
+            <h4 class="chart_title row">Primary Energy Requirements</h4>
+            <div class="primaryEnergyRequirmentAnalysisContainer">
+                <ul>
+                    <li>
+                        Ireland is heavily relient on imports.
+                    </li>
+                    <li>
+                        Irelands indgienous supply of natural gas is
+                    </li>
+                    <li>
+                        Refining is an important industry in Ireland
+                    </li>
+                </ul>
+            </div>
+            <div class="primaryEnergyRequirmentChartContainer">
+                <div class="chart_container primaryEnergyRequirment col-xs-12 col-sm-6">
+                    <h5 class="chart_title">Requirements by Source</h5>
+                    <div id="supplyBySource_barchart" class="dc-chart col-xs-8"></div>
+                </div>
+                <div class="pie_container col-xs-12 col-sm-6">
+                    <p class="subchart_title">Fuel</p>
+                    <div class="fuel_primReq_sunburst_chart">
+                        <div id="primReqByFuel_sunburstchart_outer" class="dc-chart"></div>
+                        <div id="primReqByFuel_sunburstchart_inner" class="dc-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="transformation_container col-xs-12 col-sm-4">
+            <h4 class="chart_title row">Transformation</h4>
+            <div class="tranformationAnalysisContainer">
+                <ul>
+                    <li>
+                        Most of the island electricity is generated from gas powered plants
+                    </li>
+                    <li>
+                        Peat still features which is suprising
+                    </li>
+                    <li>
+                        Moneypoint coal needs to be removed
+                    </li>
+                </ul>
+            </div>
+            <div class="tranformationChartContainer">
+                <div class="transformation_barchart_container">
+                    <div class="tranChart_label_container">
+                        <h5 class="subchart_title">Input<span class="labelOut">Output</span></h5>
+                        <div class="transChart_text_container">
+                            <p class="tranChart_label">Public Thermal Power Plants</p>
+                            <p class="tranChart_label">Oil Refineries & other energy sector</p>
+                            <p class="tranChart_label">Combined Heat and Power Plants</p>
+                            <p class="tranChart_label">Pumped Storage</p>
+                            <p class="tranChart_label">Briquetting Plants</p>
                         </div>
                     </div>
-
-                    <div class="transformation_container col-xs-12 col-sm-4">
-                        <h4 class="chart_title row">Transformation</h4>
-                        <div class="tranformationAnalysisContainer">
-                            <ul>
-                                <li>
-                                    Most of the island electricity is generated from gas powered plants
-                                </li>
-                                <li>
-                                    Peat still features which is suprising
-                                </li>
-                                <li>
-                                    Moneypoint coal needs to be removed
-                                </li>
-                            </ul>
-                        </div>
-                            <div class="tranformationChartContainer">
-                                <div class="transformation_barchart_container">
-                                    <div class="tranChart_label_container">
-                                        <h5 class="subchart_title">Input<span class="labelOut">Output</span></h5>
-                                        <div class="transChart_text_container">
-                                            <p class="tranChart_label">Public Thermal Power Plants</p>
-                                            <p class="tranChart_label">Oil Refineries & other energy sector</p>
-                                            <p class="tranChart_label">Combined Heat and Power Plants</p>
-                                            <p class="tranChart_label">Pumped Storage</p>
-                                            <p class="tranChart_label">Briquetting Plants</p>
-                                        </div>
-                                    </div>
-                                    <div id="transformationInput_barchart" class="dc-chart"></div>
-                                    <div id="transformationOutput_barchart" class="dc-chart"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="transformationInput_barchart" class="dc-chart"></div>
+                    <div id="transformationOutput_barchart" class="dc-chart"></div>
                 </div>
+            </div>
+        </div>
+    </div>
 
     <!---------------------------------------------------------------------------------------------------------Footer Content-->
 
-                <footer class="container footer col-xs-12">
-                        <div class="footer-text">
-                            <p>Developed by <a class="linkedIn-link" target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/">Daniel Casey</a></p>
-                        </div>
-                </footer>
+    <footer class="container footer col-xs-12">
+        <div class="footer-text">
+            <p>Developed by <a class="linkedIn-link" target="_blank" href="https://www.linkedin.com/in/danielcaseyengineer/">Daniel Casey</a></p>
+        </div>
+    </footer>
 
-                <!---------------------------------------------------------------------------------------------------------Scripts-->
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!---------------------------------------------------------------------------------------------------------Scripts-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 </body>
 </html>
