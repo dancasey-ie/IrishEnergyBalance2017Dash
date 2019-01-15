@@ -30,7 +30,7 @@ coal = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke",
 peat = ["MilledPeat", "SodPeat", "Briquettes"]
 oil = ["Crude", "RefineryGas", "Gasoline", "Kerosene", "JetKerosene",
        "Fueloil", "LPG", "Gasoil/Diesel/DERV", "PetroleumCoke", "Naphta"]
-natgas = ['NaturalGas']
+natgas = ['Nat.Gas']
 RE = ["Hydro", "Wind", "Biomass&RenewableWaste", "LandfillGas", "Biogas",
       "LiquidBiofuel", "Solar", "Geothermal"]
 nonRwWaste = ["Non-RenewableWaste"]

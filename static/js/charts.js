@@ -57,7 +57,7 @@ var coalTypes = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke",
 var peatTypes = ["MilledPeat", "SodPeat", "Briquettes"];
 var oilTypes = ["Crude", "RefineryGas", "Gasoline", "Kerosene", "JetKerosene",
     "Fueloil", "LPG", "Gasoil/Diesel/DERV", "PetroleumCoke", "Naphta"];
-var natgasTypes = ['NaturalGas'];
+var natgasTypes = ['Nat.Gas'];
 var ReTypes = ["Hydro", "Wind", "Biomass&RenewableWaste", "LandfillGas", "Biogas",
     "LiquidBiofuel", "Solar", "Geothermal"];
 var nonRwWasteTypes = ["Non-RenewableWaste"];
@@ -132,7 +132,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
     var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
 
-    var consumers = ["Transport", "Residential", "Industry", "Services", "Agricultural & Fisheries"]
+    var consumers = ["Transport", "Residential", "Industry", "Services", "Agri. & Fisheries"]
 
     var coal_group = consumer_dim.group().reduceSum(function (d) {
         if (d.fuelType === 'Coal') {
