@@ -653,7 +653,6 @@ function show_primReqFuel_sunburstchart_outer(ndx) {
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
     //var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
     var filteredFuel_array = fuel_group.top(Infinity);
-    var list = [];
     var coalDomain = [];
     var peatDomain = [];
     var oilDomain = [];
@@ -803,7 +802,7 @@ function show_transforationInput_barchart(ndx) {
     transformationInput_barchart = dc.barChart("#transformationInput_barchart")
     transformationInput_barchart
         .width(300)
-        //.height(150)
+        .height(200)
         .margins({ top: 0, right: 0, bottom: 0, left: 20 })
         .dimension(tranIn_dim)
         .group(oil_group, 'Oil')
@@ -904,7 +903,7 @@ function show_transforationOutput_barchart(ndx) {
     transformationOutput_barchart = dc.barChart("#transformationOutput_barchart")
     transformationOutput_barchart
         .width(300)
-        //.height(150)
+        .height(200)
         .margins({ top: 0, right: 0, bottom: 0, left: 20 })
         .dimension(tranOut_dim)
         .group(oil_group, 'Oil')
@@ -950,6 +949,57 @@ function show_transformationInputFuel_piechart(ndx) {
             return 0;
         }
     });
+
+    var filteredFuel_array = fuel_group.top(Infinity);
+    var coalDomain = [];
+    var peatDomain = [];
+    var oilDomain = [];
+    var natgasDomain = [];
+    var ReDomain = [];
+    var nonRwWasteDomain = [];
+    var elecDomain = [];
+    var domainColors = []
+    var oilFuelIndex = 0;
+    var renewFuelIndex = 0;
+    var coalFuelIndex = 0;
+    var peatFuelIndex = 0;
+
+    filteredFuel_array.forEach(seperate_fuelTypes);
+    function seperate_fuelTypes(d) {
+        if (oilTypes.indexOf(d.key) > -1) {
+            oilDomain.push(d.key);
+            domainColors.push(oilColorScale[oilFuelIndex]);
+
+            oilFuelIndex = oilFuelIndex + 1;
+        }
+        else if (elecTypes.indexOf(d.key) > -1) {
+            elecDomain.push(d.key);
+            domainColors.push(elecColor);
+        }
+        else if (natgasTypes.indexOf(d.key) > -1) {
+            natgasDomain.push(d.key);
+            domainColors.push(natgasColor);
+        }
+        else if (ReTypes.indexOf(d.key) > -1) {
+            ReDomain.push(d.key);
+            domainColors.push(renewColorScale[renewFuelIndex]);
+            renewFuelIndex = renewFuelIndex + 1;
+        }
+        else if (coalTypes.indexOf(d.key) > -1) {
+            coalDomain.push(d.key);
+            domainColors.push(coalColorScale[coalFuelIndex]);
+            coalFuelIndex = coalFuelIndex + 1;
+        }
+        else if (peatTypes.indexOf(d.key) > -1) {
+            peatDomain.push(d.key);
+            domainColors.push(peatColorScale[peatFuelIndex]);
+            peatFuelIndex = peatFuelIndex + 1;
+        }
+        else if (nonRwWasteTypes.indexOf(d.key) > -1) {
+            nonRwWasteDomain.push(d.key);
+            domainColors.push(nonRWColor);
+        }
+    };
     dc.pieChart("#transformationInputByFuel_piechart")
         .height(100)
         .width(100)
@@ -961,7 +1011,7 @@ function show_transformationInputFuel_piechart(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(fuelColorsList)
+        .ordinalColors(domainColors)
         .renderLabel(false);
 }
 
@@ -980,6 +1030,65 @@ function show_transformationOutputFuel_piechart(ndx) {
             return 0;
         }
     });
+
+    var filteredFuel_array = fuel_group.top(Infinity);
+
+    var coalDomain = [];
+    var peatDomain = [];
+    var oilDomain = [];
+    var natgasDomain = [];
+    var ReDomain = [];
+    var nonRwWasteDomain = [];
+    var elecDomain = [];
+    var domainColors = []
+
+    var oilFuelIndex = 0;
+    var renewFuelIndex = 0;
+    var coalFuelIndex = 0;
+    var peatFuelIndex = 0;
+
+    filteredFuel_array.forEach(seperate_fuelTypes);
+
+    function seperate_fuelTypes(d) {
+
+
+        if (oilTypes.indexOf(d.key) > -1) {
+            oilDomain.push(d.key);
+            domainColors.push(oilColorScale[oilFuelIndex]);
+
+            oilFuelIndex = oilFuelIndex + 1;
+        }
+        else if (elecTypes.indexOf(d.key) > -1) {
+            elecDomain.push(d.key);
+            domainColors.push(elecColor);
+        }
+        else if (natgasTypes.indexOf(d.key) > -1) {
+            natgasDomain.push(d.key);
+            domainColors.push(natgasColor);
+        }
+        else if (ReTypes.indexOf(d.key) > -1) {
+            ReDomain.push(d.key);
+            domainColors.push(renewColorScale[renewFuelIndex]);
+            renewFuelIndex = renewFuelIndex + 1;
+        }
+        else if (coalTypes.indexOf(d.key) > -1) {
+            coalDomain.push(d.key);
+            domainColors.push(coalColorScale[coalFuelIndex]);
+            coalFuelIndex = coalFuelIndex + 1;
+        }
+        else if (peatTypes.indexOf(d.key) > -1) {
+            peatDomain.push(d.key);
+            domainColors.push(peatColorScale[peatFuelIndex]);
+            peatFuelIndex = peatFuelIndex + 1;
+        }
+        else if (nonRwWasteTypes.indexOf(d.key) > -1) {
+            nonRwWasteDomain.push(d.key);
+            domainColors.push(nonRWColor);
+        }
+
+
+    };
+
     dc.pieChart("#transformationOutputByFuel_piechart")
         .height(100)
         .width(100)
@@ -991,6 +1100,7 @@ function show_transformationOutputFuel_piechart(ndx) {
         .title(function (d) {
             return d.key + ':\n' + Math.round(d.value / all.value() * 100) + '%\n' + Math.round(d.value) + 'toe';
         })
-        .ordinalColors(fuelColorsList)
+        .ordinalColors(domainColors)
         .renderLabel(false);
+
 }

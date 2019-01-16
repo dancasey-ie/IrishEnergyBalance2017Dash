@@ -55,17 +55,27 @@ svg text {
 
 .finalEnergyConsumption_container, .primaryEnergyReq_container, .transformation_container {
     background-color: #eeeeee;
-    padding:0px;
-    overflow:hidden;
+    padding: 0px;
+    border-bottom: solid;
+    border-color: #39827d;
+    border-width: 1px;
+    padding-top: 20px;
+    overflow: hidden;
 }
-.chart_title {
-    font-family: 'Lato', futura, georgia;
-    letter-spacing: 1px;
-    line-height: 15px;
-    text-transform: Uppercase;
-    text-align: center;
-    color: #39827d;
+
+.transformation_container {
+    border-left: solid;
+    border-color: #39827d;
+    border-width: 1px;
 }
+    .chart_title {
+        font-family: 'Lato', futura, georgia;
+        letter-spacing: 1px;
+        line-height: 15px;
+        text-transform: Uppercase;
+        text-align: center;
+        color: #39827d;
+    }
 
 .subchart_title {
     font-family: 'Lato', futura, georgia;
@@ -265,20 +275,21 @@ svg text {
             transform: translate(220px,0px);
         }
 /*---------------------------------------------------------Transformation Bar Chart*/
-.tranformationChartContainer {
-    margin: 0 auto;
-    overflow:scroll !important;
-}
 .transformation_barchart_container {
-    width: 800px;
+    overflow: scroll !important;
+    width: 700px;
     margin: 0 auto;
     height: 350px;
 }
 
+.transformation_barchart_container_outer{
+    padding:0px;
+
+}
 .tranChart_label_container {
     text-align: center;
     position: absolute;
-    left: 230px;
+    left: 160px;
 }
 
     .tranChart_label_container .subchart_title {
@@ -289,24 +300,16 @@ svg text {
 .labelOut {
     margin-left: 50px;
 }
-.transChart_text_container {
-}
 
 .tranChart_label {
     margin-bottom:31px;
 }
 
-.transformation_barchart_bar_container {
-    position: relative;
-    margin: 0 auto;
-}
 #transformationInput_barchart {
-    transform: rotate(-90deg);
+    transform: translate(0px,50px) rotate(-90deg);
 
 }
-    #transformationInput_barchart svg {
-        height: 50%;
-    }
+
     #transformationInput_barchart svg g g.axis.x {
         display: none;
     }
@@ -322,11 +325,11 @@ svg text {
 }
 
 #transformationOutput_barchart {
-    transform: rotate(90deg);
+    transform: translate(-100px,50px)rotate(90deg);
 }
 
 #transformationOutput_barchart svg {
-    height: 50%;
+
 }
 
     #transformationOutput_barchart svg g .stack rect {
@@ -346,10 +349,15 @@ svg text {
         transform: translate(15px, 0px) rotate(-90deg);
     }
 
+.transformation_piechart_container {
+    margin: 0 auto;
+}
 
-
-/* ------------------------------------------------------Footer Styling*/
-.footer {
+#transformationOutputByFuel_piechart {
+    margin: 0 auto;
+}
+    /* ------------------------------------------------------Footer Styling*/
+    .footer {
     height: 30px;
     color: #ffffff;
     position: relative;
