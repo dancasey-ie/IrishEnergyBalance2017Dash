@@ -267,12 +267,12 @@ svg text {
 /*---------------------------------------------------------Transformation Bar Chart*/
 .tranformationChartContainer {
     margin: 0 auto;
+    overflow:scroll !important;
 }
 .transformation_barchart_container {
-    width: 100%;
+    width: 800px;
     margin: 0 auto;
     height: 350px;
-    overflow: scroll !important;
 }
 
 .tranChart_label_container {

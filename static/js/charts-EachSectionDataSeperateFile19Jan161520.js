@@ -1,6 +1,16 @@
 
 
+queue()
+  .defer(d3.json, "static/data/EnergyBalance2017FinalEnergyConsumption.json")
+  .await(makeGraphsFinalEnergyConsumption);
 
+queue()
+  .defer(d3.json, "static/data/EnergyBalance2017PrimaryEnergyReq.json")
+   .await(makeGraphsPrimaryEnergyReq);
+
+queue()
+  .defer(d3.json, "static/data/EnergyBalance2017Transformation.json")
+  .await(makeGraphsTransformation);
 
 var oilColor = '#46a09a'
 var oilColorScale = ['#4eb1ab', '#5fb9b3', '#71c1bb', '#95d0cc', '#83c9c4', '#a6d8d5', '#b8e0dd', '#cae8e6', '#dcefee', '#edf7f7', '#ffffff']
@@ -50,23 +60,14 @@ var ReTypes = ["Hydro", "Wind", "Biomass&RenewableWaste", "LandfillGas", "Biogas
 var nonRwWasteTypes = ["Non-RenewableWaste"];
 var elecTypes = ["Electricity"];
 
-queue()
-    .defer(d3.json, "static/data/EnergyBalance2017.json")
-    .await(makeGraphsAllData);
-
-queue()
-    .defer(d3.json, "static/data/EnergyBalance2017PrimaryEnergyReq.json")
-    .await(makeGraphsPrimaryEnergyReq);
-
-queue()
-    .defer(d3.json, "static/data/EnergyBalance2017Transformation.json")
-    .await(makeGraphsTransformation);
-
-function makeGraphsAllData(error, energyData) {
+function makeGraphsFinalEnergyConsumption(error, energyData) {
     var ndx = crossfilter(energyData);
 
     show_consumptionByFuelType_rowchart(ndx);
     show_consumptionByConsumer_barchart(ndx);
+
+    // show_consumptionByConsumer_piechart(ndx);
+    //show_consumptionFuel_piechart(ndx);
 
     show_consumptionConsumer_sunburstchart_inner(ndx);
     show_consumptionConsumer_sunburstchart_outer(ndx);
@@ -74,23 +75,26 @@ function makeGraphsAllData(error, energyData) {
     show_consumptionFuel_sunburstchart_inner(ndx);
     show_consumptionFuel_sunburstchart_outer(ndx);
 
-    show_supplyBySource_barchart(ndx);
-
-    show_primReqFuel_sunburstchart_inner(ndx);
-    show_primReqFuel_sunburstchart_outer(ndx);
-
+    //show_consumptionByConsumer_rowchart(ndx);
+    //show_consumptionByFuelType_barchart(ndx);
 
     dc.renderAll();
 }
 
 function makeGraphsPrimaryEnergyReq(error, energyData) {
     var ndx = crossfilter(energyData);
+
+    show_supplyBySource_barchart(ndx);
+    // show_supplyFuel_piechart(ndx);
+    show_primReqFuel_sunburstchart_inner(ndx);
+    show_primReqFuel_sunburstchart_outer(ndx);
     dc.renderAll();
 }
 
 function makeGraphsTransformation(error, energyData) {
     var ndx = crossfilter(energyData);
-
+    //show_transformationInput_rowchart(ndx);
+    //show_transformationOutput_rowchart(ndx);
     show_transforationInput_barchart(ndx);
     show_transforationOutput_barchart(ndx);
     dc.renderAll();
@@ -98,24 +102,9 @@ function makeGraphsTransformation(error, energyData) {
 //----------------------------------------------------------------------------Final Consumption Charts
 //--------------------------------------------------------------Consumption by Fuel Row Chart
 function show_consumptionByFuelType_rowchart(ndx) {
-    //var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
-    var fuelType_dim = ndx.dimension(function (d) {
-        if (d.group === 'FinalEnergyConsumption')
-            return d.fuelType;
-        }
-    );
+    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
-    //var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
-    var fuelType_group = fuelType_dim.group().reduceSum(function (d) {
-    if (d.group === 'FinalEnergyConsumption') {
-        return +d.value;
-    } else {
-        return 0;
-    }
-    });
-
-    console.log(fuelType_group.top(Infinity))
-
+    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
     dc.rowChart("#consumptionByFuelType_rowchart")
         .height(350)
         .margins({ top: 0, left: 10, right: 20, bottom: 100 })
@@ -137,25 +126,20 @@ function show_consumptionByFuelType_rowchart(ndx) {
 //--------------------------------------------------------------Consumption by Consumer Bar Chart
 function show_consumptionByConsumer_barchart(ndx) {
 
-    //var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
-    var consumer_dim = ndx.dimension(function (d) {
-        if (d.group === 'FinalEnergyConsumption')
-            return d.subgroup;
-    }
-    );
+    var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
     var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
 
     var consumers = ["Transport", "Residential", "Industry", "Services", "Agri. & Fisheries"]
 
     var coal_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Coal')){
+        if (d.fuelType === 'Coal') {
             return +d.value;
         } else {
             return 0;
         }
     });
     var elec_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Electricity') ){
+        if (d.fuelType === 'Electricity') {
             return +d.value;
         } else {
             return 0;
@@ -163,7 +147,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     });
 
     var natgas_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Nat.Gas')) {
+        if (d.fuelType === 'Nat.Gas') {
             return +d.value;
         } else {
             return 0;
@@ -171,7 +155,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     });
 
     var nRWaste_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Non-Re.Waste') ){
+        if (d.fuelType === 'Non-Re.Waste') {
             return +d.value;
         } else {
             return 0;
@@ -179,7 +163,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     });
 
     var oil_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Oil')) {
+        if (d.fuelType === 'Oil') {
             return +d.value;
         } else {
             return 0;
@@ -187,7 +171,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     });
 
     var peat_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Peat') ){
+        if (d.fuelType === 'Peat') {
             return +d.value;
         } else {
             return 0;
@@ -195,7 +179,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     });
 
     var renew_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Renewables')){
+        if (d.fuelType === 'Renewables') {
             return +d.value;
         } else {
             return 0;
@@ -241,21 +225,10 @@ function show_consumptionByConsumer_barchart(ndx) {
 
 //--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart (inner)
 function show_consumptionConsumer_sunburstchart_inner(ndx) {
-    //var consumerType_dim = ndx.dimension(dc.pluck('subgroup'));
-    var consumerType_dim = ndx.dimension(function (d) {
-        if (d.group === 'FinalEnergyConsumption')
-            return d.subgroup;
-    }
-    );
+    var consumerType_dim = ndx.dimension(dc.pluck('subgroup'));
     var all = consumerType_dim.groupAll().reduceSum(dc.pluck('value'));
-    //var consumerType_group = consumerType_dim.group().reduceSum(dc.pluck('value'));
-    var consumerType_group = consumerType_dim.group().reduceSum(function (d) {
-        if (d.group === 'FinalEnergyConsumption') {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var consumerType_group = consumerType_dim.group().reduceSum(dc.pluck('value'));
+
     dc.pieChart("#consumptionByConsumer_sunburstchart_inner")
         .transitionDuration(750)
         .dimension(consumerType_dim)
@@ -271,21 +244,9 @@ function show_consumptionConsumer_sunburstchart_inner(ndx) {
 
 //--------------------------------------------------------------Consumption Consumer Breakdown Pie Chart (outer)
 function show_consumptionConsumer_sunburstchart_outer(ndx) {
-    //var consumer_dim = ndx.dimension(dc.pluck('record'));
-    var consumer_dim = ndx.dimension(function (d) {
-        if (d.group === 'FinalEnergyConsumption')
-            return d.record;
-    }
-    );
+    var consumer_dim = ndx.dimension(dc.pluck('record'));
     var all = consumer_dim.groupAll().reduceSum(dc.pluck('value'));
-    //var consumer_group = consumer_dim.group().reduceSum(dc.pluck('value'));
-    var consumer_group = consumer_dim.group().reduceSum(function (d) {
-        if (d.group === 'FinalEnergyConsumption') {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var consumer_group = consumer_dim.group().reduceSum(dc.pluck('value'));
     var filteredConsumer_array = consumer_group.top(Infinity);
     var list = [];
     var transportDomain = [];
@@ -363,21 +324,10 @@ function show_consumptionConsumer_sunburstchart_outer(ndx) {
 
 //--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (inner)
 function show_consumptionFuel_sunburstchart_inner(ndx) {
-    //var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
-    var fuelType_dim = ndx.dimension(function (d) {
-        if (d.group === 'FinalEnergyConsumption')
-            return d.fuelType;
-    }
-    );
+    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
-    //var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
-    var fuelType_group = fuelType_dim.group().reduceSum(function (d) {
-        if (d.group === 'FinalEnergyConsumption') {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
+
     dc.pieChart("#consumptionByFuel_sunburstchart_inner")
         .transitionDuration(750)
         .dimension(fuelType_dim)
@@ -396,29 +346,10 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
 
 
 
-    //var fuel_dim = ndx.dimension(dc.pluck('fuel'));
-
-    //var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
-
-
-    var fuel_dim = ndx.dimension(function (d) {
-        if (d.group === 'FinalEnergyConsumption')
-            return d.fuel;
-    }
-    );
-
-    var fuel_group = fuel_dim.group().reduceSum(function (d) {
-        if (d.group === 'FinalEnergyConsumption') {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
+    var fuel_dim = ndx.dimension(dc.pluck('fuel'));
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
+    var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
     var filteredFuel_array = fuel_group.top(Infinity);
-
-
     var list = [];
     var coalDomain = [];
     var peatDomain = [];
@@ -499,24 +430,18 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
 //--------------------------------------------------------------Primary Req. by Source Bar Chart
 function show_supplyBySource_barchart(ndx) {
 
-    //var source_dim = ndx.dimension(dc.pluck('record'));
-
-    var source_dim = ndx.dimension(function (d) {
-        if (d.group === 'PrimaryEnergyRequirement')
-            return d.record;
-    }
-    );
+    var source_dim = ndx.dimension(dc.pluck('record'));
     var all = source_dim.groupAll().reduceSum(dc.pluck('value'));
 
     var coal_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Coal')) {
+        if (d.fuelType === 'Coal') {
             return +d.value;
         } else {
             return 0;
         }
     });
     var elec_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Electricity')) {
+        if (d.fuelType === 'Electricity') {
             return +d.value;
         } else {
             return 0;
@@ -524,7 +449,7 @@ function show_supplyBySource_barchart(ndx) {
     });
 
     var natgas_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Nat.Gas')) {
+        if (d.fuelType === 'Nat.Gas') {
             return +d.value;
         } else {
             return 0;
@@ -532,7 +457,7 @@ function show_supplyBySource_barchart(ndx) {
     });
 
     var nRWaste_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Non-Re.Waste')) {
+        if (d.fuelType === 'Non-Re.Waste') {
             return +d.value;
         } else {
             return 0;
@@ -540,7 +465,7 @@ function show_supplyBySource_barchart(ndx) {
     });
 
     var oil_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Oil')) {
+        if (d.fuelType === 'Oil') {
             return +d.value;
         } else {
             return 0;
@@ -548,7 +473,7 @@ function show_supplyBySource_barchart(ndx) {
     });
 
     var peat_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Peat')) {
+        if (d.fuelType === 'Peat') {
             return +d.value;
         } else {
             return 0;
@@ -556,7 +481,7 @@ function show_supplyBySource_barchart(ndx) {
     });
 
     var renew_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Renewables')) {
+        if (d.fuelType === 'Renewables') {
             return +d.value;
         } else {
             return 0;
@@ -600,23 +525,9 @@ function show_supplyBySource_barchart(ndx) {
 
 //--------------------------------------------------------------Primary Req. Fuel Breakdown Pie Chart (inner)
 function show_primReqFuel_sunburstchart_inner(ndx) {
-    //var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
-
-    var fuelType_dim = ndx.dimension(function (d) {
-        if (d.group === 'PrimaryEnergyRequirement')
-            return d.fuelType;
-    }
-    );
+    var fuelType_dim = ndx.dimension(dc.pluck('fuelType'));
     var all = fuelType_dim.groupAll().reduceSum(dc.pluck('value'));
-   // var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
-
-    var fuelType_group = fuelType_dim.group().reduceSum(function (d) {
-        if (d.group === 'PrimaryEnergyRequirement') {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
 
     dc.pieChart("#primReqByFuel_sunburstchart_inner")
         .transitionDuration(750)
@@ -633,24 +544,9 @@ function show_primReqFuel_sunburstchart_inner(ndx) {
 
 //--------------------------------------------------------------Primary Req. Fuel Breakdown Pie Chart (outer)
 function show_primReqFuel_sunburstchart_outer(ndx) {
-    //var fuel_dim = ndx.dimension(dc.pluck('fuel'));
-
-    var fuel_dim = ndx.dimension(function (d) {
-        if (d.group === 'PrimaryEnergyRequirement')
-            return d.fuel;
-    }
-    );
-
-    var fuel_group = fuel_dim.group().reduceSum(function (d) {
-        if (d.group === 'PrimaryEnergyRequirement') {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
+    var fuel_dim = ndx.dimension(dc.pluck('fuel'));
     var all = fuel_dim.groupAll().reduceSum(dc.pluck('value'));
-    //var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
+    var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
     var filteredFuel_array = fuel_group.top(Infinity);
     var list = [];
     var coalDomain = [];
