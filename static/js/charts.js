@@ -110,8 +110,7 @@ function show_consumptionByFuelType_rowchart(ndx) {
     var fuelType_group = fuelType_dim.group().reduceSum(dc.pluck('value'));
     dc.rowChart("#consumptionByFuelType_rowchart")
         .height(350)
-        .width(300)
-        .margins({ top: 0, left: 10, right: 0, bottom: 100 })
+        .margins({ top: 0, left: 10, right: 20, bottom: 100 })
         .transitionDuration(750)
         .dimension(fuelType_dim)
         .group(fuelType_group)
@@ -193,8 +192,7 @@ function show_consumptionByConsumer_barchart(ndx) {
     consumptionByConsumer_barchart = dc.barChart("#consumptionByConsumer_barchart")
     consumptionByConsumer_barchart
         .height(330)
-        .width(400)
-        .margins({ top: 10, right: 50, bottom: 80, left: 50 })
+        .margins({ top: 10, right: -20, bottom: 80, left: 20 })
         .dimension(consumer_dim)
         .group(oil_group, 'Oil')
         .stack(elec_group, 'Electricity')
@@ -496,9 +494,8 @@ function show_supplyBySource_barchart(ndx) {
 
     consumptionByFuelType_barchart = dc.barChart("#supplyBySource_barchart")
     consumptionByFuelType_barchart
-        .width(300)
-        .height(300)
-        .margins({ top: 10, right: 50, bottom: 100, left: 40 })
+        .height(330)
+        .margins({ top: 10, right: -20, bottom: 80, left: 25 })
         .dimension(source_dim)
         .group(oil_group, 'Oil')
         .stack(elec_group, 'Electricity')
@@ -703,7 +700,7 @@ function show_transforationInput_barchart(ndx) {
     transformationInput_barchart = dc.barChart("#transformationInput_barchart")
     transformationInput_barchart
         .width(300)
-        .height(200)
+        //.height(150)
         .margins({ top: 0, right: 0, bottom: 0, left: 20 })
         .dimension(tranIn_dim)
         .group(oil_group, 'Oil')
@@ -800,9 +797,9 @@ function show_transforationOutput_barchart(ndx) {
 
     transformationOutput_barchart = dc.barChart("#transformationOutput_barchart")
     transformationOutput_barchart
-        .width(310)
-        .height(200)
-        .margins({ top: 0, right: -10, bottom: 0, left: 35 })
+        .width(300)
+        //.height(150)
+        .margins({ top: 0, right: 0, bottom: 0, left: 20 })
         .dimension(tranOut_dim)
         .group(oil_group, 'Oil')
         .stack(elec_group, 'Electricity')
