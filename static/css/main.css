@@ -86,6 +86,9 @@ svg text {
     margin-top: 20px;
 }
 
+.modal {
+    top:60px;
+}
 /*---------------------------------------------------------Final Consumption Fuel Row Chart*/
 .consumptionByFuelType_rowchart_container {
     width: 100%;

@@ -1,4 +1,6 @@
-
+$(window).on('load', function () {
+    $('#welcomeModal').modal('show');
+});
 
 
 
@@ -730,7 +732,7 @@ function show_primReqFuel_sunburstchart_outer(ndx) {
 //----------------------------------------------------------------------------Transformation Charts
 
 
-//--------------------------------------------------------------Transformation Output by Use Bar Chart
+//--------------------------------------------------------------Transformation Input by Use Bar Chart
 function show_transforationInput_barchart(ndx) {
 
     var tranIn_dim = ndx.dimension(function (d) {
