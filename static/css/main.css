@@ -374,9 +374,12 @@ svg text {
 
 .footer-text {
     margin-top: 5px;
-}
 
-.linkedIn-link {
+}
+.footer-text p{
+    margin-bottom: 0px;
+}
+    .linkedIn-link {
     color: #ffffff;
     font-weight: bold;
 }

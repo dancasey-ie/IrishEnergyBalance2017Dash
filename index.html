@@ -64,7 +64,7 @@
                         <li>Please open on desktop for greater user experience.</li>
                         <li>Hover the mouse over a data group to reveal additional information on a data group. (Only available on desktop)</li>
                         <li>Click on a data group to filter the data displayed on the charts.</li>
-                        <li>Click a filtered data group again will remove the group from the filter.</li>
+                        <li>Click a filtered data group again to remove the group from the filter.</li>
                         <li>Narrow or widen your filter by selecting or removing a number of data groups.</li>
                         <li>Filter only works within chart groupings - Final Energy Consumption, Primary Energy Requirements and Transformation.</li>
                         <li>Reset the charts by clicking the 'Reset Charts' option from the menu. </li>
@@ -88,15 +88,13 @@
 
 
                     <ul>
-                        <li>The dashboard can be used on mobile, but is best explored on desktop.</li>
+                        <li>Please open on desktop for greater user experience.</li>
                         <li>Hover the mouse over a data group to reveal additional information on a data group. (Only available on desktop)</li>
-                        <li>
-                            Click on a data group to filter the data displayed on the charts. <br />
-                            i.e. Click the 'Oil' data group on the 'Consumption by Fuel' will filter for 'Oil' data across all charts, while clicking 'Transport' data group on the 'Consumption by Consumer' chart will only filter across 'Final Energy Consumption' charts.
-                        </li>
-                        <li>Clicking a filtered data group again to remove the group from the filter.</li>
-                        <li>Narrow or widen your filter range by selecting or removing a number of data groups.</li>
-                        <li>Reset the charts data by clicking the 'Reset Charts' option from the menu. </li>
+                        <li>Click on a data group to filter the data displayed on the charts.</li>
+                        <li>Click a filtered data group again to remove the group from the filter.</li>
+                        <li>Narrow or widen your filter by selecting or removing a number of data groups.</li>
+                        <li>Filter only works within chart groupings - Final Energy Consumption, Primary Energy Requirements and Transformation.</li>
+                        <li>Reset the charts by clicking the 'Reset Charts' option from the menu. </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -143,7 +141,7 @@
                 <div class="modal-body">
                     <h4 class="modal-title">Bio</h4>
                     <p>
-                        I am foremost an Energy Engineer by eduction, an Automation Engineer by experience and soon to be Full Stack Software Developer.
+                        I am Energy Engineering, combining complementery skills for the digitalizion of the energy sector.
                     </p>
                     <p>
                         Having spent a number of years working as an Automation Engineer designing and commisioning SCADA and PLC systems for energy applications,
@@ -183,7 +181,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <p class="subchart_title">Fuel Breakdown</p>
+                        <p class="subchart_title">Fuel Breakdown <br />(Inner: Grouped / Outer: Specific)</p>
                         <div class="consumptionByFuel_sunburst_chart">
                             <div id="consumptionByFuel_sunburstchart_outer" class="dc-chart"></div>
                             <div id="consumptionByFuel_sunburstchart_inner" class="dc-chart"></div>
@@ -198,7 +196,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <p class="subchart_title">Consumer Breakdown</p>
+                        <p class="subchart_title">Consumer Breakdown <br />(Inner: Grouped / Outer: Specific)</p>
                         <div class="consumptionByConsumer_sunburst_chart">
                             <div id="consumptionByConsumer_sunburstchart_outer" class="dc-chart"></div>
                             <div id="consumptionByConsumer_sunburstchart_inner" class="dc-chart"></div>
@@ -219,7 +217,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <p class="subchart_title">Fuel</p>
+                        <p class="subchart_title">Fuel Breakdown <br />(Inner: Grouped / Outer: Specific)</p>
                         <div class="fuel_primReq_sunburst_chart">
                             <div id="primReqByFuel_sunburstchart_outer" class="dc-chart"></div>
                             <div id="primReqByFuel_sunburstchart_inner" class="dc-chart"></div>
@@ -257,13 +255,13 @@
                     <div class="col-xs-12 col-sm-3">
                         <div class="col-xs-6 col-sm-12">
                             <div class="transformation_piechart_container ">
-                                <h5 class="subchart_title">Inputs</h5>
+                                <h5 class="subchart_title">Fuel Inputs</h5>
                                 <div id="transformationInputByFuel_piechart" class="dc-chart"></div>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-12">
                             <div class="transformation_piechart_container ">
-                                <h5 class="subchart_title">Outputs</h5>
+                                <h5 class="subchart_title">Fuel Outputs</h5>
                                 <div id="transformationOutputByFuel_piechart" class="dc-chart"></div>
                             </div>
                         </div>
