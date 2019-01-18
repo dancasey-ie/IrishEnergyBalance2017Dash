@@ -38,15 +38,27 @@ UX
 ----
 
 
-
 __User Stories__
 
+* As a user I should have a clear understandinig of what the dashboard is showing me straight away.
+* As a user I should be able to see all charts in one view while using a desktop.
+* As a user I should be able to see all charts on my mobile, scrolling between each chart but not haveing to zoom.
+* As a user I should see clear seperation of data groups.
+* As a user I should continuation of styles and colors across the charts, using common colours for common data.
+* As a user I should be given information on the source of the data.
+* As a user I should be given information on the technologies used in developing the charts.
+* As a user I should be given information on how to best use the charts.
+* As a user I should be given information on the developer, their background and autority on the subject matter.
+* As a user I should be able to filter data across charts to explore the data more efficently.
+* As a user I should be able to reset all filters whithout having to reload the page.
+* As a user I should be able to access further details on the data by hovering over the data groups on the charts.
 
-Features and Process
------------------
+Features
+--------
 
 __Existing Features__
 
+__Features to Develop__
 
 
 Testing
