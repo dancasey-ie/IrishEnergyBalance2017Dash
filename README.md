@@ -13,8 +13,9 @@ This python script could probably be written in JS and once all is up and runnin
 Technologies Used
 -----------------------
 * __JavaScript__ was used for interactive frontend development.
-* __D3.js__ (https://d3js.org/) was used to develop graphical visualizations of the data.
-* __DC.js__ (https://dc-js.github.io/dc.js/) was to give interactive attributes to D3 charts.
+* __DC.js v.2.1.8__ (https://dc-js.github.io/dc.js/) was the JavaScript charting library used.
+* __D3.js v.3__ (https://d3js.org/) is the data processing library used by DC.js.
+. __crossfilter__ (https://github.com/crossfilter/crossfilter) is used by D3.js to filter data across a data set.
 * __VisualStudios2017__ (https://visualstudio.microsoft.com/downloads/) IDE was used in the development of the project.
 * __VirtualEnvironment__ (https://docs.python.org/3/library/venv.html) was used to wrap the project.
 * __Git__ (https://git-scm.com/) was used for version control.
@@ -67,7 +68,14 @@ __Manual Testing__
 
 
 __Known Bugs__
-
+* Transformation charts section padding not the same as rest of sections, presume its due to the number of bootstrap grid classes used
+* Transformation bar charts does not fit into div on xs screen
+* Transformation bar charts labels not aligned properly in smaller screens.
+* Nav bar hover should change color
+* Nav collapsed should pull right
+* Pie chart slices should be labeled
+* Crossfilter across data sets not working properly
+* 
 
 
 Development
@@ -76,24 +84,35 @@ The project was developed using Visual Studios 2017. Even though this project is
 There are a number of folders included in the wrapper associated with the virtual envirenment not required by the project that should not be included in the git repository. 
 A .gitignore file was included so these files would not be commited.
 
-During the project I wanted to develop a sunburst style pie chart. Dc.js v.5 has the function built in. Dc.js version 5 requires D3 version 3, time was spent trying to get these working with my
-project but I decided that it wasn't worth spending more time on and tried to develop them myself.
+A wireframe was devloped outlining that I wanted row charts, bar charts, pie charts and back to back row charts and their arrangments on the screen.
+
+The energy balance data I downloaded from the SEAI site was in .xlsx format. I converted this to .csv and began trying to work with the data. Since a lot of the columns where calculated 
+totals of other columns and some rows were calculated totals of other rows, working with .csv was proving difficult to extract useful groupings. The data was converted to .json using an
+online converting tool and a Python script was developed to seperate out categories allowing for more managibal data extraction.
+
+The first charts developed read the data from one .json file and used functions to chooce the data to display in the different charts. The crossfilter was not working correctly and a number of the D3
+calculations were in correct. The Python script was updated to seperate out the .json file into a number of seperate files, thus seperate crossfilteres.
+
+Since the fuels and consumers were seperated into sub-groups I wanted to develop sunburst style pie charts to breakdown these sub-groups. Dc.js v.5 has the sunburst style charts built in but I had been using DC.js v.2.  
+Time was spent trying to migrate to Dc.js v.5, but it required migrating to D3 v.3, this was proving more work than was benificial and decided to stay with dc.js v.2 and develop custom sunburst charts with the inner and outer 
+charts filtering seperatly so that a sub-group specifics could be explored in more detail once selected.
+
+For the transformation Input/ Output chart I first used back to back rowCharts from the DC.js, but as the rowCharts are self sorting the input and output row groupings did not line up approprietly.
+As an alternative I developed two seperate bar charts using domain(...) to set my desired arrangment and using .css rotated the charts 90deg and -90deg and positioned them back to back.
+
+As fuels were common across all charts and data sets I wanted to standardise the colors across the charts. Using the same colors used on the SEAI website, extracting them using Mozila Eyedropper tool,
+I developed color scales. The hex value for the base color for a grouping was put into a color selector tool and the next 10 lighter shades of that color were added to the color scale list. 
+A script was writen that set the colors of the outer rings of the sunburst charts based on there parent group.
+
+The charts were re-arranged and re-sized a number of times so that all charts fit nicely into a laptop screen, for efficient data comparison, without loosing effect in mobile screens.
+
+Modals were included accessed from the navbar to give context to the charts data, explain how to use the interactive functionality and give a background to my own interests in the data and technologies.
+
+A reset button was also added to the navbar to reset the charts after they have been filtered.
+
+A welcome modal was developed to introduce the user to the charts when the page first loaded. This was added to remove confusion for the user. 
 
 Deployment
 ------------------------
 
-__Hosting__
-
-IP: 0.0.0.0  
-Port: 5000
-
-__Requirements__
-
-
-__Deployed vs Development__
-
-Running App
-------------------------
-
-https://irish-energy-assets.herokuapp.com/
-
+The dashboard is hosted on GitHub Pages https://pages.github.com/ and can be accessed at https://dcasey720.github.io/IrishEnergyBalance2017Dash/.
