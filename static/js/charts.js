@@ -1,44 +1,38 @@
-$(window).on('load', function () {
-    $('#welcomeModal').modal('show');
-});
+var oilColor = '#46a09a';
+var oilColorScale = ['#4eb1ab', '#5fb9b3', '#71c1bb', '#95d0cc', '#83c9c4', '#a6d8d5', '#b8e0dd', '#cae8e6', '#dcefee', '#edf7f7', '#ffffff'];
+var elecColor = '#0560a7';
+var natgasColor = '#007a45';
+var renewColor = '#bebd01';
+var renewColorScale = ['#cbcb01', '#e4e401', '#fefe01', '#fefe1b', '#fefe34', '#fefe4d', '#fefe67', '#fefe80', '#fefe9a'];
+var coalColor = '#ffb736';
+var coalColorScale = ['#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc'];
+var peatColor = '#ec571b';
+var peatColorScale = ['#ee622b', '#f07342', '#f2855a', '#f49671', '#f5a889', '#f7b9a1', '#f9cbb8', '#fbdcd0'];
+var nonRWColor = '#c70063';
+var fuelColorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor];
 
+var transportColor = '#5b156a';
+var transportColorScale = ['#6d1980', '#7f1d95', '#9122aa', '#a326c0', '#b62ad5', '#bd3fd9', '#c455dd', '#cc6ae2', '#d37fe6', '#da95ea', '#e2aaee'];
+var residentialColor = '#ec571b';
+var industryColor = '#ffb736';
+var industryColorScale = ['#e69500', '#ffa600', '#ffaf1a', '#ffb833', '#ffb736', '#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc', '#fff6e6'];
+var servicesColor = '#006b3d';
+var servicesColorScale = ['#009957', '#00cc74'];
+var agriFishColor = '#c70063';
+var agriFishColorScale = ['#e60073', '#ff3399', '#ff66b3'];
 
-
-var oilColor = '#46a09a'
-var oilColorScale = ['#4eb1ab', '#5fb9b3', '#71c1bb', '#95d0cc', '#83c9c4', '#a6d8d5', '#b8e0dd', '#cae8e6', '#dcefee', '#edf7f7', '#ffffff']
-var elecColor = '#0560a7'
-var natgasColor = '#007a45'
-var renewColor = '#bebd01'
-var renewColorScale = ['#cbcb01', '#e4e401', '#fefe01', '#fefe1b', '#fefe34', '#fefe4d', '#fefe67', '#fefe80', '#fefe9a']
-var coalColor = '#ffb736'
-var coalColorScale = ['#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc']
-var peatColor = '#ec571b'
-var peatColorScale = ['#ee622b', '#f07342', '#f2855a', '#f49671', '#f5a889', '#f7b9a1', '#f9cbb8', '#fbdcd0']
-var nonRWColor = '#c70063'
-var fuelColorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor]
-
-var transportColor = '#5b156a'
-var transportColorScale = ['#6d1980', '#7f1d95', '#9122aa', '#a326c0', '#b62ad5', '#bd3fd9', '#c455dd', '#cc6ae2', '#d37fe6', '#da95ea', '#e2aaee']
-var residentialColor = '#ec571b'
-var industryColor = '#ffb736'
-var industryColorScale = ['#e69500', '#ffa600', '#ffaf1a', '#ffb833', '#ffb736', '#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc', '#fff6e6']
-var servicesColor = '#006b3d'
-var servicesColorScale = ['#009957', '#00cc74']
-var agriFishColor = '#c70063'
-var agriFishColorScale = ['#e60073', '#ff3399', '#ff66b3']
-
-var consumerColorsList = [transportColor, residentialColor, industryColor, servicesColor, agriFishColor]
+var consumerColorsList = [transportColor, residentialColor, industryColor, servicesColor, agriFishColor];
 
 var transportTypes = ['Road Freight', 'Road Light Goods Vehicle', 'Road Private Car',
     'Public Passenger Services', 'Rail', 'Domestic Aviation', 'International Aviation',
-    'Fuel Tourism', 'Navigation', 'Unspecified']
+    'Fuel Tourism', 'Navigation', 'Unspecified'];
 var industryTypes = ['Non - Energy Mining', 'Food & beverages', 'Textiles and textile products',
     'Wood and wood products', 'Pulp, paper, publishing and printing', 'Chemicals & man - made fibres',
     'Rubber and plastic products', 'Other non - metallic mineral products',
     'Basic metals and fabricated metal products', 'Machinery and equipment n.e.c.',
-    'Electrical and optical equipment', 'Transport equipment manufacture', 'Other manufacturing']
-var servicesTypes = ['Commercial Services', 'Public Services']
-var agriFishTypes = ['Agricultural', 'Fisheries']
+    'Electrical and optical equipment', 'Transport equipment manufacture', 'Other manufacturing'];
+var servicesTypes = ['Commercial Services', 'Public Services'];
+var agriFishTypes = ['Agricultural', 'Fisheries'];
 
 
 var coalTypes = ["BituminousCoal", "Anthracite+ManufacturedOvoids", "Coke",
@@ -136,7 +130,7 @@ function show_consumptionByFuelType_rowchart(ndx) {
         })
         .elasticX(true)
         .ordinalColors(fuelColorsList)
-        .xAxis().ticks(4).tickFormat(d3.format("s"));;
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
 //--------------------------------------------------------------Consumption by Consumer Bar Chart
@@ -430,7 +424,7 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
     var ReDomain = [];
     var nonRwWasteDomain = [];
     var elecDomain = [];
-    var domainColors = []
+    var domainColors = [];
     var oilFuelIndex = 0;
     var renewFuelIndex = 0;
     var coalFuelIndex = 0;
@@ -662,7 +656,7 @@ function show_primReqFuel_sunburstchart_outer(ndx) {
     var ReDomain = [];
     var nonRwWasteDomain = [];
     var elecDomain = [];
-    var domainColors = []
+    var domainColors = [];
     var oilFuelIndex = 0;
     var renewFuelIndex = 0;
     var coalFuelIndex = 0;
@@ -960,7 +954,7 @@ function show_transformationInputFuel_piechart(ndx) {
     var ReDomain = [];
     var nonRwWasteDomain = [];
     var elecDomain = [];
-    var domainColors = []
+    var domainColors = [];
     var oilFuelIndex = 0;
     var renewFuelIndex = 0;
     var coalFuelIndex = 0;
@@ -1042,7 +1036,7 @@ function show_transformationOutputFuel_piechart(ndx) {
     var ReDomain = [];
     var nonRwWasteDomain = [];
     var elecDomain = [];
-    var domainColors = []
+    var domainColors = [];
 
     var oilFuelIndex = 0;
     var renewFuelIndex = 0;
