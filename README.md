@@ -8,7 +8,6 @@ The dashboard gives visualisation to the key data from the SEAI's Ireland's Ener
 The data was downloaded as an Excel spreadsheet. All irrelevent data including in spreadsheet calculations were removed before saving the file as a .csv file. 
 After some time trying to get the data I wanted to show apprietly using the .csv format, I switched to a json. 
 First convereting the csv file to json using an online tool and then using a python script to organise and group the data more effieciently.
-This python script could probably be written in JS and once all is up and running will replace the python script with JS as this project is focused on JS.
 
 Technologies Used
 -----------------------
@@ -36,7 +35,7 @@ Technologies Used
 
 UX
 ----
-
+The dashboard was designed to be a tool for the public and acedimics to explore Ireland Energy Balance in easy to visulisations.
 
 __User Stories__
 
@@ -53,13 +52,36 @@ __User Stories__
 * As a user I should be able to reset all filters whithout having to reload the page.
 * As a user I should be able to access further details on the data by hovering over the data groups on the charts.
 
+
 Features
 --------
 
 __Existing Features__
 
+* Welcome pop up on first load, explaining to the user the source of the data and how to use the interactive functionality.
+* Final Energy Consumption by Fuel Type row chart, color coded and self sorting.
+* Final Energy Consumption by Fuel custom sunburst chart, to explore the breakdown of fuels in the fuel types, including legend. Color coding of fuels in fuel types related.
+* Final Energy Consumption by Consumer Type bar chart, stacked by fuel type, commonly color coded.
+* Final Energy Consumption by Consumer custom sunburst chart, to explore the breakdown of consumers in the consumer types, including legend. Color coding of consumers in consumer types related.
+* Primary Energy Requirements by Source bar chart, stacked fueled types, commonly color coded.
+* Primary Energy Requirements by Fuel custom sunburst chart, to explore the breakdown of fuels in the fuel types, including legend. Color coding of fuels in fuel types related.
+* Transformation Input-Output bar chart, stacked fuel types, commily colored. 
+* Tranformation Input by fuel donut chart, commily colored.
+* Tranformation Output by fuel donut chart, commily colored.
+* How to Use popup, explaining how to use the interactive functions, accesible from theh nav menu.
+* About the Charts popup, explaining the source of the data and the technologies used in the developement, accesible from theh nav menu.
+* About the DEveloper popup, giveing a background to the developers experience, technolgy interests and contact details.
+* Charts are filterible per data set.
+* Additional information on a data group displayed on mouse hover.
+* Reseting of chart filters resetible from nav-menu button.
+
+
 __Features to Develop__
 
+* Tooltip
+* Analysis
+* label pies
+* Co2 emmisions
 
 Testing
 -----------------------
@@ -75,19 +97,43 @@ __Visual Testing__
 
 The dev tool within Firefox Development Edition was used to test that the pages were displaying correctly (alignment, spacing, position etc.) across different screen widths.
 
+|                                                       | Galaxy S5 | Pixel 2 | Pixel 2XL | iPhone 5/SE |	iPhone 6/7/8 | iPhone 6/7/8 + | iPhone X | iPad  | iPad Pro   | Responsive 1366 x 768 | Responsive 1680 x 1050 |  
+| --------------------------------------------------- | --------- | ------- | --------- | ----------- | -------------- | -------------- | -------- | ------| ---------- | --------------------- | ---------------------- |
+| Welcome Pop Up                                      | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Nav-menu                                            | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Footer                                              | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| How to Use Pop Up                                   | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| About Charts Pop Up                                 | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| About Developer Pop Up                              | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Final Energy Consumption by Fuel Type Row Chart     | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     |                 
+| Final Energy Consumption by Fuel Sunburst Chart     | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Final Energy Consumption by Consumer Type Row Chart | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Final Energy Consumption by Consumer Sunburst Chart | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Primary Energy Requirement by Fuel Type Row Chart   | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Primary Energy Requirement by Fuel Sunburst Chart   | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Transformation Barcharts                            | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Transformation Input Donut Chart                    | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+| Transformation Output Donut Chart                   | OK        | OK      | OK        | OK          | OK             | OK             | OK       | OK    | OK         | OK                    | OK                     | 
+
 
 __Manual Testing__
 
+The following test were performed manually.
+
+|    Feature            |   Test Action                                                                             |   Expected Result                                |  Chrome (Desktop) |  Firefox (Desktop)  | Chrome (Mobile) |
+| --------------------- | ------------------------------------------------------------------------------------------| ------------------------------------------------ | ----------------- | ------------------- | --------------- |
+| __Data Sorter__       | Select 'Sort by' option -> 'Apply Filter' -> repeat for all 'Sort by' options.            | Data is sorted appropriately                      | OK                | OK                  | OK              |
+
+
 
 __Known Bugs__
-* Transformation charts section padding not the same as rest of sections, presume its due to the number of bootstrap grid classes used
-* Transformation bar charts does not fit into div on xs screen
+* Transformation charts section padding not the same as rest of sections, presume its due to the number of bootstrap grid classes used.
+* Transformation bar charts does not fit into div on xs screen.
 * Transformation bar charts labels not aligned properly in smaller screens.
-* Nav bar hover should change color
-* Nav collapsed should pull right
-* Pie chart slices should be labeled
-* Crossfilter across data sets not working properly
-* 
+* Nav bar hover should change color.
+* Nav collapsed should pull right.
+* Pie chart slices should be labeled.
+* Crossfilter across data sets not working properly.
 
 
 Development
