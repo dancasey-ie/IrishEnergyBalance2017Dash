@@ -6,6 +6,7 @@ html, body {
 .header_container {
     color: #ffffff;
     background-color: #1a1350;
+    overflow:hidden;
 }
 
 .navbar-nav > li > a {
@@ -55,7 +56,6 @@ svg text {
 
 .finalEnergyConsumption_container, .primaryEnergyReq_container, .transformation_container {
     background-color: #eeeeee;
-    padding: 0px;
     border-bottom: solid;
     border-color: #39827d;
     border-width: 1px;
@@ -68,14 +68,15 @@ svg text {
     border-color: #39827d;
     border-width: 1px;
 }
-    .chart_title {
-        font-family: 'Lato', futura, georgia;
-        letter-spacing: 1px;
-        line-height: 15px;
-        text-transform: Uppercase;
-        text-align: center;
-        color: #39827d;
-    }
+
+.chart_title {
+    font-family: 'Lato', futura, georgia;
+    letter-spacing: 1px;
+    line-height: 15px;
+    text-transform: Uppercase;
+    text-align: center;
+    color: #39827d;
+}
 
 .subchart_title {
     font-family: 'Lato', futura, georgia;
@@ -91,14 +92,14 @@ svg text {
 }
 /*---------------------------------------------------------Final Consumption Fuel Row Chart*/
 .consumptionByFuelType_rowchart_container {
-    width: 100%;
     max-width: 420px;
+    position:relative;
     overflow: scroll !important;
 }
 
 #consumptionByFuelType_rowchart {
-    width: 100%;
 }
+
 #consumptionByFuelType_rowchart svg {
     height: 330px;
 }
@@ -157,9 +158,7 @@ svg text {
 
 /*---------------------------------------------------------Final Consumption Consumer Bar Chart*/
 .consumptionByConsumer_barchart_container {
-    width: 100%;
     max-width: 420px;
-
     overflow: scroll !important;
 }
 
@@ -170,11 +169,11 @@ svg text {
 }
 
 /*---------------------------------------------------------Final Consumption Consumer Pie Chart*/
+
 .consumptionByConsumer_sunburst_chart {
     width: 100%;
     max-width: 430px;
     height: 250px;
-
     position: relative;
     text-align: center;
     overflow: scroll !important;
@@ -219,9 +218,7 @@ svg text {
 
 /*---------------------------------------------------------Primary Req Source Bar Chart*/
 .supplyBySource_barchart_container {
-    width: 100%;
     max-width: 420px;
-
     overflow: scroll !important;
 }
 
@@ -233,7 +230,6 @@ svg text {
 .fuel_primReq_sunburst_chart {
     width: 100%;
     max-width: 420px;
-
     height: 250px;
     text-align: center;
     position: relative;
@@ -277,20 +273,17 @@ svg text {
         }
 /*---------------------------------------------------------Transformation Bar Chart*/
 .transformation_barchart_container {
-    overflow: scroll !important;
-    width: 700px;
-
     height: 350px;
+    width:100%;
+    position: relative;
+    overflow: scroll !important;
 }
 
-.transformation_barchart_container_outer{
-    padding:0px;
-
-}
 .tranChart_label_container {
+    width: 600px;
     text-align: center;
-    position: absolute;
-    left: 160px;
+    position:absolute;
+    margin: 0px auto;
 }
 
     .tranChart_label_container .subchart_title {
@@ -306,9 +299,13 @@ svg text {
     margin-bottom:31px;
 }
 
+.transformation_barchart_bar_container {
+    width: 600px;
+    text-align: center;
+}
+
 #transformationInput_barchart {
     transform: translate(0px,50px) rotate(-90deg);
-
 }
 
     #transformationInput_barchart svg g g.axis.x {
@@ -329,10 +326,6 @@ svg text {
     transform: translate(-100px,50px)rotate(90deg);
 }
 
-#transformationOutput_barchart svg {
-
-}
-
     #transformationOutput_barchart svg g .stack rect {
         transform: translate(10px, 0px);
     }
@@ -350,12 +343,28 @@ svg text {
         transform: translate(15px, 0px) rotate(-90deg);
     }
 
-.transformation_piechart_container {
+.transformationInput_piechart_container {
+    width: 100%;
+    position:relative;
 
 }
+#transformationInputByFuel_piechart {
+   width: 100px;
+   position: relative;
+    margin: 0 auto;
+    left: 20%;
+}
 
+.transformationOutput_piechart_container {
+    width: 100%;
+    position: relative;
+    margin-bottom:20px;
+}
 #transformationOutputByFuel_piechart {
-
+    width: 100px;
+    position: relative;
+    margin: 0 auto;
+    left: 20%;
 }
     /* ------------------------------------------------------Footer Styling*/
     .footer {
@@ -384,4 +393,10 @@ svg text {
 
 .linkedIn-link:hover {
     color: #b35573;
+}
+
+/* ------------------------------------------------------Bootstrap Overrides*/
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }

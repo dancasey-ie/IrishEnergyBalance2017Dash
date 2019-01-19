@@ -169,11 +169,11 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.my_modal modal -->
     <!---------------------------------------------------------------------------------------------------------Main Content-->
-    <div class="main_container">
+    <div class="main_container row">
         <div class="row finalEnergyConsumption_container ">
             <h4 class="chart_title row">Final Energy Consumption</h4>
             <div class="row">
-                <div class="col-xs-12 col-md-6 consumptionFuelContainer">
+                <div class="col-xs-12 col-lg-6 consumptionFuelContainer">
                     <h5 class="chart_title row">Consumption by Fuel</h5>
                     <div class="finalEnergyConsumptionFuelChartContainer row">
                         <div class="col-xs-12 col-sm-6 consumptionByFuelType_rowchart_container ">
@@ -188,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 consumptionConsumerContainer">
+                <div class="col-xs-12 col-lg-6 consumptionConsumerContainer">
                     <h5 class="chart_title row">Consumption by Consumer</h5>
                     <div class="finalEnergyConsumptionConsumerChartContainer row">
                         <div class="col-xs-12 col-sm-6 consumptionByConsumer_barchart_container">
@@ -228,33 +228,40 @@
             <div class="col-xs-12 col-lg-6 transformation_container">
                 <h4 class="chart_title row">Transformation</h4>
                 <div class="tranformationChartContainer row">
-                    <div class="col-xs-12 col-sm-9 transformation_barchart_container">
-                        <div class="tranChart_label_container">
-                            <h5 class="subchart_title">Input<span class="labelOut">Output</span></h5>
-                            <div class="transChart_text_container">
-                                <p class="tranChart_label">Public Thermal Power Plants</p>
-                                <p class="tranChart_label">Oil Refineries & other energy sector</p>
-                                <p class="tranChart_label">Combined Heat and Power Plants</p>
-                                <p class="tranChart_label">Pumped Storage</p>
-                                <p class="tranChart_label">Briquetting Plants</p>
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="transformation_barchart_container">
+                            <div class="tranChart_label_container">
+                                <h5 class="subchart_title">Input<span class="labelOut">Output</span></h5>
+                                <div class="transChart_text_container">
+                                    <p class="tranChart_label">Public Thermal Power Plants</p>
+                                    <p class="tranChart_label">Oil Refineries & other energy sector</p>
+                                    <p class="tranChart_label">Combined Heat and Power Plants</p>
+                                    <p class="tranChart_label">Pumped Storage</p>
+                                    <p class="tranChart_label">Briquetting Plants</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="transformation_barchart_bar_container">
-                            <div id="transformationInput_barchart" class="dc-chart"></div>
-                            <div id="transformationOutput_barchart" class="dc-chart"></div>
+                            <div class="transformation_barchart_bar_container">
+                                <div id="transformationInput_barchart" class="dc-chart"></div>
+                                <div id="transformationOutput_barchart" class="dc-chart"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <div class="row">
-                            <div class="col-xs-6 col-sm-12 transformation_piechart_container">
+                            <div class="col-xs-6 col-sm-12">
+
                                 <h5 class="subchart_title">Fuel Inputs</h5>
-                                <div id="transformationInputByFuel_piechart" class="dc-chart"></div>
+                                <div class="transformationInput_piechart_container">
+                                    <div id="transformationInputByFuel_piechart" class="dc-chart"></div>
+                                </div>
                             </div>
-                            <div class="col-xs-6 col-sm-12 transformation_piechart_container">
+                            <div class="col-xs-6 col-sm-12">
                                 <h5 class="subchart_title">Fuel Outputs</h5>
-                                <div id="transformationOutputByFuel_piechart" class="dc-chart"></div>
+                                <div class="transformationOutput_piechart_container">
+                                    <div id="transformationOutputByFuel_piechart" class="dc-chart"></div>
+                                </div>
+                                </div>
                             </div>
-                        </div>
                     </div>
 
                 </div>
