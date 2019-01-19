@@ -48,7 +48,7 @@ svg text {
 /* ------------------------------------------------------Main Styling*/
 .main_container {
     margin-top: 60px;
-    margin-bottom: 30px;
+    min-height: calc(100vh - 90px);
     background-color: #eeeeee;
     color: #333333;
 }
@@ -93,7 +93,6 @@ svg text {
 .consumptionByFuelType_rowchart_container {
     width: 100%;
     max-width: 420px;
-    margin: 0 auto;
     overflow: scroll !important;
 }
 
@@ -114,7 +113,6 @@ svg text {
     width: 100%;
     max-width:420px;
     height: 250px;
-    margin: 0 auto;
     text-align: center;
     position: relative;
     overflow: scroll !important;
@@ -161,7 +159,7 @@ svg text {
 .consumptionByConsumer_barchart_container {
     width: 100%;
     max-width: 420px;
-    margin: 0 auto;
+
     overflow: scroll !important;
 }
 
@@ -176,7 +174,7 @@ svg text {
     width: 100%;
     max-width: 430px;
     height: 250px;
-    margin: 0 auto;
+
     position: relative;
     text-align: center;
     overflow: scroll !important;
@@ -223,7 +221,7 @@ svg text {
 .supplyBySource_barchart_container {
     width: 100%;
     max-width: 420px;
-    margin: 0 auto;
+
     overflow: scroll !important;
 }
 
@@ -235,7 +233,7 @@ svg text {
 .fuel_primReq_sunburst_chart {
     width: 100%;
     max-width: 420px;
-    margin: 0 auto;
+
     height: 250px;
     text-align: center;
     position: relative;
@@ -281,7 +279,7 @@ svg text {
 .transformation_barchart_container {
     overflow: scroll !important;
     width: 700px;
-    margin: 0 auto;
+
     height: 350px;
 }
 
@@ -353,11 +351,11 @@ svg text {
     }
 
 .transformation_piechart_container {
-    margin: 0 auto;
+
 }
 
 #transformationOutputByFuel_piechart {
-    margin: 0 auto;
+
 }
     /* ------------------------------------------------------Footer Styling*/
     .footer {
