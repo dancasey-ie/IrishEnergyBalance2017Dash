@@ -217,12 +217,12 @@ svg text {
 
 
 /*---------------------------------------------------------Primary Req Source Bar Chart*/
-.supplyBySource_barchart_container {
+.primReqBySource_barchart_container {
     max-width: 420px;
     overflow: scroll !important;
 }
 
-#supplyBySource_barchart svg g .x .tick text {
+#primReqBySource_barchart svg g .x .tick text {
     text-anchor: end !important;
     transform: translate(-30px, 5px) rotate(-45deg);
 }
