@@ -1,26 +1,31 @@
 var oilColor = '#46a09a';
-var oilColorScale = ['#4eb1ab', '#5fb9b3', '#71c1bb', '#95d0cc', '#83c9c4', '#a6d8d5', '#b8e0dd', '#cae8e6', '#dcefee', '#edf7f7', '#ffffff'];
+var oilColorScale = ['#4eb1ab', '#5fb9b3', '#71c1bb', '#95d0cc',
+    '#83c9c4', '#a6d8d5', '#b8e0dd', '#cae8e6', '#dcefee', '#edf7f7', '#ffffff'];
 var elecColor = '#0560a7';
 var natgasColor = '#007a45';
 var renewColor = '#bebd01';
-var renewColorScale = ['#cbcb01', '#e4e401', '#fefe01', '#fefe1b', '#fefe34', '#fefe4d', '#fefe67', '#fefe80', '#fefe9a'];
+var renewColorScale = ['#cbcb01', '#e4e401', '#fefe01', '#fefe1b',
+    '#fefe34', '#fefe4d', '#fefe67', '#fefe80', '#fefe9a'];
 var coalColor = '#ffb736';
-var coalColorScale = ['#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc'];
+var coalColorScale = ['#ffc14d', '#ffc966', '#ffd280', '#ffdb99',
+    '#ffe4b3', '#ffedcc'];
 var peatColor = '#ec571b';
-var peatColorScale = ['#ee622b', '#f07342', '#f2855a', '#f49671', '#f5a889', '#f7b9a1', '#f9cbb8', '#fbdcd0'];
+var peatColorScale = ['#ee622b', '#f07342', '#f2855a', '#f49671',
+    '#f5a889', '#f7b9a1', '#f9cbb8', '#fbdcd0'];
 var nonRWColor = '#c70063';
 var fuelColorsList = [oilColor, elecColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor];
 
 var transportColor = '#5b156a';
-var transportColorScale = ['#6d1980', '#7f1d95', '#9122aa', '#a326c0', '#b62ad5', '#bd3fd9', '#c455dd', '#cc6ae2', '#d37fe6', '#da95ea', '#e2aaee'];
+var transportColorScale = ['#6d1980', '#7f1d95', '#9122aa', '#a326c0', '#b62ad5',
+    '#bd3fd9', '#c455dd', '#cc6ae2', '#d37fe6', '#da95ea', '#e2aaee'];
 var residentialColor = '#ec571b';
 var industryColor = '#ffb736';
-var industryColorScale = ['#e69500', '#ffa600', '#ffaf1a', '#ffb833', '#ffb736', '#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc', '#fff6e6'];
+var industryColorScale = ['#e69500', '#ffa600', '#ffaf1a', '#ffb833', '#ffb736',
+    '#ffc14d', '#ffc966', '#ffd280', '#ffdb99', '#ffe4b3', '#ffedcc', '#fff6e6'];
 var servicesColor = '#006b3d';
 var servicesColorScale = ['#009957', '#00cc74'];
 var agriFishColor = '#c70063';
 var agriFishColorScale = ['#e60073', '#ff3399', '#ff66b3'];
-
 var consumerColorsList = [transportColor, residentialColor, industryColor, servicesColor, agriFishColor];
 
 var transportTypes = ['Road Freight', 'Road Light Goods Vehicle', 'Road Private Car',
@@ -48,17 +53,6 @@ var elecTypes = ["Electricity"];
 
 var numberFormat = d3.format(",.4r");
 
-var pieTip = d3.tip()
-    .attr('class', 'd3-tip')
-    .direction('nw')
-    .offset([-10, 0])
-    //.html(function (d) { return "<span style='color: #f0027f'>" + d.data.key + "</span> : " + numberFormat(d.value); });
-    .html(function (d) {
-        return "<span style='color: #f0027f'>" +
-            d.data.key + "</span> " + '</br>' +
-            numberFormat(d.value) + 'toe</br>' +
-            numberFormat(d.value*11.63) + 'MWh</br >' ;
-    });
 
 // Load in data as json, wait until data is fully loaded before executing  makeGraphs
 queue()
@@ -325,75 +319,13 @@ function show_consumptionByConsumer_barchart(ndx) {
 
     var consumer_dim = ndx.dimension(dc.pluck('subgroup'));
     var consumers = ["Transport", "Residential", "Industry", "Services", "Agri. & Fisheries"]
-
-    var coal_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Coal')){
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var coal_group_test = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Coal')});
-
-    function getValue(e, fuelTypeName) {
-        if (e.fuelType === fuelTypeName) {
-            return +e.value;
-        } else {
-            return 0;
-        }
-    }
-
-    console.log(coal_group.top(Infinity))
-    console.log(coal_group_test.top(Infinity))
-
-    var elec_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Electricity') ){
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var natgas_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Nat.Gas')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var nRWaste_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Non-Re.Waste') ){
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var oil_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Oil')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var peat_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Peat') ){
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var renew_group = consumer_dim.group().reduceSum(function (d) {
-        if ((d.group === 'FinalEnergyConsumption') && (d.fuelType === 'Renewables')){
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var coal_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Coal')});
+    var elec_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Electricity') });
+    var natgas_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Nat.Gas') });
+    var nRWaste_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Non-Re.Waste') });
+    var oil_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Oil') });
+    var peat_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Peat') });
+    var renew_group = consumer_dim.group().reduceSum(function (d) { return getValue(d, 'Renewables') });
 
     consumptionByConsumer_barchart = dc.barChart("#consumptionByConsumer_barchart")
     consumptionByConsumer_barchart
@@ -624,60 +556,13 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
 function show_primReqBySource_barchart(ndx) {
 
     var source_dim = ndx.dimension(dc.pluck('record'));
-    var coal_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Coal')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-    var elec_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Electricity')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var natgas_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Nat.Gas')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var nRWaste_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Non-Re.Waste')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var oil_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Oil')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var peat_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Peat')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var renew_group = source_dim.group().reduceSum(function (d) {
-        if ((d.group === 'PrimaryEnergyRequirement') && (d.fuelType === 'Renewables')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var coal_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Coal') });
+    var elec_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Electricity') });
+    var natgas_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Nat.Gas') });
+    var nRWaste_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Non-Re.Waste') });
+    var oil_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Oil') });
+    var peat_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Peat') });
+    var renew_group = source_dim.group().reduceSum(function (d) { return getValue(d, 'Renewables') });
 
     primReqBySource_barchart = dc.barChart("#primReqBySource_barchart")
     primReqBySource_barchart
@@ -812,63 +697,14 @@ function show_primReqFuel_sunburstchart_outer(ndx) {
 //--------------------------------------------------------------Transformation Input by Use Bar Chart
 function show_transforationInput_barchart(ndx) {
     var tranIn_dim = ndx.dimension(dc.pluck('record'));
-    var coal_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Coal') && (d.group === 'TransformationInput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-    var elec_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Electricity') && (d.group === 'TransformationInput')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var natgas_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Nat.Gas') && (d.group === 'TransformationInput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var nRWaste_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Non-Re.Waste') && (d.group === 'TransformationInput')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var oil_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Oil') && (d.group === 'TransformationInput')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var peat_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Peat') && (d.group === 'TransformationInput')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var renew_group = tranIn_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Renewables') && (d.group === 'TransformationInput')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var coal_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Coal') });
+    var elec_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Electricity') });
+    var natgas_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Nat.Gas') });
+    var nRWaste_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Non-Re.Waste') });
+    var oil_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Oil') });
+    var peat_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Peat') });
+    var renew_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Renewables') });
     var dimensions = ["Pumped Storage", "Briquetting Plants", "Combined Heat and Power Plants", "Oil Refineries & other energy sector", "Public Thermal Power Plants"]
-
-
 
     transformationInput_barchart = dc.barChart("#transformationInput_barchart")
     transformationInput_barchart
@@ -905,60 +741,13 @@ function show_transforationOutput_barchart(ndx) {
 
     var tranOut_dim = ndx.dimension(dc.pluck('record'));
 
-    var coal_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Coal') && (d.group === 'TransformationOutput')) {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-    var elec_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Electricity') && (d.group === 'TransformationOutput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var natgas_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Nat.Gas') && (d.group === 'TransformationOutput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var nRWaste_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Non-Re.Waste') && (d.group === 'TransformationOutput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var oil_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Oil') && (d.group === 'TransformationOutput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var peat_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Peat') && (d.group === 'TransformationOutput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
-
-    var renew_group = tranOut_dim.group().reduceSum(function (d) {
-        if ((d.fuelType === 'Renewables') && (d.group === 'TransformationOutput'))  {
-            return +d.value;
-        } else {
-            return 0;
-        }
-    });
+    var coal_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Coal') });
+    var elec_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Electricity') });
+    var natgas_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Nat.Gas') });
+    var nRWaste_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Non-Re.Waste') });
+    var oil_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Oil') });
+    var peat_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Peat') });
+    var renew_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Renewables') });
     var dimensions = ["Public Thermal Power Plants", "Oil Refineries & other energy sector", "Combined Heat and Power Plants", "Briquetting Plants", "Pumped Storage"]
 
 
@@ -1142,3 +931,11 @@ function show_transformationOutputFuel_piechart(ndx) {
 }
 
 
+// get fuelType_group by fuelTypeName
+function getValue(d, fuelTypeName) {
+    if (d.fuelType === fuelTypeName) {
+        return +d.value;
+    } else {
+        return 0;
+    }
+}
