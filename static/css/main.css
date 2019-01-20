@@ -54,7 +54,17 @@ svg text {
     color: #333333;
 }
 
-.finalEnergyConsumption_container, .primaryEnergyReq_container, .transformation_container {
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-color: #39827d;
+    border-radius: 8px;
+}
+
+    .finalEnergyConsumption_container, .primaryEnergyReq_container, .transformation_container {
     background-color: #eeeeee;
     border-bottom: solid;
     border-color: #39827d;
