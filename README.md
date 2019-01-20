@@ -5,14 +5,11 @@ The project displays clear understanding and capabilities in developing an inter
 
 The dashboard gives visualization to the key data from the SEAI's Ireland's Energy Balance 2017 report released in December 2018.
 
-The data was downloaded as an Excel spreadsheet. All irrelevant data including in spreadsheet calculations were removed before saving the file as a .csv file. 
-After some time trying to get the data I wanted to show appropriately using the .csv format, I switched to a .json. 
-First converting the .csv file to .json using an online tool and then using a python script to organize and group the data more efficiently.
-
 Technologies Used
 -----------------------
 * __JavaScript__ was used for interactive frontend development.
 * __jQuery.js__ was used for simplified HTML manipulation.
+* __Python__ was used for regrouping the data.
 * __DC.js v.2.1.8__ (https://dc-js.github.io/dc.js/) was the JavaScript charting library used.
 * __D3.js v.3__ (https://d3js.org/) is the data processing library used by DC.js.
 . __crossfilter.js__ (https://github.com/crossfilter/crossfilter) is used by D3.js to filter data across a data set.
@@ -75,16 +72,15 @@ __Existing Features__
 * Charts are filterable per data set.
 * Additional information on a data group displayed on mouse hover.
 * Resetting of chart filters resettable from nav-menu button.
+* Tool tip gives details of the chart groups when hovered with the mouse.
 
 
 __Features to Develop__
+* Develop the same charts but with using fuel CO2 emmission data to show the share of emmissions realeased per consumer and fuel.
+* Incorperate historic data the visualise Ireland energy transision over the years.
+* Include a data analysis sectio, giving the user a text description of what the data shows. i.e. if you combine 'Residential' and 'Road Private Cars', this makes up 40% of 
+Irelands energy consumption, so each of us as individuals have a strong part to play in a more sustainible future.
 
-* Tooltip
-* Analysis
-* label pies
-* Co2 emissions
-* Refactor code with comments
-* Over comment charts.js for future reference
 
 Testing
 -----------------------
@@ -122,22 +118,13 @@ The dev tool within Firefox Development Edition was used to test that the pages 
 
 __Manual Testing__
 
-The following test were performed manually.
-
-|    Feature            |   Test Action                                                                             |   Expected Result                                |  Chrome (Desktop) |  Firefox (Desktop)  | Chrome (Mobile) |
-| --------------------- | ------------------------------------------------------------------------------------------| ------------------------------------------------ | ----------------- | ------------------- | --------------- |
-| __Data Sorter__       | Select 'Sort by' option -> 'Apply Filter' -> repeat for all 'Sort by' options.            | Data is sorted appropriately                      | OK                | OK                  | OK              |
-
-
+The charts were filtered and the values compared against the calculations on the original excel document.
 
 __Known Bugs__
-* Transformation charts section padding not the same as rest of sections, presume its due to the number of bootstrap grid classes used.
-* Transformation bar charts does not fit into div on xs screen.
-* Transformation bar charts labels not aligned properly in smaller screens.
-* Nav bar hover should change color.
-* Nav collapsed should pull right.
-* Pie chart slices should be labeled.
-* Crossfilter across data sets not working properly.
+* Tranformation bar chart labels are not centered above chart.
+* Filtering the consumption charts for oil, the consumer breakdown outer should be all shade of purple, but there are a few yellow slices.
+
+
 
 
 Development

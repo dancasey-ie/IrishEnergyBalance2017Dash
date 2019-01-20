@@ -75,7 +75,7 @@ function makeGraphs(error, energyData) {
         .offset([0, 0])
         .html(function (d) {
             return "<span style='color: #f0027f'>" +
-                d.data.key + "-" + d.layer + "</span> " + '</br>' +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
                 numberFormat(d.y) + 'toe</br>' +
                 numberFormat(d.y * 11.63) + 'MWh</br >' +
                 numberFormat((d.y / finalConsumptionDataTot) * 100) + '% of total';
@@ -92,6 +92,82 @@ function makeGraphs(error, energyData) {
                 numberFormat(d.value) + 'toe</br>' +
                 numberFormat(d.value * 11.63) + 'MWh</br >' +
                 numberFormat((d.value / finalConsumptionDataTot) * 100) + '% of total';
+        });
+
+    // Primary requirements Tool Tips
+    var reqPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d, total) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / primReqDataTot) * 100) + '% of total';
+        });
+
+    var reqBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('se')
+        .offset([0, 0])
+        .html(function (d) {
+
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / primReqDataTot) * 100) + '% of total';
+        });
+
+    // Transformation Input Tool Tips
+    var transformInPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d, total) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / transInputDataTot) * 100) + '% of total';
+        });
+
+    var transformInBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / transInputDataTot) * 100) + '% of total';
+        });
+
+    // Transformation Output Tool Tips
+    var transformOutPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d, total) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / transOutputDataTot) * 100) + '% of total';
+        });
+
+    var transformOutBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / transOutputDataTot) * 100) + '% of total';
         });
 
     // call dc.chart functions and render
@@ -118,81 +194,7 @@ function makeGraphs(error, energyData) {
 
     dc.renderAll();
 
-    // Primary requirements Tool Tips
-    var reqPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d, total) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / primReqDataTot) * 100) + '% of total';
-        });
 
-    var reqBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('se')
-        .offset([0, 0])
-        .html(function (d) {
-
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "-" + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / primReqDataTot) * 100) + '% of total';
-        });
-
-    // Transformation Input Tool Tips
-    var transformInPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d, total) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / transInputDataTot) * 100) + '% of total';
-        });
-
-    var transformInBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "-" + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / transInputDataTot) * 100) + '% of total';
-        });
-
-    // Transformation Output Tool Tips
-    var transformOutPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d, total) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / transOutputDataTot) * 100) + '% of total';
-        });
-
-    var transformOutBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "-" + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / transOutputDataTot) * 100) + '% of total';
-        });
 
     // Call consumption tool tip functions
     d3.selectAll(".finalEnergyConsumption_container .pie-slice").call(consumptionPieTip);
@@ -277,7 +279,6 @@ function show_consumptionByConsumer_barchart(ndx) {
         .stack(coal_group, 'Coal')
         .stack(peat_group, 'Peat')
         .stack(nRWaste_group, 'non-Ren.Waste')
-
         .centerBar(true)
         .brushOn(false)
         .title(function (d) { return ""; })
@@ -355,16 +356,11 @@ function show_consumptionFuel_sunburstchart_inner(ndx) {
         .title(function (d) { return ""; })
         .ordinalColors(fuelColorsList)
         .renderLabel(false);
-
 }
 
 //--------------------------------------------------------------Consumption Fuel Breakdown Pie Chart (outer)
 function show_consumptionFuel_sunburstchart_outer(ndx) {
-
-
-
     var fuel_dim = ndx.dimension(dc.pluck('fuel'));
-
     var fuel_group = fuel_dim.group().reduceSum(dc.pluck('value'));
     var domainColors = getFuelDomainColors(fuel_group.top(Infinity));
 
@@ -388,7 +384,6 @@ function show_consumptionFuel_sunburstchart_outer(ndx) {
             return l.data > 0;
         });
     });
-
 }
 
 //----------------------------------------------------------------------------Primary Requirement Charts
@@ -448,7 +443,6 @@ function show_primReqFuel_sunburstchart_inner(ndx) {
         .title(function (d) { return ""; })
         .ordinalColors([oilColor, natgasColor, renewColor, coalColor, peatColor, nonRWColor])
         .renderLabel(false);
-
 }
 
 //--------------------------------------------------------------Primary Req. Fuel Breakdown Pie Chart (outer)
@@ -490,7 +484,8 @@ function show_transforationInput_barchart(ndx) {
     var oil_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Oil') });
     var peat_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Peat') });
     var renew_group = tranIn_dim.group().reduceSum(function (d) { return getValue(d, 'Renewables') });
-    var dimensions = ["Pumped Storage", "Briquetting Plants", "Combined Heat and Power Plants", "Oil Refineries & other energy sector", "Public Thermal Power Plants"]
+    // domain sets order of bars on chart
+    var domain = ["Pumped Storage", "Briquetting Plants", "Combined Heat and Power Plants", "Oil Refineries & other energy sector", "Public Thermal Power Plants"]
 
     transformationInput_barchart = dc.barChart("#transformationInput_barchart")
     transformationInput_barchart
@@ -508,15 +503,15 @@ function show_transforationInput_barchart(ndx) {
         .centerBar(true)
         .brushOn(false)
         .title(function (d) { return ""; })
-        .elasticY(true)
         .transitionDuration(750)
-        .x(d3.scale.ordinal().domain(dimensions))
+        .x(d3.scale.ordinal().domain(domain))
         .xUnits(dc.units.ordinal)
         .gap(10)
         .barPadding(0.4)
         .outerPadding(0.5)
         .ordinalColors(fuelColorsList)
-        .y(d3.scale.linear().domain([0, 5500000]))
+        .y(d3.scale.linear().domain([0, 35000]))
+        .elasticY(true)
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
@@ -531,7 +526,8 @@ function show_transforationOutput_barchart(ndx) {
     var oil_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Oil') });
     var peat_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Peat') });
     var renew_group = tranOut_dim.group().reduceSum(function (d) { return getValue(d, 'Renewables') });
-    var dimensions = ["Public Thermal Power Plants", "Oil Refineries & other energy sector", "Combined Heat and Power Plants", "Briquetting Plants", "Pumped Storage"]
+    // domain sets order of bars on chart
+    var domain = ["Public Thermal Power Plants", "Oil Refineries & other energy sector", "Combined Heat and Power Plants", "Briquetting Plants", "Pumped Storage"]
 
     transformationOutput_barchart = dc.barChart("#transformationOutput_barchart")
     transformationOutput_barchart
@@ -551,13 +547,13 @@ function show_transforationOutput_barchart(ndx) {
         .title(function (d) { return ""; })
         .elasticY(true)
         .transitionDuration(750)
-        .x(d3.scale.ordinal().domain(dimensions))
+        .x(d3.scale.ordinal().domain(domain))
         .xUnits(dc.units.ordinal)
         .gap(10)
         .barPadding(0.4)
         .outerPadding(0.5)
         .ordinalColors(fuelColorsList)
-        .y(d3.scale.linear().domain([0, 5500000]))
+        .y(d3.scale.linear().domain([0, 35000]))
         .yAxis().ticks(4).tickFormat(d3.format("s"));
 }
 
@@ -617,7 +613,7 @@ function getValue(d, fuelTypeName) {
     }
 }
 
-// get domain colors for consumer pie chart outers based on sub type
+// get domain colors list for consumer pie chart outers based on sub type
 function getConsumerDomainColors(d) {
     var transportDomain = [];
     var residentialDomain = [];
@@ -680,7 +676,7 @@ function getConsumerDomainColors(d) {
     };
 }
 
-// get domain colors for fuel pie chart outers based on sub type
+// get domain colors lis for fuel pie chart outers based on sub type
 function getFuelDomainColors(d) {
     var coalDomain = [];
     var peatDomain = [];
