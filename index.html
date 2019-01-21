@@ -46,6 +46,7 @@
         </div>
     </nav>
 
+    <!---------------------------------------------------------------------------------------------------------Pop Ups-->
     <!-- How to Use my_modal modal -->
     <div class="my_modal modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -141,21 +142,19 @@
                 <div class="modal-body">
                     <h4 class="modal-title">Bio</h4>
                     <p>
-                        I am an Energy Engineer, developing Software skills for an advancing energy industry.
-                    </p>
-                    <p>
-                        As an Automation Engineer I am lucky to have been involved in the design and commissioning of a number of progressive energy projects.
-                        From Biomass CHPs to Tidal turbines, the benfits of advances in connected technologies is obvious.
-                    </p>
-                    <p>
-                        Whether it is advanced precision control of a distributed grid, use tracking for customers or data models influencing policy,
-                        software is ever more instrumental in the industry.
+                        I am an Energy Engineer, developing software skills for an advancing energy industry.
                     </p>
 
                     <p>
-                        After taking a break from engineering and Ireland for a few (fun) years, I am currently completing a diploma in software development.
-                        With an initial focus on learning Python for data analysis and engineering tasks,
-                        I have become increasingly interested in the web-application aspects of the course and how these skills can be brought back into the energy industry.
+                        Whether it is advanced precision control of a more distributed grid, use tracking for end users or data models influencing policy,
+                        software is ever more instrumental in achieving a more sustainable energy future.
+                    </p>
+
+                    <p>
+                        I have a degree in Energy Engineering from University College Cork, have worked as an Automation Engineer in a range of progressive energy projects and am currently completing a diploma in Software Development through The Code Institute.
+                    </p>
+                    <p>
+                        Combining industry experience with web development skills, I hope to help achieve a more efficient, sustainble energy future.
                     </p>
                     <h4 class="modal-title">Connect</h4>
                     <p>
@@ -178,7 +177,7 @@
                     <h5 class="chart_title row">Consumption by Fuel</h5>
                     <div class="finalEnergyConsumptionFuelChartContainer row">
                         <div class="col-xs-12 col-sm-6 consumptionByFuelType_rowchart_container ">
-                                <div id="consumptionByFuelType_rowchart" class="dc-chart"></div>
+                            <div id="consumptionByFuelType_rowchart" class="dc-chart"></div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <p class="subchart_title">Fuel Breakdown <br />(Inner: Grouped / Outer: Specific)</p>
@@ -193,7 +192,7 @@
                     <h5 class="chart_title row">Consumption by Consumer</h5>
                     <div class="finalEnergyConsumptionConsumerChartContainer row">
                         <div class="col-xs-12 col-sm-6 consumptionByConsumer_barchart_container">
-                                <div id="consumptionByConsumer_barchart" class="dc-chart"></div>
+                            <div id="consumptionByConsumer_barchart" class="dc-chart"></div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <p class="subchart_title">Consumer Breakdown <br />(Inner: Grouped / Outer: Specific)</p>
@@ -203,7 +202,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
         <div class="row primAndTrans_container">
@@ -237,8 +236,8 @@
                                     <p class="tranChart_label">Public Thermal Power Plants</p>
                                     <p class="tranChart_label">Oil Refineries & other energy sector</p>
                                     <p class="tranChart_label">Combined Heat and Power Plants</p>
-                                    <p class="tranChart_label">Pumped Storage</p>
                                     <p class="tranChart_label">Briquetting Plants</p>
+                                    <p class="tranChart_label">Pumped Storage</p>
                                 </div>
                             </div>
                             <div class="transformation_barchart_bar_container">
@@ -261,8 +260,8 @@
                                 <div class="transformationOutput_piechart_container">
                                     <div id="transformationOutputByFuel_piechart" class="dc-chart"></div>
                                 </div>
-                                </div>
                             </div>
+                        </div>
                     </div>
 
                 </div>
@@ -281,7 +280,7 @@
     <!---------------------------------------------------------------------------------------------------------Scripts-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
-    $(window).on('load', function () {
+        $(window).on('load', function () {
             $('#welcomeModal').modal('show');
         });
     </script>

@@ -17,7 +17,11 @@ html, body {
     .navbar-default .navbar-nav > li > a:hover {
         color: #b35573;
     }
-    .navbar-header{
+
+    .navbar-default .navbar-nav > li > a:focus {
+        color: #ffffff;
+    }
+.navbar-header {
     height: 60px;
 }
 

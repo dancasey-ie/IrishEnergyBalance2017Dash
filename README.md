@@ -3,37 +3,36 @@ Irish Energy Balance 2017 Dashboard
 This is the Milestone Project for the Interactive Front-End module for the Code Institutes Diploma in Software Development.
 The project displays clear understanding and capabilities in developing an interactive dashboard built using JavaScript utilizing dc.js dimensional charting library.
 
-The dashboard gives visualization to the key data from the SEAI's Ireland's Energy Balance 2017 report released in December 2018.
+The dashboard gives visualization to the key data from [SEAI's'](https://www.seai.ie) [Ireland Energy 2018](https://www.seai.ie/resources/publications/Energy-in-Ireland-2018.pdf) report released in December 2018.
 
 Technologies Used
 -----------------------
-* __JavaScript__ was used for interactive frontend development.
-* __jQuery.js__ was used for simplified HTML manipulation.
-* __Python__ was used for regrouping the data.
-* __DC.js v.2.1.8__ (https://dc-js.github.io/dc.js/) was the JavaScript charting library used.
-* __D3.js v.3__ (https://d3js.org/) is the data processing library used by DC.js.
-. __crossfilter.js__ (https://github.com/crossfilter/crossfilter) is used by D3.js to filter data across a data set.
-* __VisualStudios2017__ (https://visualstudio.microsoft.com/downloads/) IDE was used in the development of the project.
-* __VirtualEnvironment__ (https://docs.python.org/3/library/venv.html) was used to wrap the project.
-* __Git__ (https://git-scm.com/) was used for version control.
-* __GitHub__ (https://github.com/) was used to share the repository.
-* __Python3.6__ (https://docs.python.org/3/) was used to develop all back-end code.
-* __HTML5__ (https://www.w3.org/TR/html5/) was used to develop front-end templates.
-* __CSS__ (https://www.w3.org/Style/CSS/) was used for styling of front-end templates.
-* __Bootstrap 3.3.7__ (https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css) was used for more effective CSS layout styling.
+* __[JavaScript](https://www.javascript.com/)__ was used for interactive frontend development.
+* __[jQuery.js](https://jquery.com/)__ was used for simplified HTML manipulation.
+* __[DC.js v.2.1.8](https://dc-js.github.io/dc.js/)__ was the JavaScript charting library used.
+* __[D3.js v.3](https://d3js.org/)__ is the data processing library used by DC.js.
+. __[crossfilter.js](https://github.com/crossfilter/crossfilter)__ is used by D3.js to filter data across a data set.
+* __[VisualStudios2017](https://visualstudio.microsoft.com/downloads/)__ IDE was used in the development of the project.
+* __[VirtualEnvironment](https://docs.python.org/3/library/venv.html)__ was used to wrap the project.
+* __[Git](https://git-scm.com/)__ was used for version control.
+* __[GitHub](https://github.com/)__ was used to share the repository.
+* __[Python3.6](https://docs.python.org/3/)__ was used for regrouping the data.
+* __[HTML5](https://www.w3.org/TR/html5/)__ was used to develop front-end templates.
+* __[CSS](https://www.w3.org/Style/CSS/)__ was used for styling of front-end templates.
+* __[Bootstrap 3.3.7](https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css)__ was used for more effective CSS layout styling.
     - __Bootstrap Grid__ system was used for content arrangement and responsive behavior when moving between different screen sizes
     - __Bootstrap Navbar__ was used for the main navigation. Collapsible menu was utilized for lower screen resolutions.
     - __Bootstrap Forms Controls__ were used for the user actions.
-* __Font-Awesome 5.3.1__ (https://use.fontawesome.com/releases/v5.3.1/css/all.css) was for the icons in the header, footer and quiz template.
-* __FluidUI__ (https://www.fluidui.com) was used to develop wireframes for the initial UI design mockups.
-* __json__ (http://www.json.org/) was used to store and access non-database data.
-* __CSVJSON__ (https://www.csvjson.com/csv2json) was used to convert CSV formatted data to json.
-* __Firefox Developer Edition__ (https://www.mozilla.org/en-US/firefox/developer/) was used for debugging of the running app.
+* __[Font-Awesome 5.3.1](https://use.fontawesome.com/releases/v5.3.1/css/all.css)__ was for the icons in the header, footer and quiz template.
+* __[FluidUI](https://www.fluidui.com)__ was used to develop wireframes for the initial UI design mockups.
+* __[json](http://www.json.org/)__ was used to store and access non-database data.
+* __[CSVJSON](https://www.csvjson.com/csv2json)__ was used to convert CSV formatted data to json.
+* __[Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)__ was used for debugging of the running app.
 
 
 UX
 ----
-The dashboard was designed to be a tool for the public and academics to explore Ireland Energy Balance in easy to visualizations.
+The dashboard was designed to be a tool for the public and academics to explore Ireland Energy Balance in easy to use visualizations.
 
 __User Stories__
 
@@ -89,6 +88,7 @@ __Code Validation__
 
 * __HTML__ was validated using https://validator.w3.org/. Due to the python code embedded in the HTML templates there were a number of errors.
 * __JavaScript__ was validated using https://codebeautify.org/jsvalidate.
+* __Python__ was validated using https:http://pep8online.com.
 * __CSS__ was validated using https://jigsaw.w3.org/css-validator/. No errors were found.
 * __Spelling and Grammar__ was validated using Google Docs.
 
@@ -123,6 +123,7 @@ The charts were filtered and the values compared against the calculations on the
 __Known Bugs__
 * Tranformation bar chart labels are not centered above chart.
 * Filtering the consumption charts for oil, the consumer breakdown outer should be all shade of purple, but there are a few yellow slices.
+* Still items in legend with 0 value even with script correcting most of them.
 
 
 
@@ -133,21 +134,23 @@ The project was developed using Visual Studios 2017. Even though this project is
 There are a number of folders included in the wrapper associated with the virtual environment not required by the project that should not be included in the git repository. 
 A .gitignore file was included so these files would not be committed.
 
-A wireframe was developed outlining that I wanted row charts, bar charts, pie charts and back to back row charts and their arrangements on the screen.
+A wireframe was developed, using FluidUI, outlining that I wanted row charts, bar charts, pie charts and back to back row charts and their arrangements on the screen. Wireframe can be found [here](https://github.com/dcasey720/IrishEnergyBalance2017Dash/blob/master/dev_folder/wireframes/wireframe.JPG)
 
-The energy balance data I downloaded from the SEAI site was in .xlsx format. I converted this to .csv and began trying to work with the data. Since a lot of the columns where calculated 
+The energy balance data I downloaded from the SEAI site was in .xlsx format ([Energy-Balance-2017.xlsx](https://github.com/dcasey720/IrishEnergyBalance2017Dash/blob/master/dev_folder/data/Energy-Balance-2017.xlsx).
+I converted this to .csv and began trying to work with the data. Since a lot of the columns where calculated 
 totals of other columns and some rows were calculated totals of other rows, working with .csv was proving difficult to extract useful groupings. The data was converted to .json using an
-online converting tool and a Python script was developed to separate out categories allowing for more manageable data extraction.
+online converting tool and a Python  script was developed to separate out categories allowing for more manageable data extraction.
 
 The first charts developed read the data from one .json file and used functions to choose the data to display in the different charts. The cross filter was not working correctly and a number of the D3
-calculations were in correct. The Python script was updated to separate out the .json file into a number of separate files, thus separate cross filter.
+calculations were in correct. The Python script ([restruct_json.py](https://github.com/dcasey720/IrishEnergyBalance2017Dash/blob/master/dev_folder/data/restruct_json.py) was updated to separate out the .json file into a number of separate files, thus separate cross filter.
 
 Since the fuels and consumers were separated into sub-groups I wanted to develop sunburst style pie charts to breakdown these sub-groups. Dc.js v.5 has the sunburst style charts built in but I had been using DC.js v.2.  
 Time was spent trying to migrate to Dc.js v.5, but it required migrating to D3 v.3, this was proving more work than was beneficial and decided to stay with dc.js v.2 and develop custom sunburst charts with the inner and outer 
 charts filtering separately so that a sub-group specifics could be explored in more detail once selected.
 
 For the transformation Input/ Output chart I first used back to back row Charts from the DC.js, but as the row Charts are self-sorting the input and output row groupings did not line up appropriately.
-As an alternative I developed two separate bar charts using domain(...) to set my desired arrangement and using .css rotated the charts 90deg and -90deg and positioned them back to back.
+As an alternative I developed two separate bar charts using domain(...) to set my desired arrangement and using .css rotated the charts 90deg and -90deg and positioned them back to back. I positioned labels over the charts 
+in a seperate div in the html. I was unable to center the labels effectivily on these charts.
 
 As fuels were common across all charts and data sets I wanted to standardize the colors across the charts. Using the same colors used on the SEAI website, extracting them using Mozila Eyedropper tool,
 I developed color scales. The hex value for the base color for a grouping was put into a color selector tool and the next 10 lighter shades of that color were added to the color scale list. 
@@ -164,4 +167,4 @@ A welcome modal was developed to introduce the user to the charts when the page 
 Deployment
 ------------------------
 
-The dashboard is hosted on GitHub Pages https://pages.github.com/ and can be accessed at https://dcasey720.github.io/IrishEnergyBalance2017Dash/.
+The dashboard is hosted on [GitHub Pages] (https://pages.github.com/) and can be accessed at https://dcasey720.github.io/IrishEnergyBalance2017Dash/.
