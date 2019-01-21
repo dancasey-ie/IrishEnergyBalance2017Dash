@@ -162,4 +162,4 @@ A welcome modal was developed to introduce the user to the charts when the page 
 Deployment
 ------------------------
 
-The dashboard is hosted on [GitHub Pages] (https://pages.github.com/) and can be accessed at https://dcasey720.github.io/IrishEnergyBalance2017Dash/.
+The dashboard is hosted on [GitHub Pages](https://pages.github.com/) and can be accessed at https://dcasey720.github.io/IrishEnergyBalance2017Dash/.
