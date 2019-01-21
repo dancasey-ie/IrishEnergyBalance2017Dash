@@ -11,7 +11,7 @@ Technologies Used
 * __[jQuery.js](https://jquery.com/)__ was used for simplified HTML manipulation.
 * __[DC.js v.2.1.8](https://dc-js.github.io/dc.js/)__ was the JavaScript charting library used.
 * __[D3.js v.3](https://d3js.org/)__ is the data processing library used by DC.js.
-. __[crossfilter.js](https://github.com/crossfilter/crossfilter)__ is used by D3.js to filter data across a data set.
+* __[crossfilter.js](https://github.com/crossfilter/crossfilter)__ is used by D3.js to filter data across a data set.
 * __[VisualStudios2017](https://visualstudio.microsoft.com/downloads/)__ IDE was used in the development of the project.
 * __[VirtualEnvironment](https://docs.python.org/3/library/venv.html)__ was used to wrap the project.
 * __[Git](https://git-scm.com/)__ was used for version control.
@@ -20,12 +20,7 @@ Technologies Used
 * __[HTML5](https://www.w3.org/TR/html5/)__ was used to develop front-end templates.
 * __[CSS](https://www.w3.org/Style/CSS/)__ was used for styling of front-end templates.
 * __[Bootstrap 3.3.7](https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css)__ was used for more effective CSS layout styling.
-    - __Bootstrap Grid__ system was used for content arrangement and responsive behavior when moving between different screen sizes
-    - __Bootstrap Navbar__ was used for the main navigation. Collapsible menu was utilized for lower screen resolutions.
-    - __Bootstrap Forms Controls__ were used for the user actions.
-* __[Font-Awesome 5.3.1](https://use.fontawesome.com/releases/v5.3.1/css/all.css)__ was for the icons in the header, footer and quiz template.
 * __[FluidUI](https://www.fluidui.com)__ was used to develop wireframes for the initial UI design mockups.
-* __[json](http://www.json.org/)__ was used to store and access non-database data.
 * __[CSVJSON](https://www.csvjson.com/csv2json)__ was used to convert CSV formatted data to json.
 * __[Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)__ was used for debugging of the running app.
 
@@ -86,8 +81,8 @@ Testing
 
 __Code Validation__
 
-* __HTML__ was validated using https://validator.w3.org/. Due to the python code embedded in the HTML templates there were a number of errors.
-* __JavaScript__ was validated using https://codebeautify.org/jsvalidate.
+* __HTML__ was validated using https://validator.w3.org/.
+* __JavaScript__ (charts.js) was validated using https://codebeautify.org/jsvalidate. There are a number of errors due to functions being called from other called .js files.
 * __Python__ was validated using https:http://pep8online.com.
 * __CSS__ was validated using https://jigsaw.w3.org/css-validator/. No errors were found.
 * __Spelling and Grammar__ was validated using Google Docs.

@@ -32,14 +32,11 @@ function makeGraphs(error, energyData) {
     energyData.forEach(function seperate_dataGroups(d) {
         if (d.group === "FinalEnergyConsumption") {
             finalConsumptionData.push(d);
-        }
-        else if (d.group === "PrimaryEnergyRequirement") {
+        } else if (d.group === "PrimaryEnergyRequirement") {
             primReqData.push(d);
-        }
-        else if (d.group === "TransformationInput") {
+        } else if (d.group === "TransformationInput") {
             transInputData.push(d);
-        }
-        else if (d.group === "TransformationOutput") {
+        } else if (d.group === "TransformationOutput") {
             transOutputData.push(d);
         }
     });
@@ -51,6 +48,14 @@ function makeGraphs(error, energyData) {
     var transOutputData_ndx = crossfilter(transOutputData);
 
     // get unfilters total of different data groups
+
+    // get total of array with values to be totaled stored in key = value
+    function getTotal(array) {
+        var valuesList = [];
+        array.forEach(function (a) { if (a.value !== "") { valuesList.push(a.value); }; });
+        return valuesList.reduce((a, b) => a + b, 0);
+    };
+
     var finalConsumptionDataTot = getTotal(finalConsumptionData);
     var primReqDataTot = getTotal(primReqData);
     var transInputDataTot = getTotal(transInputData);
@@ -593,16 +598,6 @@ function show_transformationOutputFuel_piechart(ndx) {
         .ordinalColors(domainColors)
         .renderLabel(false);
 }
-
-
-
-// get total of array with values to be totaled stored in key = value
-function getTotal(array) {
-    var valuesList = [];
-    array.forEach(function (a) { if (a.value != "") valuesList.push(a.value) })
-    return valuesList.reduce((a, b) => a + b, 0);
-};
-
 
 // get fuelType_group by fuelTypeName
 function getValue(d, fuelTypeName) {
