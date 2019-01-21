@@ -56,124 +56,10 @@ function makeGraphs(error, energyData) {
         return valuesList.reduce((a, b) => a + b, 0);
     };
 
-    var finalConsumptionDataTot = getTotal(finalConsumptionData);
-    var primReqDataTot = getTotal(primReqData);
-    var transInputDataTot = getTotal(transInputData);
-    var transOutputDataTot = getTotal(transOutputData);
-
-    // Consumption Tool Tips
-    var consumptionPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / finalConsumptionDataTot) * 100) + '% of total';
-        });
-
-    var consumptionBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('se')
-        .offset([0, 0])
-        .html(function (d) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + " - " + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / finalConsumptionDataTot) * 100) + '% of total';
-        });
-
-    var consumptionRowTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('se')
-        .offset([-10, -25])
-        .html(function (d) {
-
-            return "<span style='color: #f0027f'>" +
-                d.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / finalConsumptionDataTot) * 100) + '% of total';
-        });
-
-    // Primary requirements Tool Tips
-    var reqPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d, total) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / primReqDataTot) * 100) + '% of total';
-        });
-
-    var reqBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('se')
-        .offset([0, 0])
-        .html(function (d) {
-
-            return "<span style='color: #f0027f'>" +
-                d.data.key + " - " + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / primReqDataTot) * 100) + '% of total';
-        });
-
-    // Transformation Input Tool Tips
-    var transformInPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d, total) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / transInputDataTot) * 100) + '% of total';
-        });
-
-    var transformInBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + " - " + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / transInputDataTot) * 100) + '% of total';
-        });
-
-    // Transformation Output Tool Tips
-    var transformOutPieTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d, total) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + "</span> " + '</br>' +
-                numberFormat(d.value) + 'toe</br>' +
-                numberFormat(d.value * 11.63) + 'MWh</br >' +
-                numberFormat((d.value / transOutputDataTot) * 100) + '% of total';
-        });
-
-    var transformOutBarTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .direction('s')
-        .offset([0, -50])
-        .html(function (d) {
-            return "<span style='color: #f0027f'>" +
-                d.data.key + " - " + d.layer + "</span> " + '</br>' +
-                numberFormat(d.y) + 'toe</br>' +
-                numberFormat(d.y * 11.63) + 'MWh</br >' +
-                numberFormat((d.y / transOutputDataTot) * 100) + '% of total';
-        });
+    window['finalConsumptionDataTot'] = getTotal(finalConsumptionData);
+    window['primReqDataTot'] = getTotal(primReqData);
+    window['transInputDataTot'] = getTotal(transInputData);
+    window['transOutputDataTot'] = getTotal(transOutputData);
 
     // call dc.chart functions and render
     show_consumptionByFuelType_rowchart(finalConsumptionData_ndx);
@@ -199,42 +85,7 @@ function makeGraphs(error, energyData) {
 
     dc.renderAll();
 
-
-
-    // Call consumption tool tip functions
-    d3.selectAll(".finalEnergyConsumption_container .pie-slice").call(consumptionPieTip);
-    d3.selectAll(".finalEnergyConsumption_container .pie-slice").on('mouseover', consumptionPieTip.show)
-        .on('mouseout', consumptionPieTip.hide);
-    d3.selectAll(".finalEnergyConsumption_container g .bar").call(consumptionBarTip);
-    d3.selectAll(".finalEnergyConsumption_container g .bar").on('mouseover', consumptionBarTip.show)
-        .on('mouseout', consumptionBarTip.hide);
-    d3.selectAll(".finalEnergyConsumption_container g .row").call(consumptionRowTip);
-    d3.selectAll(".finalEnergyConsumption_container g .row").on('mouseover', consumptionRowTip.show)
-        .on('mouseout', consumptionRowTip.hide);
-
-    // Call primary requirements tool tip functions
-    d3.selectAll(".primaryEnergyReq_container .pie-slice").call(reqPieTip);
-    d3.selectAll(".primaryEnergyReq_container .pie-slice").on('mouseover', reqPieTip.show)
-        .on('mouseout', reqPieTip.hide);
-    d3.selectAll(".primaryEnergyReq_container g .bar").call(reqBarTip);
-    d3.selectAll(".primaryEnergyReq_container g .bar").on('mouseover', reqBarTip.show)
-        .on('mouseout', reqBarTip.hide);
-
-    // Call transformation input tool tip functions
-    d3.selectAll("#transformationInputByFuel_piechart .pie-slice").call(transformInPieTip);
-    d3.selectAll("#transformationInputByFuel_piechart .pie-slice").on('mouseover', transformInPieTip.show)
-        .on('mouseout', transformInPieTip.hide);
-    d3.selectAll("#transformationInput_barchart g .bar").call(transformInBarTip);
-    d3.selectAll("#transformationInput_barchart g .bar").on('mouseover', transformInBarTip.show)
-        .on('mouseout', transformInBarTip.hide);
-
-    // Call transformation output tool tip functions
-    d3.selectAll("#transformationOutputByFuel_piechart .pie-slice").call(transformOutPieTip);
-    d3.selectAll("#transformationOutputByFuel_piechart .pie-slice").on('mouseover', transformOutPieTip.show)
-        .on('mouseout', transformOutPieTip.hide);
-    d3.selectAll("#transformationOutput_barchart g .bar").call(transformOutBarTip);
-    d3.selectAll("#transformationOutput_barchart g .bar").on('mouseover', transformOutBarTip.show)
-        .on('mouseout', transformOutBarTip.hide);
+    toolTip();
 }
 
 //----------------------------------------------------------------------------Final Consumption Charts
@@ -745,5 +596,156 @@ function getFuelDomainColors(d) {
 
 }
 
+// renders tool tip on hover over data, finalConsumptionDataTot, primReqDataTot, transInputDataTot &
+// transOutputDataTot passed as windows variables from makeGraphs()
+function toolTip() {
+    // Consumption Tool Tips
+    var consumptionPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / finalConsumptionDataTot) * 100) + '% of total';
+        });
 
+    var consumptionBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('se')
+        .offset([0, 0])
+        .html(function (d) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / finalConsumptionDataTot) * 100) + '% of total';
+        });
+
+    var consumptionRowTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('se')
+        .offset([-10, -25])
+        .html(function (d) {
+
+            return "<span style='color: #f0027f'>" +
+                d.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / finalConsumptionDataTot) * 100) + '% of total';
+        });
+
+    // Primary requirements Tool Tips
+    var reqPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d, total) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / primReqDataTot) * 100) + '% of total';
+        });
+
+    var reqBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('se')
+        .offset([0, 0])
+        .html(function (d) {
+
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / primReqDataTot) * 100) + '% of total';
+        });
+
+    // Transformation Input Tool Tips
+    var transformInPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d, total) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / transInputDataTot) * 100) + '% of total';
+        });
+
+    var transformInBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / transInputDataTot) * 100) + '% of total';
+        });
+
+    // Transformation Output Tool Tips
+    var transformOutPieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d, total) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + "</span> " + '</br>' +
+                numberFormat(d.value) + 'toe</br>' +
+                numberFormat(d.value * 11.63) + 'MWh</br >' +
+                numberFormat((d.value / transOutputDataTot) * 100) + '% of total';
+        });
+
+    var transformOutBarTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('s')
+        .offset([0, -50])
+        .html(function (d) {
+            return "<span style='color: #f0027f'>" +
+                d.data.key + " - " + d.layer + "</span> " + '</br>' +
+                numberFormat(d.y) + 'toe</br>' +
+                numberFormat(d.y * 11.63) + 'MWh</br >' +
+                numberFormat((d.y / transOutputDataTot) * 100) + '% of total';
+        });
+
+    // Call consumption tool tip functions
+    d3.selectAll(".finalEnergyConsumption_container .pie-slice").call(consumptionPieTip);
+    d3.selectAll(".finalEnergyConsumption_container .pie-slice").on('mouseover', consumptionPieTip.show)
+        .on('mouseout', consumptionPieTip.hide);
+    d3.selectAll(".finalEnergyConsumption_container g .bar").call(consumptionBarTip);
+    d3.selectAll(".finalEnergyConsumption_container g .bar").on('mouseover', consumptionBarTip.show)
+        .on('mouseout', consumptionBarTip.hide)
+    d3.selectAll(".finalEnergyConsumption_container g .row").call(consumptionRowTip);
+    d3.selectAll(".finalEnergyConsumption_container g .row").on('mouseover', consumptionRowTip.show)
+        .on('mouseout', consumptionRowTip.hide);
+
+    // Call primary requirements tool tip functions
+    d3.selectAll(".primaryEnergyReq_container .pie-slice").call(reqPieTip);
+    d3.selectAll(".primaryEnergyReq_container .pie-slice").on('mouseover', reqPieTip.show)
+        .on('mouseout', reqPieTip.hide);
+    d3.selectAll(".primaryEnergyReq_container g .bar").call(reqBarTip);
+    d3.selectAll(".primaryEnergyReq_container g .bar").on('mouseover', reqBarTip.show)
+        .on('mouseout', reqBarTip.hide);
+
+    // Call transformation input tool tip functions
+    d3.selectAll("#transformationInputByFuel_piechart .pie-slice").call(transformInPieTip);
+    d3.selectAll("#transformationInputByFuel_piechart .pie-slice").on('mouseover', transformInPieTip.show)
+        .on('mouseout', transformInPieTip.hide);
+    d3.selectAll("#transformationInput_barchart g .bar").call(transformInBarTip);
+    d3.selectAll("#transformationInput_barchart g .bar").on('mouseover', transformInBarTip.show)
+        .on('mouseout', transformInBarTip.hide);
+
+    // Call transformation output tool tip functions
+    d3.selectAll("#transformationOutputByFuel_piechart .pie-slice").call(transformOutPieTip);
+    d3.selectAll("#transformationOutputByFuel_piechart .pie-slice").on('mouseover', transformOutPieTip.show)
+        .on('mouseout', transformOutPieTip.hide);
+    d3.selectAll("#transformationOutput_barchart g .bar").call(transformOutBarTip);
+    d3.selectAll("#transformationOutput_barchart g .bar").on('mouseover', transformOutBarTip.show)
+        .on('mouseout', transformOutBarTip.hide);
+}
 
